@@ -7,15 +7,16 @@ import de.vik.testrail2java.net.Filter;
 import de.vik.testrail2java.net.Filters;
 import de.vik.testrail2java.net.MethodUri;
 import de.vik.testrail2java.types.Case;
-import de.vik.testrail2java.types.Milestone;
-import de.vik.testrail2java.types.Priority;
-import de.vik.testrail2java.types.Section;
+import de.vik.testrail2java.types.Case.CaseId;
+import de.vik.testrail2java.types.Milestone.MilestoneId;
+import de.vik.testrail2java.types.Priority.PriorityId;
+import de.vik.testrail2java.types.Project.ProjectId;
+import de.vik.testrail2java.types.Section.SectionId;
 import de.vik.testrail2java.types.Suite;
-import de.vik.testrail2java.types.Type;
+import de.vik.testrail2java.types.Type.TypeId;
+import de.vik.testrail2java.types.User.UserId;
 import de.vik.testrail2java.types.primitive.Id;
 import de.vik.testrail2java.types.primitive.Timestamp;
-import de.vik.testrail2java.types.Project.ProjectId;
-import de.vik.testrail2java.types.User.UserId;
 
 /**
  *
@@ -35,7 +36,7 @@ public class Cases {
      * @param id The ID of the test case
      * @return Returns an existing test case.
      */
-    public Case getCase(Case.CaseId id) {
+    public Case getCase(CaseId id) {
         return apiClient.get(Case.class, new MethodUri("get_case/:case_id").withParameters(id));
     }
 
@@ -53,7 +54,7 @@ public class Cases {
      * Creates a new test case.
      * @return If successful, this method returns the created test case
      */
-    public Case addCase(Section.SectionId sectionId, Case c) {
+    public Case addCase(SectionId sectionId, Case c) {
         String[] allowedFields = {"title", "typeId", "priorityId", "estimate", "milestoneId", "refs",
                 "customStepsSeparated", "customPreconds", "customTestdata"};
         final MethodUri uri = new MethodUri("add_case/:section_id").withParameters(sectionId);
@@ -75,7 +76,7 @@ public class Cases {
      * Deletes an existing test case.
      * @param id The ID of the test case
      */
-    public void deleteCase(Case.CaseId id) {
+    public void deleteCase(CaseId id) {
         apiClient.post(new MethodUri("delete_case/:case_id").withParameters(id));
     }
 
@@ -103,7 +104,7 @@ public class Cases {
         /**
          * The ID of the section
          */
-        public static CaseFilter sectionId(Section.SectionId id) {
+        public static CaseFilter sectionId(SectionId id) {
             return new CaseFilter("section_id", id);
         }
 
@@ -131,21 +132,21 @@ public class Cases {
         /**
          * A comma-separated list of milestone IDs to filter by.
          */
-        public static CaseFilter milestoneId(Milestone.MilestoneId id, Milestone.MilestoneId... furtherIds) {
+        public static CaseFilter milestoneId(MilestoneId id, MilestoneId... furtherIds) {
             return new CaseFilter("milestone_id", id, furtherIds);
         }
 
         /**
          * A comma-separated list of priority IDs to filter by.
          */
-        public static CaseFilter priorityId(Priority.PriorityId id, Priority.PriorityId... furtherIds) {
+        public static CaseFilter priorityId(PriorityId id, PriorityId... furtherIds) {
             return new CaseFilter("priority_id", id, furtherIds);
         }
 
         /**
          * A comma-separated list of case type IDs to filter by.
          */
-        public static CaseFilter typeId(Type.TypeId id, Type.TypeId... furtherIds) {
+        public static CaseFilter typeId(TypeId id, TypeId... furtherIds) {
             return new CaseFilter("type_id", id, furtherIds);
         }
 
