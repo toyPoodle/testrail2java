@@ -78,10 +78,17 @@ public class Milestones {
         }
 
         /**
-         * @param completed true to return completed milestones only. false to return active milestones only.
+         * To return completed milestones only.
          */
-        public static MilestoneFilter isCompleted(boolean completed) {
-            return new MilestoneFilter("is_completed", completed ? "1" : "0");
+        public static MilestoneFilter isCompleted() {
+            return new MilestoneFilter("is_completed", "1");
+        }
+
+        /**
+         * To return active milestones only.
+         */
+        public static MilestoneFilter isNotCompleted() {
+            return new MilestoneFilter("is_completed", "0");
         }
     }
 }
