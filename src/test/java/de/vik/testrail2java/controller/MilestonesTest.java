@@ -13,13 +13,11 @@ import de.vik.testrail2java.types.Project.ProjectId;
 
 import static de.vik.testrail2java.controller.Milestones.MilestoneFilter.isCompleted;
 import static de.vik.testrail2java.net.Filters.filterBy;
-import static de.vik.testrail2java.testhelpers.MoreMatchers.uri;
+import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithData;
+import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithoutResultAndData;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class MilestonesTest {
@@ -42,34 +40,23 @@ public class MilestonesTest {
 
     @Test
     public void testAddMilestone() throws Exception {
-        Milestone expected = mock(Milestone.class);
-        APIClient apiClient = mock(APIClient.class);
-        Milestones target = new Milestones(apiClient);
-        Milestone data = mock(Milestone.class);
         String[] allowedFields = {"name", "description", "dueOn"};
-        when(apiClient.post(uri("add_milestone/1"), eq(data), eq(allowedFields), eq(Milestone.class))).thenReturn(expected);
-        assertThat(target.addMilestone(new ProjectId(1), data), sameInstance(expected));
-        verify(apiClient, times(1)).post(uri("add_milestone/1"), eq(data), eq(allowedFields), eq(Milestone.class));
+        testSubmissionWithData("add_milestone/1", Milestone.class, allowedFields,
+                (data) -> {},
+                (apiClient, data) -> new Milestones(apiClient).addMilestone(new ProjectId(1), data));
     }
 
     @Test
     public void testUpdateMilestone() throws Exception {
-        Milestone expected = mock(Milestone.class);
-        APIClient apiClient = mock(APIClient.class);
-        Milestones target = new Milestones(apiClient);
-        Milestone data = mock(Milestone.class);
-        when(data.getId()).thenReturn(new MilestoneId(2));
         String[] allowedFields = {"name", "description", "dueOn", "isCompleted"};
-        when(apiClient.post(uri("update_milestone/2"), eq(data), eq(allowedFields), eq(Milestone.class))).thenReturn(expected);
-        assertThat(target.updateMilestone(data), sameInstance(expected));
-        verify(apiClient, times(1)).post(uri("update_milestone/2"), eq(data), eq(allowedFields), eq(Milestone.class));
+        testSubmissionWithData("update_milestone/2", Milestone.class, allowedFields,
+                (data) -> when(data.getId()).thenReturn(new MilestoneId(2)),
+                (apiClient, data) -> new Milestones(apiClient).updateMilestone(data));
     }
 
     @Test
     public void testDeleteMilestone() throws Exception {
-        APIClient apiClient = mock(APIClient.class);
-        Milestones target = new Milestones(apiClient);
-        target.deleteMilestone(new MilestoneId(3));
-        verify(apiClient, times(1)).post(uri("delete_milestone/3"));
+        testSubmissionWithoutResultAndData("delete_milestone/3",
+                (apiClient) -> new Milestones(apiClient).deleteMilestone(new MilestoneId(3)));
     }
 }
