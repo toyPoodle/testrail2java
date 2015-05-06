@@ -1,14 +1,13 @@
 package de.vik.testrail2java.net;
 
+import de.vik.testrail2java.TestRailException;
+import de.vik.testrail2java.types.primitive.AsString;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import de.vik.testrail2java.types.primitive.AsString;
-import de.vik.testrail2java.types.primitive.Id;
-import de.vik.testrail2java.TestRailException;
 
 public class MethodUri {
     private static final Object[] NO_PARAMETERS = {};
@@ -32,7 +31,7 @@ public class MethodUri {
     public MethodUri(String uri, Object[] parameters, Filters<?> filters) {
         this.uri = uri;
         this.filters = filters;
-        this.parameters = new ArrayList<Object>(Arrays.asList(parameters));
+        this.parameters = new ArrayList<>(Arrays.asList(parameters));
     }
 
     public String insertParameters() {
@@ -89,10 +88,6 @@ public class MethodUri {
 
     @Override
     public String toString() {
-        return "MethodUri{" +
-                "uri='" + uri + '\'' +
-                ", filters=" + filters +
-                ", parameters=" + parameters +
-                '}';
+        return insertParameters();
     }
 }
