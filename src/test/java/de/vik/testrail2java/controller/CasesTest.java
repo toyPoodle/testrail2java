@@ -1,40 +1,34 @@
 package de.vik.testrail2java.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 
-import de.vik.testrail2java.net.Filters;
-import de.vik.testrail2java.testhelpers.Mockups;
 import de.vik.testrail2java.types.Case;
 import de.vik.testrail2java.types.Project.ProjectId;
 import de.vik.testrail2java.types.Section.SectionId;
-import de.vik.testrail2java.types.Suite;
+import de.vik.testrail2java.types.Suite.SuiteId;
 
 import static de.vik.testrail2java.controller.Cases.CaseFilter.suiteId;
+import static de.vik.testrail2java.net.Filters.filterBy;
+import static de.vik.testrail2java.testhelpers.Mockups.testGetItem;
+import static de.vik.testrail2java.testhelpers.Mockups.testGetList;
 import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithData;
 import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithoutResultAndData;
-import static org.hamcrest.Matchers.sameInstance;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class CasesTest {
 
     @Test
     public void getCase() throws Exception {
-        Case expected = mock(Case.class);
-        Cases target = new Cases(Mockups.apiClientGET(Case.class, "get_case/1", expected));
-        assertThat(target.getCase(new Case.CaseId(1)), sameInstance(expected));
+        testGetItem(Case.class, "get_case/1",
+                (client) -> new Cases(client).getCase(new Case.CaseId(1)));
     }
 
     @Test
     public void getCases() throws Exception {
-        List<Case> expected = new ArrayList<>();
-        Cases target = new Cases(Mockups.apiClientGET(Case.class, "get_cases/1&suite_id=2", expected));
-        final List<Case> actual = target.getCases(new ProjectId(1), Filters.filterBy(suiteId(new Suite.SuiteId(2))));
-        assertThat(actual, sameInstance(expected));
+        testGetList(Case.class, "get_cases/1&suite_id=2", (client) -> {
+            Cases target = new Cases(client);
+            return target.getCases(new ProjectId(1), filterBy(suiteId(new SuiteId(2))));
+        });
     }
 
     @Test

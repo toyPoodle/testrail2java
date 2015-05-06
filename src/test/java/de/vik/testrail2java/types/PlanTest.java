@@ -171,16 +171,4 @@ public class PlanTest {
         assertThat(run.getCaseIds().get(1).getValue(), equalTo("19"));
 
     }
-/*
-    @Test
-    public void test() throws Exception {
-        ConfigPropertiesReader configReader = new ConfigPropertiesReader("/configfile/config.properties");
-        RestClient client = new RestClient(configReader.getProperty("testRailURL"));
-        client.setUser(configReader.getProperty("testRailUser"));
-        client.setPassword(configReader.getProperty("testRailPassword"));
-        final APIClient apiClientGET = new APIClient(client, new GsonBuilder());
-        final Plan plan = new Plans(apiClientGET).getPlan(new PlanId(673));
-        System.out.println(plan);
-    }
-    */
 }
