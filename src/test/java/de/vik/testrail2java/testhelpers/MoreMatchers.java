@@ -17,6 +17,11 @@ public class MoreMatchers {
                 return argument instanceof MethodUri
                         && uri.equals(((MethodUri)argument).insertParameters());
             }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText(uri);
+            }
         });
     }
 
