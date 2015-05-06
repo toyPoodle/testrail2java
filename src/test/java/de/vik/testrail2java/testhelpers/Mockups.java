@@ -1,21 +1,19 @@
 package de.vik.testrail2java.testhelpers;
 
+import de.vik.testrail2java.net.APIClient;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import de.vik.testrail2java.net.APIClient;
-
 import static de.vik.testrail2java.testhelpers.MoreMatchers.uri;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
+import static org.mockito.AdditionalMatchers.aryEq;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class Mockups {
 
@@ -43,10 +41,11 @@ public class Mockups {
         D data = mock(dataClass);
 
         testDataSetup.accept(data);
-        when(apiClient.post(uri(uriString), eq(data), eq(allowedFields), eq(dataClass))).thenReturn(expected);
+        when(apiClient.post(uri(uriString), eq(data), aryEq(allowedFields), eq(dataClass))).thenReturn(expected);
 
-        assertThat(targetCall.apply(apiClient, data), sameInstance(expected));
-        verify(apiClient, times(1)).post(uri(uriString), eq(data), eq(allowedFields), eq(dataClass));
+        final D actual = targetCall.apply(apiClient, data);
+        verify(apiClient, times(1)).post(uri(uriString), eq(data), aryEq(allowedFields), eq(dataClass));
+        assertThat(actual, sameInstance(expected));
     }
 
     public static <R> void testSubmissionWithoutData(String uriString, Class<R> resultClass, Function<APIClient, R> targetCall) {
@@ -55,8 +54,9 @@ public class Mockups {
 
         when(apiClient.post(uri(uriString), eq(resultClass))).thenReturn(expected);
 
-        assertThat(targetCall.apply(apiClient), sameInstance(expected));
+        final R actual = targetCall.apply(apiClient);
         verify(apiClient, times(1)).post(uri(uriString), eq(resultClass));
+        assertThat(actual, sameInstance(expected));
     }
 
     public static void testSubmissionWithoutResultAndData(String uriString, Consumer<APIClient> targetCall) {
