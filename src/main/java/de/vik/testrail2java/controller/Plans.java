@@ -1,16 +1,19 @@
 package de.vik.testrail2java.controller;
 
-import java.util.List;
-
 import de.vik.testrail2java.net.APIClient;
 import de.vik.testrail2java.net.Filter;
 import de.vik.testrail2java.net.Filters;
 import de.vik.testrail2java.net.MethodUri;
-import de.vik.testrail2java.types.Milestone;
+import de.vik.testrail2java.types.Milestone.MilestoneId;
 import de.vik.testrail2java.types.Plan;
+import de.vik.testrail2java.types.Plan.PlanEntry;
+import de.vik.testrail2java.types.Plan.PlanEntryId;
+import de.vik.testrail2java.types.Plan.PlanId;
+import de.vik.testrail2java.types.Project.ProjectId;
+import de.vik.testrail2java.types.User.UserId;
 import de.vik.testrail2java.types.primitive.Timestamp;
-import de.vik.testrail2java.types.Project;
-import de.vik.testrail2java.types.User;
+
+import java.util.List;
 
 /**
  * http://docs.gurock.com/testrail-api2/reference-plans
@@ -26,7 +29,7 @@ public class Plans {
     /**
      * @return Returns an existing test plan.
      */
-    public Plan getPlan(Plan.PlanId id) {
+    public Plan getPlan(PlanId id) {
         return client.get(Plan.class, new MethodUri("get_plan/:plan_id").withParameters(id));
     }
 
@@ -34,7 +37,7 @@ public class Plans {
      *
      * @return Returns a list of test plans for a project.
      */
-    public List<Plan> getPlans(Project.ProjectId id, Filters<Plan> filters) {
+    public List<Plan> getPlans(ProjectId id, Filters<Plan> filters) {
         return client.getList(Plan.class, new MethodUri("get_plans/:project_id", filters).withParameters(id));
     }
 
@@ -43,7 +46,7 @@ public class Plans {
      * @param plan Plan to add
      * @return If successful, this method returns the new test plan
      */
-    public Plan addPlan(Plan plan, Project.ProjectId projectId) {
+    public Plan addPlan(Plan plan, ProjectId projectId) {
         final MethodUri uri = new MethodUri("add_plan/:project_id").withParameters(projectId);
         final String[] allowedFields = {"name", "description", "milestoneId", "entries"};
         return client.post(uri, plan, allowedFields, Plan.class);
@@ -54,10 +57,10 @@ public class Plans {
      * @param planId The ID of the plan the test runs should be added to
      * @return If successful, this method returns the new test plan entry
      */
-    public Plan.PlanEntry addPlanEntry(Plan.PlanId planId, Plan.PlanEntry planEntry) {
+    public PlanEntry addPlanEntry(PlanId planId, PlanEntry planEntry) {
         MethodUri uri = new MethodUri("add_plan_entry/:plan_id").withParameters(planId);
         final String[] allowedFields = {"suiteId", "name", "assignedtoId", "includeAll", "caseIds", "configIds", "runs"};
-        return client.post(uri, planEntry, allowedFields, Plan.PlanEntry.class);
+        return client.post(uri, planEntry, allowedFields, PlanEntry.class);
     }
 
     /**
@@ -74,10 +77,10 @@ public class Plans {
      * Updates one or more existing test runs in a plan
      * @return If successful, this method returns the updated test plan entry including test runs
      */
-    public Plan.PlanEntry updatePlanEntry(Plan.PlanEntry planEntry, Plan.PlanId planId) {
+    public PlanEntry updatePlanEntry(PlanEntry planEntry, PlanId planId) {
         MethodUri uri = new MethodUri("update_plan_entry/:plan_id/:entry_id").withParameters(planId, planEntry.getId());
         final String[] allowedFields = {"name", "assignedtoId", "includeAll", "caseIds"};
-        return client.post(uri, planEntry, allowedFields, Plan.PlanEntry.class);
+        return client.post(uri, planEntry, allowedFields, PlanEntry.class);
     }
 
     /**
@@ -85,7 +88,7 @@ public class Plans {
      * @param id The ID of the test plan
      * @return If successful, this method returns the closed test plan
      */
-    public Plan closePlan(Plan.PlanId id) {
+    public Plan closePlan(PlanId id) {
         return client.post(new MethodUri("close_plan/:plan_id").withParameters(id), Plan.class);
     }
 
@@ -93,7 +96,7 @@ public class Plans {
      * Deletes an existing test plan.
      * @param id The ID of the test plan
      */
-    public void deletePlan(Plan.PlanId id) {
+    public void deletePlan(PlanId id) {
         client.post(new MethodUri("delete_plan/:plan_id").withParameters(id));
     }
 
@@ -102,7 +105,7 @@ public class Plans {
      * @param planId The ID of the test plan.
      * @param entryId The ID of the test plan entry
      */
-    public void deletePlanEntry(Plan.PlanId planId, Plan.PlanEntryId entryId) {
+    public void deletePlanEntry(PlanId planId, PlanEntryId entryId) {
         client.post(new MethodUri("delete_plan_entry/:plan_id/:entry_id").withParameters(planId, entryId));
     }
 
@@ -111,11 +114,11 @@ public class Plans {
             super(key, value);
         }
 
-        public PlanFilter(String key, Timestamp value) {
+        protected PlanFilter(String key, Timestamp value) {
             this(key, asString(value));
         }
 
-        public PlanFilter(String key, int value) {
+        protected PlanFilter(String key, int value) {
             super(key, String.valueOf(value));
         }
 
@@ -136,15 +139,22 @@ public class Plans {
         /**
          * A comma-separated list of creators (user IDs) to filter by.
          */
-        public static Filter<Plan> created_by(User.UserId id, User.UserId... furtherIds) {
+        public static Filter<Plan> created_by(UserId id, UserId... furtherIds) {
             return new PlanFilter("created_by", asString(id, furtherIds));
         }
 
         /**
-         * 1 to return completed test plans only. 0 to return active test plans only.
+         * completed test plans only
          */
-        public static Filter<Plan> isCompleted(boolean isCompleted) {
-            return new PlanFilter("is_completed", isCompleted ? "1" : "0");
+        public static Filter<Plan> isCompleted() {
+            return new PlanFilter("is_completed", "1");
+        }
+
+        /**
+         * active test plans only
+         */
+        public static Filter<Plan> isActive() {
+            return new PlanFilter("is_completed", "0");
         }
 
         /**
@@ -164,7 +174,7 @@ public class Plans {
         /**
          *A comma-separated list of milestone IDs to filter by.
          */
-        public static Filter<Plan> milestoneId(Milestone.MilestoneId id, Milestone.MilestoneId... furtherIds) {
+        public static Filter<Plan> milestoneId(MilestoneId id, MilestoneId... furtherIds) {
             return new PlanFilter("milestone_id", asString(id, furtherIds));
         }
     }
