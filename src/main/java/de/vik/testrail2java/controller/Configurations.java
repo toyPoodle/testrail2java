@@ -7,6 +7,9 @@ import de.vik.testrail2java.net.MethodUri;
 import de.vik.testrail2java.types.ConfigurationGroup;
 import de.vik.testrail2java.types.Project.ProjectId;
 
+/**
+ * http://docs.gurock.com/testrail-api2/reference-configs
+ */
 public class Configurations {
     private final APIClient apiClient;
 

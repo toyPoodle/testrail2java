@@ -6,6 +6,9 @@ import de.vik.testrail2java.types.Priority;
 
 import java.util.List;
 
+/**
+ * http://docs.gurock.com/testrail-api2/reference-priorities
+ */
 public class Priorities {
     private APIClient client;
 
