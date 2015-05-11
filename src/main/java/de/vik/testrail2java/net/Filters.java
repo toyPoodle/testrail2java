@@ -9,24 +9,24 @@ public class Filters <T> implements AsString {
     private final List<Filter<T>> filters;
 
     protected Filters() {
-        filters = new ArrayList<Filter<T>>();
+        filters = new ArrayList<>();
     }
 
     protected Filters(Filter<T> filter) {
-        filters = new ArrayList<Filter<T>>();
+        filters = new ArrayList<>();
         filters.add(filter);
     }
 
     public static <T> Filters<T> none() {
-        return new Filters<T>();
+        return new Filters<>();
     }
 
     public static <T> Filters<T> filterBy(Filter<T> filter) {
-        return new Filters<T>(filter);
+        return new Filters<>(filter);
     }
 
     public Filters<T> and(Filter<T> filter) {
-        Filters<T> result = new Filters<T>();
+        Filters<T> result = new Filters<>();
         result.filters.addAll(this.filters);
         result.filters.add(filter);
         return result;
