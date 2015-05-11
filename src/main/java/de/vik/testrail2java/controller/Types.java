@@ -16,6 +16,9 @@ public class Types {
         this.apiClient = apiClient;
     }
 
+    /**
+     * Returns a list of available case types.
+     */
     public List<Type> getCaseTypes() {
         return apiClient.getList(Type.class, new MethodUri("get_case_types"));
     }

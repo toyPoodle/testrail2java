@@ -13,6 +13,9 @@ public class Priorities {
         this.client = client;
     }
 
+    /**
+     * Returns a list of available priorities.
+     */
     public List<Priority> getPriorities() {
         return client.getList(Priority.class, new MethodUri("get_priorities"));
     }
