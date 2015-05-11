@@ -139,7 +139,7 @@ public class Plans {
         /**
          * A comma-separated list of creators (user IDs) to filter by.
          */
-        public static Filter<Plan> created_by(UserId id, UserId... furtherIds) {
+        public static Filter<Plan> createdBy(UserId id, UserId... furtherIds) {
             return new PlanFilter("created_by", asString(id, furtherIds));
         }
 
