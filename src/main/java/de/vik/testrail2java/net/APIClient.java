@@ -65,6 +65,6 @@ public class APIClient implements APIClientInterface {
     }
 
     protected <T> List<T> asList(T[] array) {
-        return new ArrayList<T>(Arrays.asList(array));
+        return new ArrayList<>(Arrays.asList(array));
     }
 }
