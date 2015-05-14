@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import de.vik.testrail2java.serialization.GsonBuilder;
@@ -18,6 +17,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
 
 public class APIClientTest {
 
@@ -44,8 +44,7 @@ public class APIClientTest {
     @Test
     public void post() throws Exception {
         RestClient restClient = mock(RestClient.class);
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        final APIClient target = new APIClient(restClient, gsonBuilder);
+        final APIClient target = new APIClient(restClient, new GsonBuilder());
 
         target.post(someUri());
 
@@ -53,22 +52,30 @@ public class APIClientTest {
     }
 
     @Test
+    public void postWithoutData() throws Exception {
+        RestClient restClient = mock(RestClient.class);
+        JsonElement response = response("{\"field\":\"value\"}");
+        when(restClient.sendPost(someUri(), null)).thenReturn(response);
+
+        APIClient target = new APIClient(restClient, new GsonBuilder());
+        final TestClass actual = target.post(someUri(), TestClass.class);
+
+        verify(restClient, times(1)).sendPost(someUri(), null);
+        assertThat(actual.getField(), equalTo("value"));
+    }
+
+    @Test
     public void postWithData() throws Exception {
         RestClient restClient = mock(RestClient.class);
-        JsonObject jsonElement = new JsonObject();
-        jsonElement.addProperty("field", "result");
-        when(restClient.sendPost(someUri(), "{\n  \"field\": \"value\"\n}")).thenReturn(jsonElement);
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        final APIClient target = new APIClient(restClient, gsonBuilder);
-
+        final JsonElement response = response("{\"field\":\"result\"}");
+        when(restClient.sendPost(someUri(), "{\n  \"field\": \"value\"\n}")).thenReturn(response);
+        final APIClient target = new APIClient(restClient, new GsonBuilder());
         final TestClass data = new TestClass("value");
         final String[] allowedFields = {"field"};
 
         TestClass actual = target.post(someUri(), data, allowedFields, TestClass.class);
 
         assertThat(actual.getField(), equalTo("result"));
-
-        //only submit once
         verify(restClient, Mockito.times(1)).sendPost(someUri(), "{\n  \"field\": \"value\"\n}");
     }
 
@@ -86,11 +93,12 @@ public class APIClientTest {
 
     private APIClient targetForGet(MethodUri uri, String json) throws IOException {
         RestClient restClient = mock(RestClient.class);
-        JsonElement jsonElement = new JsonParser().parse(json);
-        when(restClient.sendGet(uri)).thenReturn(jsonElement);
+        when(restClient.sendGet(uri)).thenReturn(response(json));
+        return new APIClient(restClient, new GsonBuilder());
+    }
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        return new APIClient(restClient, gsonBuilder);
+    private JsonElement response(String json) {
+        return new JsonParser().parse(json);
     }
 
     private GsonBuilder ignoredGson() {
