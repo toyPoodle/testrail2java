@@ -1,22 +1,26 @@
 package de.vik.testrail2java.serialization;
 
-import de.vik.testrail2java.types.Case;
-import de.vik.testrail2java.types.ConfigurationGroup;
-import de.vik.testrail2java.types.Milestone;
-import de.vik.testrail2java.types.Plan;
-import de.vik.testrail2java.types.Suite;
-import de.vik.testrail2java.types.Type;
-import de.vik.testrail2java.types.primitive.Timestamp;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+
+import de.vik.testrail2java.types.Case.CaseId;
 import de.vik.testrail2java.types.CaseField.CaseFieldId;
 import de.vik.testrail2java.types.CaseField.ConfigId;
+import de.vik.testrail2java.types.ConfigurationGroup.ConfigurationGroupId;
+import de.vik.testrail2java.types.ConfigurationGroup.ConfigurationId;
+import de.vik.testrail2java.types.Milestone.MilestoneId;
+import de.vik.testrail2java.types.Plan.PlanEntryId;
+import de.vik.testrail2java.types.Plan.PlanId;
+import de.vik.testrail2java.types.Plan.TestRunId;
 import de.vik.testrail2java.types.Priority.PriorityId;
 import de.vik.testrail2java.types.Project.ProjectId;
 import de.vik.testrail2java.types.Section.SectionId;
+import de.vik.testrail2java.types.Suite.SuiteId;
+import de.vik.testrail2java.types.SuiteMode;
+import de.vik.testrail2java.types.Type.TypeId;
 import de.vik.testrail2java.types.User.UserId;
 import de.vik.testrail2java.types.primitive.TimeSpan;
-
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
+import de.vik.testrail2java.types.primitive.Timestamp;
 
 public class GsonBuilder {
 
@@ -34,19 +38,20 @@ public class GsonBuilder {
 
     private void registerIdAdapter(com.google.gson.GsonBuilder gsonBuilder) {
         gsonBuilder.registerTypeAdapter(CaseFieldId.class, new NumericIdAdapter());
-        gsonBuilder.registerTypeAdapter(Case.CaseId.class, new NumericIdAdapter());
+        gsonBuilder.registerTypeAdapter(CaseId.class, new NumericIdAdapter());
         gsonBuilder.registerTypeAdapter(ConfigId.class, new NumericIdAdapter());
-        gsonBuilder.registerTypeAdapter(ConfigurationGroup.ConfigurationGroupId.class, new NumericIdAdapter());
-        gsonBuilder.registerTypeAdapter(ConfigurationGroup.ConfigurationId.class, new NumericIdAdapter());
-        gsonBuilder.registerTypeAdapter(Milestone.MilestoneId.class, new NumericIdAdapter());
-        gsonBuilder.registerTypeAdapter(Plan.PlanEntryId.class, new PlanEntryIdAdapter());
-        gsonBuilder.registerTypeAdapter(Plan.PlanId.class, new NumericIdAdapter());
+        gsonBuilder.registerTypeAdapter(ConfigurationGroupId.class, new NumericIdAdapter());
+        gsonBuilder.registerTypeAdapter(ConfigurationId.class, new NumericIdAdapter());
+        gsonBuilder.registerTypeAdapter(MilestoneId.class, new NumericIdAdapter());
+        gsonBuilder.registerTypeAdapter(PlanEntryId.class, new PlanEntryIdAdapter());
+        gsonBuilder.registerTypeAdapter(PlanId.class, new NumericIdAdapter());
         gsonBuilder.registerTypeAdapter(PriorityId.class, new NumericIdAdapter());
         gsonBuilder.registerTypeAdapter(ProjectId.class, new NumericIdAdapter());
         gsonBuilder.registerTypeAdapter(SectionId.class, new NumericIdAdapter());
-        gsonBuilder.registerTypeAdapter(Suite.SuiteId.class, new NumericIdAdapter());
-        gsonBuilder.registerTypeAdapter(Plan.TestRunId.class, new NumericIdAdapter());
-        gsonBuilder.registerTypeAdapter(Type.TypeId.class, new NumericIdAdapter());
+        gsonBuilder.registerTypeAdapter(SuiteId.class, new NumericIdAdapter());
+        gsonBuilder.registerTypeAdapter(SuiteMode.class, new NumericIdAdapter());
+        gsonBuilder.registerTypeAdapter(TestRunId.class, new NumericIdAdapter());
+        gsonBuilder.registerTypeAdapter(TypeId.class, new NumericIdAdapter());
         gsonBuilder.registerTypeAdapter(UserId.class, new NumericIdAdapter());
     }
 
