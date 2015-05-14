@@ -40,6 +40,14 @@ public class NumericIdAdapterTest {
         assertThat(actual.getAsString(), equalTo("5"));
     }
 
+    @Test
+    public void deserializationWithPrivateConstructor() throws Exception {
+        Id result = target().deserialize(jsonPrimitive(3), resultType(TestIdWithPrivateConstructor.class), ignoredContext());
+
+        assertThat(result, instanceOf(TestIdWithPrivateConstructor.class));
+        assertThat(result.getValue(), equalTo("3"));
+    }
+
     private NumericIdAdapter target() {
         return new NumericIdAdapter();
     }
@@ -48,7 +56,7 @@ public class NumericIdAdapterTest {
         return null;
     }
 
-    private Type resultType(final Class<TestId> resultType) {
+    private Type resultType(final Class<?> resultType) {
         return resultType;
     }
 
@@ -58,6 +66,12 @@ public class NumericIdAdapterTest {
 
     public static class TestId extends NumericId {
         public TestId(int id) {
+            super(id);
+        }
+    }
+
+    public static class TestIdWithPrivateConstructor extends NumericId {
+        private TestIdWithPrivateConstructor(int id) {
             super(id);
         }
     }
