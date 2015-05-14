@@ -80,6 +80,20 @@ public class Project {
         return url;
     }
 
+    @Override
+    public String toString() {
+        return "Project{" +
+                "announcement='" + announcement + '\'' +
+                ", completedOn=" + completedOn +
+                ", id=" + id +
+                ", isCompleted=" + isCompleted +
+                ", name='" + name + '\'' +
+                ", showAnnouncement=" + showAnnouncement +
+                ", suiteMode=" + suiteMode +
+                ", url='" + url + '\'' +
+                '}';
+    }
+
     public static class ProjectId extends NumericId {
         public ProjectId(int id) {
             super(id);

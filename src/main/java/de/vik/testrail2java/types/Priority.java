@@ -37,6 +37,17 @@ public class Priority {
         return shortName;
     }
 
+    @Override
+    public String toString() {
+        return "Priority{" +
+                "id=" + id +
+                ", isDefault=" + isDefault +
+                ", name='" + name + '\'' +
+                ", priority=" + priority +
+                ", shortName='" + shortName + '\'' +
+                '}';
+    }
+
     public static class PriorityId extends NumericId {
         public PriorityId(int id) {
             super(id);
