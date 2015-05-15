@@ -3,16 +3,21 @@ package de.vik.testrail2java.types;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.vik.testrail2java.types.Case.CaseId;
+import de.vik.testrail2java.types.ConfigurationGroup.ConfigurationId;
+import de.vik.testrail2java.types.Project.ProjectId;
+import de.vik.testrail2java.types.Suite.SuiteId;
+import de.vik.testrail2java.types.User.UserId;
 import de.vik.testrail2java.types.primitive.Id;
 import de.vik.testrail2java.types.primitive.NumericId;
 import de.vik.testrail2java.types.primitive.Timestamp;
 
 public class Plan {
 
-    private User.UserId assignedtoId;
+    private UserId assignedtoId;
     private int blockedCount;
     private Timestamp completedOn;
-    private User.UserId createdBy;
+    private UserId createdBy;
     private Timestamp createdOn;
     private int customStatus1Count;
     private String description;
@@ -23,12 +28,12 @@ public class Plan {
     private Milestone.MilestoneId milestoneId;
     private String name;
     private int passedCount;
-    private Project.ProjectId projectId;
+    private ProjectId projectId;
     private int retestCount;
     private int untestedCount;
     private String url;
 
-    public Plan(User.UserId assignedtoId, int blockedCount, Timestamp completedOn, User.UserId createdBy, Timestamp createdOn, int customStatus1Count, String description, List<PlanEntry> entries, int failedCount, PlanId id, boolean isCompleted, Milestone.MilestoneId milestoneId, String name, int passedCount, Project.ProjectId projectId, int retestCount, int untestedCount, String url) {
+    public Plan(UserId assignedtoId, int blockedCount, Timestamp completedOn, UserId createdBy, Timestamp createdOn, int customStatus1Count, String description, List<PlanEntry> entries, int failedCount, PlanId id, boolean isCompleted, Milestone.MilestoneId milestoneId, String name, int passedCount, ProjectId projectId, int retestCount, int untestedCount, String url) {
         this.assignedtoId = assignedtoId;
         this.blockedCount = blockedCount;
         this.completedOn = completedOn;
@@ -49,7 +54,7 @@ public class Plan {
         this.url = url;
     }
 
-    public User.UserId getAssignedtoId() {
+    public UserId getAssignedtoId() {
         return assignedtoId;
     }
 
@@ -61,7 +66,7 @@ public class Plan {
         return completedOn;
     }
 
-    public User.UserId getCreatedBy() {
+    public UserId getCreatedBy() {
         return createdBy;
     }
 
@@ -105,7 +110,7 @@ public class Plan {
         return passedCount;
     }
 
-    public Project.ProjectId getProjectId() {
+    public ProjectId getProjectId() {
         return projectId;
     }
 
@@ -154,13 +159,13 @@ public class Plan {
     public static class PlanEntry {
         private PlanEntryId id;
         private String name;
-        private Suite.SuiteId suiteId;
+        private SuiteId suiteId;
         private List<TestRun> runs;
-        private List<ConfigurationGroup.ConfigurationId> configIds;
+        private List<ConfigurationId> configIds;
         private boolean includeAll;
-        private User.UserId assignedtoId;
+        private UserId assignedtoId;
 
-        public PlanEntry(PlanEntryId id, String name, Suite.SuiteId suiteId, List<TestRun> runs, List<ConfigurationGroup.ConfigurationId> configIds, boolean includeAll, User.UserId assignedtoId) {
+        public PlanEntry(PlanEntryId id, String name, SuiteId suiteId, List<TestRun> runs, List<ConfigurationId> configIds, boolean includeAll, UserId assignedtoId) {
             this.id = id;
             this.name = name;
             this.suiteId = suiteId;
@@ -178,7 +183,7 @@ public class Plan {
             return name;
         }
 
-        public Suite.SuiteId getSuiteId() {
+        public SuiteId getSuiteId() {
             return suiteId;
         }
 
@@ -186,7 +191,7 @@ public class Plan {
             return runs;
         }
 
-        public List<ConfigurationGroup.ConfigurationId> getConfigIds() {
+        public List<ConfigurationId> getConfigIds() {
             return configIds;
         }
 
@@ -194,7 +199,7 @@ public class Plan {
             return includeAll;
         }
 
-        public User.UserId getAssignedtoId() {
+        public UserId getAssignedtoId() {
             return assignedtoId;
         }
 
@@ -214,7 +219,7 @@ public class Plan {
 
     public static class TestRun {
         private TestRunId id;
-        private Suite.SuiteId suiteId;
+        private SuiteId suiteId;
         private boolean includeAll;
         private boolean isCompleted;
         private int passedCount;
@@ -222,16 +227,16 @@ public class Plan {
         private int failedCount;
         private int untestedCount;
         private int retestCount;
-        private Project.ProjectId projectId;
+        private ProjectId projectId;
         private PlanId planId;
         private int entryIndex;
         private PlanEntryId entryId;
-        private List<Case.CaseId> caseIds;
-        private User.UserId assignedtoId;
-        private List<ConfigurationGroup.ConfigurationId> configIds;
+        private List<CaseId> caseIds;
+        private UserId assignedtoId;
+        private List<ConfigurationId> configIds;
         private String name;
 
-        public TestRun(TestRunId id, Suite.SuiteId suiteId, boolean includeAll, boolean isCompleted, int passedCount, int blockedCount, int failedCount, int untestedCount, int retestCount, Project.ProjectId projectId, PlanId planId, int entryIndex, PlanEntryId entryId, List<Case.CaseId> caseIds, User.UserId assignedtoId, List<ConfigurationGroup.ConfigurationId> configIds, String name) {
+        public TestRun(TestRunId id, SuiteId suiteId, boolean includeAll, boolean isCompleted, int passedCount, int blockedCount, int failedCount, int untestedCount, int retestCount, ProjectId projectId, PlanId planId, int entryIndex, PlanEntryId entryId, List<CaseId> caseIds, UserId assignedtoId, List<ConfigurationId> configIds, String name) {
             this.id = id;
             this.suiteId = suiteId;
             this.includeAll = includeAll;
@@ -255,7 +260,7 @@ public class Plan {
             return id;
         }
 
-        public Suite.SuiteId getSuiteId() {
+        public SuiteId getSuiteId() {
             return suiteId;
         }
 
@@ -287,7 +292,7 @@ public class Plan {
             return retestCount;
         }
 
-        public Project.ProjectId getProjectId() {
+        public ProjectId getProjectId() {
             return projectId;
         }
 
@@ -303,16 +308,16 @@ public class Plan {
             return entryId;
         }
 
-        public List<Case.CaseId> getCaseIds() {
-            return new ArrayList<Case.CaseId>(caseIds);
+        public List<CaseId> getCaseIds() {
+            return new ArrayList<CaseId>(caseIds);
         }
 
-        public User.UserId getAssignedtoId() {
+        public UserId getAssignedtoId() {
             return assignedtoId;
         }
 
-        public List<ConfigurationGroup.ConfigurationId> getConfigIds() {
-            return new ArrayList<ConfigurationGroup.ConfigurationId>(configIds);
+        public List<ConfigurationId> getConfigIds() {
+            return new ArrayList<ConfigurationId>(configIds);
         }
 
         public String getName() {
