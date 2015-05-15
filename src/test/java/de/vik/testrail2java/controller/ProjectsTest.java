@@ -2,6 +2,7 @@ package de.vik.testrail2java.controller;
 
 import org.junit.Test;
 
+import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Project;
 
 import static de.vik.testrail2java.controller.Projects.ProjectFilter.isCompleted;
@@ -29,7 +30,7 @@ public class ProjectsTest {
 
     @Test
     public void testAddProject() throws Exception {
-        final String[] allowedFields = {"name", "announcement", "showAnnouncement", "suiteMode"};
+        final AllowedFields allowedFields = new AllowedFields(Project.class, "name", "announcement", "showAnnouncement", "suiteMode");
         testSubmissionWithData("add_project", Project.class, allowedFields,
                 project -> {},
                 (client, project) -> new Projects(client).addProject(project));
@@ -37,7 +38,7 @@ public class ProjectsTest {
 
     @Test
     public void testUpdateProject() throws Exception {
-        final String[] allowedFields = {"name", "announcement", "showAnnouncement", "suiteMode", "isCompleted"};
+        final AllowedFields allowedFields = new AllowedFields(Project.class, "name", "announcement", "showAnnouncement", "suiteMode", "isCompleted");
         testSubmissionWithData("update_project/1", Project.class, allowedFields,
                 project -> when(project.getId()).thenReturn(projectId(1)),
                 (client, project) -> new Projects(client).updateProject(project));

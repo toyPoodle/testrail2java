@@ -2,6 +2,7 @@ package de.vik.testrail2java.controller;
 
 import org.junit.Test;
 
+import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Milestone;
 import de.vik.testrail2java.types.Milestone.MilestoneId;
 import de.vik.testrail2java.types.Project.ProjectId;
@@ -32,7 +33,7 @@ public class MilestonesTest {
 
     @Test
     public void testAddMilestone() throws Exception {
-        String[] allowedFields = {"name", "description", "dueOn"};
+        final AllowedFields allowedFields = new AllowedFields(Milestone.class, "name", "description", "dueOn");
         testSubmissionWithData("add_milestone/1", Milestone.class, allowedFields,
                 (data) -> {},
                 (apiClient, data) -> new Milestones(apiClient).addMilestone(new ProjectId(1), data));
@@ -40,7 +41,7 @@ public class MilestonesTest {
 
     @Test
     public void testUpdateMilestone() throws Exception {
-        String[] allowedFields = {"name", "description", "dueOn", "isCompleted"};
+        final AllowedFields allowedFields = new AllowedFields(Milestone.class, "name", "description", "dueOn", "isCompleted");
         testSubmissionWithData("update_milestone/2", Milestone.class, allowedFields,
                 (data) -> when(data.getId()).thenReturn(new MilestoneId(2)),
                 (apiClient, data) -> new Milestones(apiClient).updateMilestone(data));

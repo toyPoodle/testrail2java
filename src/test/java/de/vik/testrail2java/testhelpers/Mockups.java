@@ -7,11 +7,11 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import de.vik.testrail2java.net.APIClient;
+import de.vik.testrail2java.serialization.AllowedFields;
 
 import static de.vik.testrail2java.testhelpers.MoreMatchers.uri;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
-import static org.mockito.AdditionalMatchers.aryEq;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -45,18 +45,18 @@ public class Mockups {
         assertThat(actual, equalTo(expected));
     }
 
-    public static <D> void testSubmissionWithData(String uriString, Class<D> dataClass, String[] allowedFields, Consumer<D> testDataSetup, BiFunction<APIClient, D, D> targetCall) {
+    public static <D> void testSubmissionWithData(String uriString, Class<D> dataClass, AllowedFields allowedFields, Consumer<D> testDataSetup, BiFunction<APIClient, D, D> targetCall) {
         D expected = mock(dataClass);
         APIClient apiClient = mock(APIClient.class);
         D data = mock(dataClass);
 
         testDataSetup.accept(data);
-        when(apiClient.post(uri(uriString), eq(data), aryEq(allowedFields), eq(dataClass))).thenReturn(expected);
+        when(apiClient.post(uri(uriString), eq(data), eq(allowedFields), eq(dataClass))).thenReturn(expected);
 
         final D actual = targetCall.apply(apiClient, data);
 
         //Request should be submitted only once
-        verify(apiClient, times(1)).post(uri(uriString), eq(data), aryEq(allowedFields), eq(dataClass));
+        verify(apiClient, times(1)).post(uri(uriString), eq(data), eq(allowedFields), eq(dataClass));
         assertThat(actual, equalTo(expected));
     }
 

@@ -59,7 +59,7 @@ public class GsonBuilder {
         return defaultBuilder().create();
     }
 
-    public Gson createFor(String... allowedFields) {
+    public Gson createFor(AllowedFields allowedFields) {
         return defaultBuilder().addSerializationExclusionStrategy(new FieldExclusionStrategy(allowedFields)).create();
     }
 }

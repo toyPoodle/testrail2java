@@ -2,6 +2,7 @@ package de.vik.testrail2java.types;
 
 import org.junit.Test;
 
+import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.serialization.GsonBuilder;
 
 import static de.vik.testrail2java.types.primitive.Primitives.projectId;
@@ -37,7 +38,7 @@ public class ProjectTest {
     @Test
     public void serialization() throws Exception {
         Project project = new Project("announcement", timestamp(1L), projectId(2), true, "name", true, SuiteMode.SINGLE_SUITE, "url");
-        final String[] allowedFields = {"name", "announcement", "showAnnouncement", "suiteMode", "isCompleted"};
+        final AllowedFields allowedFields = new AllowedFields(Project.class, "name", "announcement", "showAnnouncement", "suiteMode", "isCompleted");
         final String actual = new GsonBuilder().createFor(allowedFields).toJson(project);
         assertThat(actual, equalTo(
                 "{\n" +

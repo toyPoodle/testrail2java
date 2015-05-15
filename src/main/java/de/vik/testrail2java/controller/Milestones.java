@@ -6,6 +6,7 @@ import de.vik.testrail2java.net.APIClient;
 import de.vik.testrail2java.net.Filters;
 import de.vik.testrail2java.net.MethodUri;
 import de.vik.testrail2java.net.Filter;
+import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Project;
 import de.vik.testrail2java.types.Milestone;
 import de.vik.testrail2java.types.Milestone.MilestoneId;
@@ -47,8 +48,8 @@ public class Milestones {
      * @return Created milestone, if successful
      */
     public Milestone addMilestone(Project.ProjectId projectId, Milestone milestone) {
-        final String[] allowedFields = {"name", "description", "dueOn"};
         final MethodUri uri = new MethodUri("add_milestone/:project_id").withParameters(projectId);
+        final AllowedFields allowedFields = new AllowedFields(Milestone.class, "name", "description", "dueOn");
         return apiClient.post(uri, milestone, allowedFields, Milestone.class);
     }
 
@@ -58,8 +59,8 @@ public class Milestones {
      * @return If successful, this method returns the updated milestone
      */
     public Milestone updateMilestone(Milestone milestone) {
-        final String[] allowedFields = {"name", "description", "dueOn", "isCompleted"};
         final MethodUri uri = new MethodUri("update_milestone/:milestone_id").withParameters(milestone.getId());
+        final AllowedFields allowedFields = new AllowedFields(Milestone.class, "name", "description", "dueOn", "isCompleted");
         return apiClient.post(uri, milestone, allowedFields, Milestone.class);
     }
 

@@ -1,19 +1,21 @@
 package de.vik.testrail2java.controller;
 
+import java.util.List;
+
 import de.vik.testrail2java.net.APIClient;
 import de.vik.testrail2java.net.Filter;
 import de.vik.testrail2java.net.Filters;
 import de.vik.testrail2java.net.MethodUri;
+import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Milestone.MilestoneId;
 import de.vik.testrail2java.types.Plan;
 import de.vik.testrail2java.types.Plan.PlanEntry;
 import de.vik.testrail2java.types.Plan.PlanEntryId;
 import de.vik.testrail2java.types.Plan.PlanId;
+import de.vik.testrail2java.types.Plan.TestRun;
 import de.vik.testrail2java.types.Project.ProjectId;
 import de.vik.testrail2java.types.User.UserId;
 import de.vik.testrail2java.types.primitive.Timestamp;
-
-import java.util.List;
 
 /**
  * http://docs.gurock.com/testrail-api2/reference-plans
@@ -48,7 +50,9 @@ public class Plans {
      */
     public Plan addPlan(Plan plan, ProjectId projectId) {
         final MethodUri uri = new MethodUri("add_plan/:project_id").withParameters(projectId);
-        final String[] allowedFields = {"name", "description", "milestoneId", "entries"};
+        final AllowedFields allowedFields = new AllowedFields(Plan.class, "name", "description", "milestoneId", "entries")
+                .and(PlanEntry.class, "suiteId", "name", "assignedtoId", "includeAll", "caseIds", "configIds", "runs")
+                .and(TestRun.class, "suiteId", "name", "description", "milestoneId", "assignedtoId", "includeAll", "caseIds");
         return client.post(uri, plan, allowedFields, Plan.class);
     }
 
@@ -59,7 +63,7 @@ public class Plans {
      */
     public PlanEntry addPlanEntry(PlanId planId, PlanEntry planEntry) {
         MethodUri uri = new MethodUri("add_plan_entry/:plan_id").withParameters(planId);
-        final String[] allowedFields = {"suiteId", "name", "assignedtoId", "includeAll", "caseIds", "configIds", "runs"};
+        final AllowedFields allowedFields = new AllowedFields(PlanEntry.class, "suiteId", "name", "assignedtoId", "includeAll", "caseIds", "configIds", "runs");
         return client.post(uri, planEntry, allowedFields, PlanEntry.class);
     }
 
@@ -69,7 +73,7 @@ public class Plans {
      */
     public Plan updatePlan(Plan plan) {
         final MethodUri uri = new MethodUri("update_plan/:plan_id").withParameters(plan.getId());
-        final String[] allowedFields = {"name", "description", "milestoneId", "entries"};
+        final AllowedFields allowedFields = new AllowedFields(Plan.class, "name", "description", "milestoneId", "entries");
         return client.post(uri, plan, allowedFields, Plan.class);
     }
 
@@ -79,7 +83,7 @@ public class Plans {
      */
     public PlanEntry updatePlanEntry(PlanEntry planEntry, PlanId planId) {
         MethodUri uri = new MethodUri("update_plan_entry/:plan_id/:entry_id").withParameters(planId, planEntry.getId());
-        final String[] allowedFields = {"name", "assignedtoId", "includeAll", "caseIds"};
+        final AllowedFields allowedFields = new AllowedFields(PlanEntry.class, "name", "assignedtoId", "includeAll", "caseIds");
         return client.post(uri, planEntry, allowedFields, PlanEntry.class);
     }
 

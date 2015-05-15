@@ -7,6 +7,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
+import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.serialization.GsonBuilder;
 
 import static de.vik.testrail2java.net.ClassUtils.arrayTypeFor;
@@ -35,10 +36,17 @@ public class APIClient implements APIClientInterface {
     }
 
     @Override
-    public <T> T post(MethodUri uri, T data, String[] allowedFields, Class<T> resultType) {
+    public <T, R> R post(MethodUri uri, T data, AllowedFields allowedFields, Class<R> resultType) {
         final String postData = serializer(allowedFields).toJson(data);
         final JsonElement response = post(uri, postData);
         return deserializer().fromJson(response, resultType);
+    }
+
+    @Override
+    public <T, R> List<R> postList(MethodUri uri, T data, AllowedFields allowedFields, Class<R> resultType) {
+        final String postData = serializer(allowedFields).toJson(data);
+        final JsonElement response = post(uri, postData);
+        return asList(deserializer().fromJson(response, arrayTypeFor(resultType)));
     }
 
     @Override
@@ -60,7 +68,7 @@ public class APIClient implements APIClientInterface {
         return gsonBuilder.create();
     }
 
-    private Gson serializer(String[] allowedFields) {
+    private Gson serializer(AllowedFields allowedFields) {
         return gsonBuilder.createFor(allowedFields);
     }
 

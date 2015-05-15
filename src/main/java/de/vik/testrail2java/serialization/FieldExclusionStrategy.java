@@ -1,17 +1,13 @@
 package de.vik.testrail2java.serialization;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 
 public class FieldExclusionStrategy implements ExclusionStrategy {
-    private final Set<String> fieldNames;
+    private final AllowedFields allowedFields;
 
-    public FieldExclusionStrategy(String... fieldNames) {
-        this.fieldNames = new HashSet<String>(Arrays.asList(fieldNames));
+    public FieldExclusionStrategy(AllowedFields allowedFields) {
+        this.allowedFields = allowedFields;
     }
 
     public boolean shouldSkipClass(Class<?> clazz) {
@@ -19,10 +15,10 @@ public class FieldExclusionStrategy implements ExclusionStrategy {
     }
 
     public boolean shouldSkipField(FieldAttributes f) {
-        return !containsField(f.getName());
+        return !isMapped(f.getDeclaringClass(), f.getName());
     }
 
-    private boolean containsField(String name) {
-        return fieldNames.contains(name);
+    private boolean isMapped(Class<?> clazz, String name) {
+        return allowedFields.isFieldMapped(clazz, name);
     }
 }

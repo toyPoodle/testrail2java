@@ -1,15 +1,21 @@
 package de.vik.testrail2java.controller;
 
+import org.junit.Test;
+
+import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Plan;
 import de.vik.testrail2java.types.Plan.PlanEntry;
 import de.vik.testrail2java.types.Plan.PlanEntryId;
 import de.vik.testrail2java.types.Plan.PlanId;
 import de.vik.testrail2java.types.Project.ProjectId;
-import org.junit.Test;
 
 import static de.vik.testrail2java.controller.Plans.PlanFilter.isCompleted;
 import static de.vik.testrail2java.net.Filters.filterBy;
-import static de.vik.testrail2java.testhelpers.Mockups.*;
+import static de.vik.testrail2java.testhelpers.Mockups.testGetItem;
+import static de.vik.testrail2java.testhelpers.Mockups.testGetList;
+import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithData;
+import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithoutData;
+import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithoutResultAndData;
 import static org.mockito.Mockito.when;
 
 public class PlansTest {
@@ -28,7 +34,9 @@ public class PlansTest {
 
 	@Test
 	public void testAddPlan() throws Exception {
-		final String[] allowedFields = {"name", "description", "milestoneId", "entries"};
+		final AllowedFields allowedFields = new AllowedFields(Plan.class, "name", "description", "milestoneId", "entries")
+				.and(PlanEntry.class, "suiteId", "name", "assignedtoId", "includeAll", "caseIds", "configIds", "runs")
+				.and(Plan.TestRun.class, "suiteId", "name", "description", "milestoneId", "assignedtoId", "includeAll", "caseIds");
 		testSubmissionWithData("add_plan/3", Plan.class, allowedFields,
 				plan -> {},
 				(client, plan) -> new Plans(client).addPlan(plan, new ProjectId(3)));
@@ -36,7 +44,7 @@ public class PlansTest {
 
 	@Test
 	public void testAddPlanEntry() throws Exception {
-		final String[] allowedFields = {"suiteId", "name", "assignedtoId", "includeAll", "caseIds", "configIds", "runs"};
+		final AllowedFields allowedFields = new AllowedFields(PlanEntry.class, "suiteId", "name", "assignedtoId", "includeAll", "caseIds", "configIds", "runs");
 		testSubmissionWithData("add_plan_entry/4", PlanEntry.class, allowedFields,
 				planEntry -> {},
 				(client, planEntry) -> new Plans(client).addPlanEntry(new PlanId(4), planEntry));
@@ -44,7 +52,7 @@ public class PlansTest {
 
 	@Test
 	public void testUpdatePlan() throws Exception {
-		final String[] allowedFields = {"name", "description", "milestoneId", "entries"};
+		final AllowedFields allowedFields = new AllowedFields(Plan.class, "name", "description", "milestoneId", "entries");
 		testSubmissionWithData("update_plan/3", Plan.class, allowedFields,
 				plan -> when(plan.getId()).thenReturn(new PlanId(3)),
 				(client, plan) -> new Plans(client).updatePlan(plan));
@@ -52,7 +60,7 @@ public class PlansTest {
 
 	@Test
 	public void testUpdatePlanEntry() throws Exception {
-		final String[] allowedFields = {"name", "assignedtoId", "includeAll", "caseIds"};
+		final AllowedFields allowedFields = new AllowedFields(PlanEntry.class, "name", "assignedtoId", "includeAll", "caseIds");
 		testSubmissionWithData("update_plan_entry/4/914bcbdf-17e7-47b9-bc34-f507bcfed8b2", PlanEntry.class, allowedFields,
 				planEntry -> when(planEntry.getId()).thenReturn(new PlanEntryId("914bcbdf-17e7-47b9-bc34-f507bcfed8b2")),
 				(client, planEntry) -> new Plans(client).updatePlanEntry(planEntry, new PlanId(4)));

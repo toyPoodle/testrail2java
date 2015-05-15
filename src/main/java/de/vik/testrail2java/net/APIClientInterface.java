@@ -3,6 +3,7 @@ package de.vik.testrail2java.net;
 import java.util.List;
 
 import de.vik.testrail2java.TestRailException;
+import de.vik.testrail2java.serialization.AllowedFields;
 
 public interface APIClientInterface {
     /**
@@ -31,7 +32,17 @@ public interface APIClientInterface {
      * @param resultType Type of returned element. Java primitive types are not supported.
      * @return Element of result type.
      */
-    <T> T post(MethodUri uri, T data, String[] allowedFields, Class<T> resultType);
+    <T, R> R post(MethodUri uri, T data, AllowedFields allowedFields, Class<R> resultType);
+
+    /**
+     * Submits an element.
+     * @param uri URI to be called.
+     * @param data Element to submit
+     * @param allowedFields Fields of the element which are relevant for submission.
+     * @param resultType Type of returned element. Java primitive types are not supported.
+     * @return List of elements of result type.
+     */
+    <T, R> List<R> postList(MethodUri uri, T data, AllowedFields allowedFields, Class<R> resultType);
 
     /**
      * Submits a call to an URI without data.

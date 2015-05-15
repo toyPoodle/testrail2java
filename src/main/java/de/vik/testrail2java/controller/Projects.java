@@ -1,13 +1,14 @@
 package de.vik.testrail2java.controller;
 
+import java.util.List;
+
 import de.vik.testrail2java.net.APIClient;
 import de.vik.testrail2java.net.Filter;
 import de.vik.testrail2java.net.Filters;
 import de.vik.testrail2java.net.MethodUri;
+import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Project;
 import de.vik.testrail2java.types.Project.ProjectId;
-
-import java.util.List;
 
 /**
  * http://docs.gurock.com/testrail-api2/reference-projects
@@ -41,7 +42,7 @@ public class Projects {
      * @return If successful, this method returns the new project
      */
     public Project addProject(Project project) {
-        final String[] allowedFields = {"name", "announcement", "showAnnouncement", "suiteMode"};
+        final AllowedFields allowedFields = new AllowedFields(Project.class, "name", "announcement", "showAnnouncement", "suiteMode");
         return client.post(new MethodUri("add_project"), project, allowedFields, Project.class);
     }
 
@@ -51,7 +52,7 @@ public class Projects {
      * @return If successful, this method returns the updated project
      */
     public Project updateProject(Project project){
-        final String[] allowedFields = {"name", "announcement", "showAnnouncement", "suiteMode", "isCompleted"};
+        final AllowedFields allowedFields = new AllowedFields(Project.class, "name", "announcement", "showAnnouncement", "suiteMode", "isCompleted");
         final MethodUri uri = new MethodUri("update_project/:project_id").withParameters(project.getId());
         return client.post(uri, project, allowedFields, Project.class);
     }

@@ -6,6 +6,7 @@ import de.vik.testrail2java.net.APIClientInterface;
 import de.vik.testrail2java.net.Filter;
 import de.vik.testrail2java.net.Filters;
 import de.vik.testrail2java.net.MethodUri;
+import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Case;
 import de.vik.testrail2java.types.Case.CaseId;
 import de.vik.testrail2java.types.Milestone.MilestoneId;
@@ -55,9 +56,9 @@ public class Cases {
      * @return If successful, this method returns the created test case
      */
     public Case addCase(SectionId sectionId, Case c) {
-        String[] allowedFields = {"title", "typeId", "priorityId", "estimate", "milestoneId", "refs",
-                "customStepsSeparated", "customPreconds", "customTestdata"};
         final MethodUri uri = new MethodUri("add_case/:section_id").withParameters(sectionId);
+        final AllowedFields allowedFields = new AllowedFields(Case.class, "title", "typeId", "priorityId", "estimate", "milestoneId", "refs",
+                "customStepsSeparated", "customPreconds", "customTestdata");
         return apiClient.post(uri, c, allowedFields, Case.class);
     }
 
@@ -66,9 +67,9 @@ public class Cases {
      * @return If successful, this method returns the updated test case
      */
     public Case updateCase(Case c) {
-        String[] allowedFields = {"title", "typeId", "priorityId", "estimate", "milestoneId",
-                "refs", "customStepsSeparated", "customPreconds", "customTestdata"};
         final MethodUri uri = new MethodUri("update_case/:case_id").withParameters(c.getId());
+        final AllowedFields allowedFields = new AllowedFields(Case.class, "title", "typeId", "priorityId", "estimate", "milestoneId",
+                "refs", "customStepsSeparated", "customPreconds", "customTestdata");
         return apiClient.post(uri, c, allowedFields, Case.class);
     }
 

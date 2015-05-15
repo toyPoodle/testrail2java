@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.google.gson.Gson;
 
+import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.serialization.GsonBuilder;
 import de.vik.testrail2java.types.custom.Step;
 import de.vik.testrail2java.types.primitive.TimeSpan;
@@ -154,7 +155,7 @@ public class CaseTest {
         String customTestData = "a=b, c=d";
         final Case c = new Case(createdBy, createdOn, estimate, estimateForecast, id, milestoneId, priorityId, refs, sectionId, suiteId, title, typeId, updatedBy, updatedOn, customStepsSeparated, customPreconds, customTestData);
 
-        final Gson gson = new GsonBuilder().createFor("createdBy");
+        final Gson gson = new GsonBuilder().createFor(new AllowedFields(Case.class, "createdBy"));
 
         String json = gson.toJson(c);
         String expected = "{\n" +

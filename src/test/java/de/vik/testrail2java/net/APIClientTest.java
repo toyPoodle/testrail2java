@@ -9,15 +9,16 @@ import org.mockito.Mockito;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.serialization.GsonBuilder;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.times;
 
 public class APIClientTest {
 
@@ -71,7 +72,7 @@ public class APIClientTest {
         when(restClient.sendPost(someUri(), "{\n  \"field\": \"value\"\n}")).thenReturn(response);
         final APIClient target = new APIClient(restClient, new GsonBuilder());
         final TestClass data = new TestClass("value");
-        final String[] allowedFields = {"field"};
+        final AllowedFields allowedFields = new AllowedFields(TestClass.class, "field");
 
         TestClass actual = target.post(someUri(), data, allowedFields, TestClass.class);
 
@@ -89,6 +90,43 @@ public class APIClientTest {
         assertThat(actual, hasSize(2));
         assertThat(actual.get(0), equalTo(array[0]));
         assertThat(actual.get(1), equalTo(array[1]));
+    }
+
+    @Test
+    public void serializationOfNestedClassesWithAllowedFieldsForAllClasses() throws Exception {
+        WrapperClass wrapper = new WrapperClass("outer", "inner");
+        RestClient client = mock(RestClient.class);
+        final String expectedJson = "{\n" +
+                "  \"outer_field\": \"outer\",\n" +
+                "  \"wrapped\": {\n" +
+                "    \"field\": \"inner\"\n" +
+                "  }\n" +
+                "}";
+        when(client.sendPost(someUri(), expectedJson)).thenReturn(response("{}"));
+        AllowedFields allowedFields = new AllowedFields(WrapperClass.class, "outerField", "wrapped")
+                .and(TestClass.class, "field");
+
+        APIClient target = new APIClient(client, new GsonBuilder());
+        target.post(someUri(), wrapper, allowedFields, WrapperClass.class);
+
+        verify(client, times(1)).sendPost(someUri(), expectedJson);
+    }
+
+    @Test
+    public void serializationOfNestedClassesWithAllowedFieldsForOuterClassOnly() throws Exception {
+        WrapperClass wrapper = new WrapperClass("outer", "inner");
+        RestClient client = mock(RestClient.class);
+        final String expectedJson = "{\n" +
+                "  \"outer_field\": \"outer\",\n" +
+                "  \"wrapped\": {}\n" +
+                "}";
+        when(client.sendPost(someUri(), expectedJson)).thenReturn(response("{}"));
+        AllowedFields allowedFields = new AllowedFields(WrapperClass.class, "outerField", "wrapped");
+
+        APIClient target = new APIClient(client, new GsonBuilder());
+        target.post(someUri(), wrapper, allowedFields, WrapperClass.class);
+
+        verify(client, times(1)).sendPost(someUri(), expectedJson);
     }
 
     private APIClient targetForGet(MethodUri uri, String json) throws IOException {
@@ -111,6 +149,21 @@ public class APIClientTest {
 
     private MethodUri someUri() {
         return new MethodUri("");
+    }
+
+    private static class WrapperClass {
+        //used via reflection
+        @SuppressWarnings("unused")
+        private String outerField;
+
+        //used via reflection
+        @SuppressWarnings("unused")
+        private TestClass wrapped;
+
+        private WrapperClass(String outerField, String wrappedField) {
+            this.outerField = outerField;
+            this.wrapped = new TestClass(wrappedField);
+        }
     }
 
     private static class TestClass {
