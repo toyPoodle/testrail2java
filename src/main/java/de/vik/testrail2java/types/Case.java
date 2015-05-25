@@ -4,33 +4,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.vik.testrail2java.types.Milestone.MilestoneId;
+import de.vik.testrail2java.types.Priority.PriorityId;
 import de.vik.testrail2java.types.Section.SectionId;
+import de.vik.testrail2java.types.Suite.SuiteId;
 import de.vik.testrail2java.types.Type.TypeId;
+import de.vik.testrail2java.types.User.UserId;
 import de.vik.testrail2java.types.custom.Step;
 import de.vik.testrail2java.types.primitive.NumericId;
 import de.vik.testrail2java.types.primitive.TimeSpan;
 import de.vik.testrail2java.types.primitive.Timestamp;
 
 public class Case {
-    private User.UserId createdBy;
+    private UserId createdBy;
     private Timestamp createdOn;
     private TimeSpan estimate;
     private TimeSpan estimateForecast;
     private CaseId id;
     private MilestoneId milestoneId;
-    private Priority.PriorityId priorityId;
+    private PriorityId priorityId;
     private String refs;
     private SectionId sectionId;
-    private Suite.SuiteId suiteId;
+    private SuiteId suiteId;
     private String title;
     private TypeId typeId;
-    private User.UserId updatedBy;
+    private UserId updatedBy;
     private Timestamp updatedOn;
     private List<Step> customStepsSeparated;
+    @SuppressWarnings("SpellCheckingInspection")
     private String customPreconds;
+    @SuppressWarnings("SpellCheckingInspection")
     private String customTestdata;
 
-    public Case(User.UserId createdBy, Timestamp createdOn, TimeSpan estimate, TimeSpan estimateForecast, CaseId id, MilestoneId milestoneId, Priority.PriorityId priorityId, String refs, SectionId sectionId, Suite.SuiteId suiteId, String title, TypeId typeId, User.UserId updatedBy, Timestamp updatedOn, List<Step> customStepsSeparated, String customPreconds, String customTestdata) {
+    public Case(UserId createdBy, Timestamp createdOn, TimeSpan estimate, TimeSpan estimateForecast, CaseId id, MilestoneId milestoneId,
+                PriorityId priorityId, String refs, SectionId sectionId, SuiteId suiteId, String title, TypeId typeId, UserId updatedBy,
+                Timestamp updatedOn, List<Step> steps, String precondition, String testData) {
         this.createdBy = createdBy;
         this.createdOn = createdOn;
         this.estimate = estimate;
@@ -45,15 +52,15 @@ public class Case {
         this.typeId = typeId;
         this.updatedBy = updatedBy;
         this.updatedOn = updatedOn;
-        this.customStepsSeparated = new ArrayList<Step>(customStepsSeparated);
-        this.customPreconds = customPreconds;
-        this.customTestdata = customTestdata;
+        this.customStepsSeparated = new ArrayList<>(steps);
+        this.customPreconds = precondition;
+        this.customTestdata = testData;
     }
 
     /**
      * @return The ID of the user who created the test case
      */
-    public User.UserId getCreatedBy() {
+    public UserId getCreatedBy() {
         return createdBy;
     }
 
@@ -99,7 +106,7 @@ public class Case {
      *
      * @return The ID of the priority that is linked to the test case
      */
-    public Priority.PriorityId getPriorityId() {
+    public PriorityId getPriorityId() {
         return priorityId;
     }
 
@@ -123,7 +130,7 @@ public class Case {
      *
      * @return The ID of the suite the test case belongs to
      */
-    public Suite.SuiteId getSuiteId() {
+    public SuiteId getSuiteId() {
         return suiteId;
     }
 
@@ -147,7 +154,7 @@ public class Case {
      *
      * @return The ID of the user who last updated the test case
      */
-    public User.UserId getUpdatedBy() {
+    public UserId getUpdatedBy() {
         return updatedBy;
     }
 
@@ -159,20 +166,21 @@ public class Case {
         return updatedOn;
     }
 
-    public String getCustomPreconds() {
+    public String getPreconditions() {
         return customPreconds;
     }
 
-    public String getCustomTestdata() {
+    public String getTestData() {
         return customTestdata;
     }
 
-    public List<Step> getCustomStepsSeparated() {
+    public List<Step> getSteps() {
         return customStepsSeparated;
     }
 
     @Override
     public String toString() {
+        //noinspection SpellCheckingInspection
         return "Case{" +
                 "createdBy=" + createdBy +
                 ", createdOn=" + createdOn +

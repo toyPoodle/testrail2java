@@ -57,6 +57,7 @@ public class Cases {
      */
     public Case addCase(SectionId sectionId, Case c) {
         final MethodUri uri = new MethodUri("add_case/:section_id").withParameters(sectionId);
+        @SuppressWarnings("SpellCheckingInspection")
         final AllowedFields allowedFields = new AllowedFields(Case.class, "title", "typeId", "priorityId", "estimate", "milestoneId", "refs",
                 "customStepsSeparated", "customPreconds", "customTestdata");
         return apiClient.post(uri, c, allowedFields, Case.class);
@@ -68,6 +69,7 @@ public class Cases {
      */
     public Case updateCase(Case c) {
         final MethodUri uri = new MethodUri("update_case/:case_id").withParameters(c.getId());
+        @SuppressWarnings("SpellCheckingInspection")
         final AllowedFields allowedFields = new AllowedFields(Case.class, "title", "typeId", "priorityId", "estimate", "milestoneId",
                 "refs", "customStepsSeparated", "customPreconds", "customTestdata");
         return apiClient.post(uri, c, allowedFields, Case.class);
