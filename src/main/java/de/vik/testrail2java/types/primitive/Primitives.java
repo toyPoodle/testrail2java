@@ -45,4 +45,8 @@ public class Primitives {
     public static Timestamp timestamp(long value) {
         return new Timestamp(value);
     }
+
+    public static TimeSpan timeSpan(String value) {
+        return new TimeSpan(value);
+    }
 }
