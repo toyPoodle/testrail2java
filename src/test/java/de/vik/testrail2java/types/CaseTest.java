@@ -9,6 +9,10 @@ import com.google.gson.Gson;
 
 import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.serialization.GsonBuilder;
+import de.vik.testrail2java.types.Case.CaseId;
+import de.vik.testrail2java.types.Milestone.MilestoneId;
+import de.vik.testrail2java.types.Suite.SuiteId;
+import de.vik.testrail2java.types.Type.TypeId;
 import de.vik.testrail2java.types.custom.Step;
 import de.vik.testrail2java.types.primitive.TimeSpan;
 import de.vik.testrail2java.types.primitive.Timestamp;
@@ -16,9 +20,11 @@ import de.vik.testrail2java.types.Priority.PriorityId;
 import de.vik.testrail2java.types.Section.SectionId;
 import de.vik.testrail2java.types.User.UserId;
 
+import static de.vik.testrail2java.types.primitive.Primitives.caseId;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class CaseTest {
 
     @Test
@@ -62,8 +68,8 @@ public class CaseTest {
 
         assertThat(actual.getCreatedBy().getValue(), equalTo("5"));
         assertThat(actual.getCreatedOn().getValue(), equalTo(1392300984L));
-        assertThat(actual.getCustomPreconds(), equalTo("you have a dog"));
-        assertThat(actual.getCustomTestdata(), equalTo("name=wuff"));
+        assertThat(actual.getPreconditions(), equalTo("you have a dog"));
+        assertThat(actual.getTestData(), equalTo("name=wuff"));
         assertThat(actual.getEstimate().getValue(), equalTo("1m 5s"));
         assertThat(actual.getEstimateForecast().getValue(), equalTo("4m 5s"));
         assertThat(actual.getId().getValue(), equalTo("1"));
@@ -76,6 +82,7 @@ public class CaseTest {
         assertThat(actual.getTypeId().getValue(), equalTo("4"));
         assertThat(actual.getUpdatedBy().getValue(), equalTo("8"));
         assertThat(actual.getUpdatedOn().getValue(), equalTo(1393586511L));
+        assertThat(actual.getSteps().size(), equalTo(3));
     }
 
     @Test
@@ -84,20 +91,21 @@ public class CaseTest {
         Timestamp createdOn = new Timestamp(1392300984L);
         TimeSpan estimate = new TimeSpan("14h, 23s");
         TimeSpan estimateForecast = new TimeSpan("1h, 2s");
-        Case.CaseId id = new Case.CaseId(2);
-        Milestone.MilestoneId milestoneId = new Milestone.MilestoneId(3);
+        CaseId id = caseId(2);
+        MilestoneId milestoneId = new MilestoneId(3);
         PriorityId priorityId = new PriorityId(4);
         String refs = "REF-1, REF-2";
         SectionId sectionId = new SectionId(5);
-        Suite.SuiteId suiteId = new Suite.SuiteId(6);
+        SuiteId suiteId = new SuiteId(6);
         String title = "serialization of objects to json";
-        Type.TypeId typeId = new Type.TypeId(7);
+        TypeId typeId = new TypeId(7);
         UserId updatedBy = new UserId(8);
         Timestamp updatedOn = new Timestamp(1393586511L);
-        List<Step> customStepsSeparated = Arrays.asList(new Step("expected 1", "content 1"), new Step("expected 2", "content 2"));
-        String customPreconds = "there is something to test";
-        String customTestData = "a=b, c=d";
-        Case c = new Case(createdBy, createdOn, estimate, estimateForecast, id, milestoneId, priorityId, refs, sectionId, suiteId, title, typeId, updatedBy, updatedOn, customStepsSeparated, customPreconds, customTestData);
+        List<Step> steps = Arrays.asList(new Step("expected 1", "content 1"), new Step("expected 2", "content 2"));
+        String preconditions = "there is something to test";
+        String testData = "a=b, c=d";
+        Case c = new Case(createdBy, createdOn, estimate, estimateForecast, id, milestoneId, priorityId, refs, sectionId, suiteId, title,
+                typeId, updatedBy, updatedOn, steps, preconditions, testData);
 
         Gson gson = new GsonBuilder().create();
 
@@ -140,20 +148,21 @@ public class CaseTest {
         Timestamp createdOn = new Timestamp(1392300984L);
         TimeSpan estimate = new TimeSpan("14h, 23s");
         TimeSpan estimateForecast = new TimeSpan("1h, 2s");
-        Case.CaseId id = new Case.CaseId(2);
-        Milestone.MilestoneId milestoneId = new Milestone.MilestoneId(3);
+        CaseId id = caseId(2);
+        MilestoneId milestoneId = new MilestoneId(3);
         PriorityId priorityId = new PriorityId(4);
         String refs = "REF-1, REF-2";
         SectionId sectionId = new SectionId(5);
-        Suite.SuiteId suiteId = new Suite.SuiteId(6);
+        SuiteId suiteId = new SuiteId(6);
         String title = "serialization of objects to json";
-        Type.TypeId typeId = new Type.TypeId(7);
+        TypeId typeId = new TypeId(7);
         UserId updatedBy = new UserId(8);
         Timestamp updatedOn = new Timestamp(1393586511L);
-        List<Step> customStepsSeparated = Arrays.asList(new Step("expected 1", "content 1"), new Step("expected 2", "content 2"));
-        String customPreconds = "there is something to test";
-        String customTestData = "a=b, c=d";
-        final Case c = new Case(createdBy, createdOn, estimate, estimateForecast, id, milestoneId, priorityId, refs, sectionId, suiteId, title, typeId, updatedBy, updatedOn, customStepsSeparated, customPreconds, customTestData);
+        List<Step> steps = Arrays.asList(new Step("expected 1", "content 1"), new Step("expected 2", "content 2"));
+        String preconditions = "there is something to test";
+        String testData = "a=b, c=d";
+        final Case c = new Case(createdBy, createdOn, estimate, estimateForecast, id, milestoneId, priorityId, refs, sectionId, suiteId,
+                title, typeId, updatedBy, updatedOn, steps, preconditions, testData);
 
         final Gson gson = new GsonBuilder().createFor(new AllowedFields(Case.class, "createdBy"));
 
