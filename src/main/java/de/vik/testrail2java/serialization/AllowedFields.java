@@ -2,23 +2,24 @@ package de.vik.testrail2java.serialization;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class AllowedFields {
-	private Map<Class<?>, List<String>> fieldMapping = new HashMap<>();
+	private Map<Class<?>, Set<String>> fieldMapping = new HashMap<>();
 
 	public AllowedFields(Class<?> clazz, String... fields) {
-		fieldMapping.put(clazz, Arrays.asList(fields));
+		fieldMapping.put(clazz, asSet(fields));
 	}
 
-	protected AllowedFields(AllowedFields otherFields, Class<?> clazz, String[] fields) {
+	protected AllowedFields(Class<?> clazz, String[] fields, AllowedFields otherFields) {
+		this(clazz, fields);
 		fieldMapping.putAll(otherFields.fieldMapping);
-		fieldMapping.put(clazz, Arrays.asList(fields));
 	}
 
 	public AllowedFields and(Class<?> clazz, String... fields) {
-		return new AllowedFields(this, clazz, fields);
+		return new AllowedFields(clazz, fields, this);
 	}
 
 	public boolean isFieldMapped(Class<?> clazz, String fieldName) {
@@ -26,7 +27,12 @@ public class AllowedFields {
 				&& fieldMapping.get(clazz).contains(fieldName);
 	}
 
-    @Override
+	private Set<String> asSet(String[] fields) {
+		//sorted for better comparison of items in failing tests
+		return new TreeSet<>(Arrays.asList(fields));
+	}
+
+	@Override
 	@SuppressWarnings("ControlFlowStatementWithoutBraces")
 	public boolean equals(Object o) {
 		if (this == o) return true;
