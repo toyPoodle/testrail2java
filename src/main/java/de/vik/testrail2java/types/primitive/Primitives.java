@@ -2,6 +2,7 @@ package de.vik.testrail2java.types.primitive;
 
 import de.vik.testrail2java.types.Case;
 import de.vik.testrail2java.types.Milestone;
+import de.vik.testrail2java.types.Status;
 import de.vik.testrail2java.types.Suite;
 import de.vik.testrail2java.types.Type;
 import de.vik.testrail2java.types.Priority.PriorityId;
@@ -48,5 +49,9 @@ public class Primitives {
 
     public static TimeSpan timeSpan(String value) {
         return new TimeSpan(value);
+    }
+
+    public static Status.StatusId statusId(int value) {
+        return new Status.StatusId(value);
     }
 }

@@ -60,6 +60,22 @@ public class Mockups {
         assertThat(actual, equalTo(expected));
     }
 
+    public static <D, R> void testSubmissionWithDataList(String uriString, Class<R> resultClass, AllowedFields allowedFields, Function<List<R>, D> testDataSetup, BiFunction<APIClient, List<R>, List<R>> targetCall) {
+        List<R> expected = new ArrayList<>();
+        expected.add(mock(resultClass, "pseudo result list item"));
+        APIClient apiClient = mock(APIClient.class);
+        D data = testDataSetup.apply(expected);
+
+        when(apiClient.postList(uri(uriString), eq(data), eq(allowedFields), eq(resultClass))).thenReturn(expected);
+
+        final List<R> actual = targetCall.apply(apiClient, expected);
+
+        //Request should be submitted only once
+        verify(apiClient, times(1)).postList(uri(uriString), eq(data), eq(allowedFields), eq(resultClass));
+        assertThat(actual, equalTo(expected));
+    }
+
+
     public static <R> void testSubmissionWithoutData(String uriString, Class<R> resultClass, Function<APIClient, R> targetCall) {
         R expected = mock(resultClass);
         APIClient apiClient = mock(APIClient.class);
