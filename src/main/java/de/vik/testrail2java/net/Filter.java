@@ -30,6 +30,7 @@ public class Filter <T>{
     }
 
     @Override
+    @SuppressWarnings({"ControlFlowStatementWithoutBraces", "SimplifiableIfStatement"})
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

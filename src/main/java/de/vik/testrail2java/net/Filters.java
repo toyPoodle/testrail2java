@@ -41,6 +41,7 @@ public class Filters <T> implements AsString {
     }
 
     @Override
+    @SuppressWarnings("ControlFlowStatementWithoutBraces")
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
