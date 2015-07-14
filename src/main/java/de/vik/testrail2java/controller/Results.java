@@ -184,7 +184,7 @@ public class Results {
 		/**
 		 * A comma-separated list of status IDs to filter by.
 		 */
-		public static Filter<Result> offset(StatusId id, StatusId... furtherIds) {
+		public static Filter<Result> statusId(StatusId id, StatusId... furtherIds) {
 			return new ResultFilter("status_id", asString(id, furtherIds));
 		}
 
