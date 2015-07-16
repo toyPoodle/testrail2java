@@ -1,9 +1,10 @@
 package de.vik.testrail2java.types;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.vik.testrail2java.types.Case.CaseId;
-import de.vik.testrail2java.types.Plan.TestRunId;
+import de.vik.testrail2java.types.Run.RunId;
 import de.vik.testrail2java.types.Priority.PriorityId;
 import de.vik.testrail2java.types.Status.StatusId;
 import de.vik.testrail2java.types.Type.TypeId;
@@ -24,18 +25,18 @@ public class Test {
 	private TimeSpan estimateForecast;
 	private TestId id;
 	private PriorityId priorityId;
-	private TestRunId runId;
+	private RunId runId;
 	private StatusId statusId;
 	private String title;
 	private TypeId typeId;
 
 	private Test(UserId assignedToId, CaseId caseId, String expected, String preconditions, List<Step> steps, TimeSpan estimate,
-				 TimeSpan estimateForecast, TestId id, PriorityId priorityId, TestRunId runId, StatusId statusId, String title, TypeId typeId) {
+				 TimeSpan estimateForecast, TestId id, PriorityId priorityId, RunId runId, StatusId statusId, String title, TypeId typeId) {
 		this.assignedtoId = assignedToId;
 		this.caseId = caseId;
 		this.customExpected = expected;
 		this.customPreconds = preconditions;
-		this.customStepsSeparated = steps;
+		this.customStepsSeparated = new ArrayList<>(steps);
 		this.estimate = estimate;
 		this.estimateForecast = estimateForecast;
 		this.id = id;
@@ -63,7 +64,7 @@ public class Test {
 	}
 
 	public List<Step> getSteps() {
-		return customStepsSeparated;
+		return new ArrayList<>(customStepsSeparated);
 	}
 
 	public TimeSpan getEstimate() {
@@ -82,7 +83,7 @@ public class Test {
 		return priorityId;
 	}
 
-	public TestRunId getRunId() {
+	public RunId getRunId() {
 		return runId;
 	}
 

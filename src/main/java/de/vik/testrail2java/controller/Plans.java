@@ -12,7 +12,7 @@ import de.vik.testrail2java.types.Plan;
 import de.vik.testrail2java.types.Plan.PlanEntry;
 import de.vik.testrail2java.types.Plan.PlanEntryId;
 import de.vik.testrail2java.types.Plan.PlanId;
-import de.vik.testrail2java.types.Plan.TestRun;
+import de.vik.testrail2java.types.Run;
 import de.vik.testrail2java.types.Project.ProjectId;
 import de.vik.testrail2java.types.User.UserId;
 import de.vik.testrail2java.types.primitive.Timestamp;
@@ -50,9 +50,10 @@ public class Plans {
      */
     public Plan addPlan(Plan plan, ProjectId projectId) {
         final MethodUri uri = new MethodUri("add_plan/:project_id").withParameters(projectId);
+        @SuppressWarnings("SpellCheckingInspection")
         final AllowedFields allowedFields = new AllowedFields(Plan.class, "name", "description", "milestoneId", "entries")
                 .and(PlanEntry.class, "suiteId", "name", "assignedtoId", "includeAll", "caseIds", "configIds", "runs")
-                .and(TestRun.class, "suiteId", "name", "description", "milestoneId", "assignedtoId", "includeAll", "caseIds");
+                .and(Run.class, "suiteId", "name", "description", "milestoneId", "assignedtoId", "includeAll", "caseIds");
         return client.post(uri, plan, allowedFields, Plan.class);
     }
 
@@ -63,7 +64,9 @@ public class Plans {
      */
     public PlanEntry addPlanEntry(PlanId planId, PlanEntry planEntry) {
         MethodUri uri = new MethodUri("add_plan_entry/:plan_id").withParameters(planId);
-        final AllowedFields allowedFields = new AllowedFields(PlanEntry.class, "suiteId", "name", "assignedtoId", "includeAll", "caseIds", "configIds", "runs");
+        @SuppressWarnings("SpellCheckingInspection")
+        final AllowedFields allowedFields = new AllowedFields(PlanEntry.class, "suiteId", "name", "assignedtoId", "includeAll",
+                "caseIds", "configIds", "runs");
         return client.post(uri, planEntry, allowedFields, PlanEntry.class);
     }
 
@@ -83,6 +86,7 @@ public class Plans {
      */
     public PlanEntry updatePlanEntry(PlanEntry planEntry, PlanId planId) {
         MethodUri uri = new MethodUri("update_plan_entry/:plan_id/:entry_id").withParameters(planId, planEntry.getId());
+        @SuppressWarnings("SpellCheckingInspection")
         final AllowedFields allowedFields = new AllowedFields(PlanEntry.class, "name", "assignedtoId", "includeAll", "caseIds");
         return client.post(uri, planEntry, allowedFields, PlanEntry.class);
     }

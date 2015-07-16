@@ -8,6 +8,7 @@ import de.vik.testrail2java.types.Plan.PlanEntry;
 import de.vik.testrail2java.types.Plan.PlanEntryId;
 import de.vik.testrail2java.types.Plan.PlanId;
 import de.vik.testrail2java.types.Project.ProjectId;
+import de.vik.testrail2java.types.Run;
 
 import static de.vik.testrail2java.controller.Plans.PlanFilter.isCompleted;
 import static de.vik.testrail2java.net.Filters.filterBy;
@@ -36,7 +37,7 @@ public class PlansTest {
 	public void testAddPlan() throws Exception {
 		final AllowedFields allowedFields = new AllowedFields(Plan.class, "name", "description", "milestoneId", "entries")
 				.and(PlanEntry.class, "suiteId", "name", "assignedtoId", "includeAll", "caseIds", "configIds", "runs")
-				.and(Plan.TestRun.class, "suiteId", "name", "description", "milestoneId", "assignedtoId", "includeAll", "caseIds");
+				.and(Run.class, "suiteId", "name", "description", "milestoneId", "assignedtoId", "includeAll", "caseIds");
 		testSubmissionWithData("add_plan/3", Plan.class, allowedFields,
 				plan -> {},
 				(client, plan) -> new Plans(client).addPlan(plan, new ProjectId(3)));

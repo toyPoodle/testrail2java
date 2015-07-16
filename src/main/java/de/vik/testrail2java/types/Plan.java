@@ -3,8 +3,8 @@ package de.vik.testrail2java.types;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.vik.testrail2java.types.Case.CaseId;
 import de.vik.testrail2java.types.ConfigurationGroup.ConfigurationId;
+import de.vik.testrail2java.types.Milestone.MilestoneId;
 import de.vik.testrail2java.types.Project.ProjectId;
 import de.vik.testrail2java.types.Suite.SuiteId;
 import de.vik.testrail2java.types.User.UserId;
@@ -14,6 +14,7 @@ import de.vik.testrail2java.types.primitive.Timestamp;
 
 public class Plan {
 
+    @SuppressWarnings("SpellCheckingInspection")
     private UserId assignedtoId;
     private int blockedCount;
     private Timestamp completedOn;
@@ -25,7 +26,7 @@ public class Plan {
     private int failedCount;
     private PlanId id;
     private boolean isCompleted;
-    private Milestone.MilestoneId milestoneId;
+    private MilestoneId milestoneId;
     private String name;
     private int passedCount;
     private ProjectId projectId;
@@ -33,15 +34,19 @@ public class Plan {
     private int untestedCount;
     private String url;
 
-    public Plan(UserId assignedtoId, int blockedCount, Timestamp completedOn, UserId createdBy, Timestamp createdOn, int customStatus1Count, String description, List<PlanEntry> entries, int failedCount, PlanId id, boolean isCompleted, Milestone.MilestoneId milestoneId, String name, int passedCount, ProjectId projectId, int retestCount, int untestedCount, String url) {
-        this.assignedtoId = assignedtoId;
+    @SuppressWarnings("BooleanParameter")
+    public Plan(UserId assignedToId, int blockedCount, Timestamp completedOn, UserId createdBy, Timestamp createdOn,
+                int customStatus1Count, String description, List<PlanEntry> entries, int failedCount, PlanId id,
+                boolean isCompleted, MilestoneId milestoneId, String name, int passedCount, ProjectId projectId,
+                int retestCount, int untestedCount, String url) {
+        this.assignedtoId = assignedToId;
         this.blockedCount = blockedCount;
         this.completedOn = completedOn;
         this.createdBy = createdBy;
         this.createdOn = createdOn;
         this.customStatus1Count = customStatus1Count;
         this.description = description;
-        this.entries = entries;
+        this.entries = new ArrayList<>(entries);
         this.failedCount = failedCount;
         this.id = id;
         this.isCompleted = isCompleted;
@@ -54,7 +59,7 @@ public class Plan {
         this.url = url;
     }
 
-    public UserId getAssignedtoId() {
+    public UserId getAssignedToId() {
         return assignedtoId;
     }
 
@@ -83,7 +88,7 @@ public class Plan {
     }
 
     public List<PlanEntry> getEntries() {
-        return entries;
+        return new ArrayList<>(entries);
     }
 
     public int getFailedCount() {
@@ -98,7 +103,7 @@ public class Plan {
         return isCompleted;
     }
 
-    public Milestone.MilestoneId getMilestoneId() {
+    public MilestoneId getMilestoneId() {
         return milestoneId;
     }
 
@@ -128,6 +133,7 @@ public class Plan {
 
     @Override
     public String toString() {
+        //noinspection SpellCheckingInspection
         return "Plan{" +
                 "assignedtoId=" + assignedtoId +
                 ", blockedCount=" + blockedCount +
@@ -160,19 +166,22 @@ public class Plan {
         private PlanEntryId id;
         private String name;
         private SuiteId suiteId;
-        private List<TestRun> runs;
+        private List<Run> runs;
         private List<ConfigurationId> configIds;
         private boolean includeAll;
+        @SuppressWarnings("SpellCheckingInspection")
         private UserId assignedtoId;
 
-        public PlanEntry(PlanEntryId id, String name, SuiteId suiteId, List<TestRun> runs, List<ConfigurationId> configIds, boolean includeAll, UserId assignedtoId) {
+        @SuppressWarnings("BooleanParameter")
+        public PlanEntry(PlanEntryId id, String name, SuiteId suiteId, List<Run> runs, List<ConfigurationId>
+                configIds, boolean includeAll, UserId assignedToId) {
             this.id = id;
             this.name = name;
             this.suiteId = suiteId;
-            this.runs = runs;
-            this.configIds = configIds;
+            this.runs = new ArrayList<>(runs);
+            this.configIds = new ArrayList<>(configIds);
             this.includeAll = includeAll;
-            this.assignedtoId = assignedtoId;
+            this.assignedtoId = assignedToId;
         }
 
         public PlanEntryId getId() {
@@ -187,7 +196,7 @@ public class Plan {
             return suiteId;
         }
 
-        public List<TestRun> getRuns() {
+        public List<Run> getRuns() {
             return runs;
         }
 
@@ -199,12 +208,13 @@ public class Plan {
             return includeAll;
         }
 
-        public UserId getAssignedtoId() {
+        public UserId getAssignedToId() {
             return assignedtoId;
         }
 
         @Override
         public String toString() {
+            //noinspection SpellCheckingInspection
             return "PlanEntry{" +
                     "id='" + id + '\'' +
                     ", name='" + name + '\'' +
@@ -214,143 +224,6 @@ public class Plan {
                     ", includeAll=" + includeAll +
                     ", assignedtoId=" + assignedtoId +
                     '}';
-        }
-    }
-
-    public static class TestRun {
-        private TestRunId id;
-        private SuiteId suiteId;
-        private boolean includeAll;
-        private boolean isCompleted;
-        private int passedCount;
-        private int blockedCount;
-        private int failedCount;
-        private int untestedCount;
-        private int retestCount;
-        private ProjectId projectId;
-        private PlanId planId;
-        private int entryIndex;
-        private PlanEntryId entryId;
-        private List<CaseId> caseIds;
-        private UserId assignedtoId;
-        private List<ConfigurationId> configIds;
-        private String name;
-
-        public TestRun(TestRunId id, SuiteId suiteId, boolean includeAll, boolean isCompleted, int passedCount, int blockedCount, int failedCount, int untestedCount, int retestCount, ProjectId projectId, PlanId planId, int entryIndex, PlanEntryId entryId, List<CaseId> caseIds, UserId assignedtoId, List<ConfigurationId> configIds, String name) {
-            this.id = id;
-            this.suiteId = suiteId;
-            this.includeAll = includeAll;
-            this.isCompleted = isCompleted;
-            this.passedCount = passedCount;
-            this.blockedCount = blockedCount;
-            this.failedCount = failedCount;
-            this.untestedCount = untestedCount;
-            this.retestCount = retestCount;
-            this.projectId = projectId;
-            this.planId = planId;
-            this.entryIndex = entryIndex;
-            this.entryId = entryId;
-            this.caseIds = caseIds;
-            this.assignedtoId = assignedtoId;
-            this.configIds = configIds;
-            this.name = name;
-        }
-
-        public TestRunId getId() {
-            return id;
-        }
-
-        public SuiteId getSuiteId() {
-            return suiteId;
-        }
-
-        public boolean isIncludeAll() {
-            return includeAll;
-        }
-
-        public boolean isCompleted() {
-            return isCompleted;
-        }
-
-        public int getPassedCount() {
-            return passedCount;
-        }
-
-        public int getBlockedCount() {
-            return blockedCount;
-        }
-
-        public int getFailedCount() {
-            return failedCount;
-        }
-
-        public int getUntestedCount() {
-            return untestedCount;
-        }
-
-        public int getRetestCount() {
-            return retestCount;
-        }
-
-        public ProjectId getProjectId() {
-            return projectId;
-        }
-
-        public PlanId getPlanId() {
-            return planId;
-        }
-
-        public int getEntryIndex() {
-            return entryIndex;
-        }
-
-        public PlanEntryId getEntryId() {
-            return entryId;
-        }
-
-        public List<CaseId> getCaseIds() {
-            return new ArrayList<CaseId>(caseIds);
-        }
-
-        public UserId getAssignedtoId() {
-            return assignedtoId;
-        }
-
-        public List<ConfigurationId> getConfigIds() {
-            return new ArrayList<ConfigurationId>(configIds);
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public String toString() {
-            return "TestRun{" +
-                    "id=" + id +
-                    ", suiteId=" + suiteId +
-                    ", includeAll=" + includeAll +
-                    ", isCompleted=" + isCompleted +
-                    ", passedCount=" + passedCount +
-                    ", blockedCount=" + blockedCount +
-                    ", failedCount=" + failedCount +
-                    ", untestedCount=" + untestedCount +
-                    ", retestCount=" + retestCount +
-                    ", projectId=" + projectId +
-                    ", planId=" + planId +
-                    ", entryIndex=" + entryIndex +
-                    ", entryId='" + entryId + '\'' +
-                    ", caseIds=" + caseIds +
-                    ", assignedtoId=" + assignedtoId +
-                    ", configIds=" + configIds +
-                    ", name='" + name + '\'' +
-                    '}';
-        }
-    }
-
-    public static class TestRunId extends NumericId {
-        public TestRunId(int id) {
-            super(id);
         }
     }
 

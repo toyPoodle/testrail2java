@@ -12,6 +12,7 @@ public class PlanTest {
 
     @Test
     public void deserializePlan() throws Exception {
+        @SuppressWarnings("SpellCheckingInspection")
         String json = "{" +
                 "    \"assignedto_id\": 1," +
                 "    \"blocked_count\": 2," +
@@ -81,7 +82,7 @@ public class PlanTest {
                 "}";
         final Plan actual = new GsonBuilder().create().fromJson(json, Plan.class);
 
-        assertThat(actual.getAssignedtoId().getValue(), equalTo("1"));
+        assertThat(actual.getAssignedToId().getValue(), equalTo("1"));
         assertThat(actual.getBlockedCount(), equalTo(2));
         assertThat(actual.getCompletedOn().getValue(), equalTo(3L));
         assertThat(actual.getCreatedBy().getValue(), equalTo("4"));
@@ -103,6 +104,7 @@ public class PlanTest {
     }
 
     @Test
+    @SuppressWarnings("SpellCheckingInspection")
     public void deserializePlanEntry() throws Exception {
         String json = "{" +
                 "    \"id\": \"22cadd88-d43d-48bb-97d7-2726af22166c\"," +
@@ -144,12 +146,12 @@ public class PlanTest {
         assertThat(actual.getName(), equalTo("Web"));
         assertThat(actual.getRuns(), hasSize(1));
         assertThat(actual.getSuiteId().getValue(), equalTo("7"));
-        assertThat(actual.getAssignedtoId().getValue(), equalTo("8"));
+        assertThat(actual.getAssignedToId().getValue(), equalTo("8"));
         assertThat(actual.isIncludeAll(), equalTo(true));
 
-        Plan.TestRun run = actual.getRuns().get(0);
+        Run run = actual.getRuns().get(0);
         assertThat(run.getSuiteId().getValue(), equalTo("1"));
-        assertThat(run.getAssignedtoId().getValue(), equalTo("9"));
+        assertThat(run.getAssignedToId().getValue(), equalTo("9"));
         assertThat(run.getName(), equalTo("Web"));
         assertThat(run.isIncludeAll(), equalTo(true));
         assertThat(run.isCompleted(), equalTo(true));

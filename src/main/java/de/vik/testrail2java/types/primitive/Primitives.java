@@ -2,12 +2,13 @@ package de.vik.testrail2java.types.primitive;
 
 import de.vik.testrail2java.types.Case;
 import de.vik.testrail2java.types.Milestone;
-import de.vik.testrail2java.types.Status;
-import de.vik.testrail2java.types.Suite;
-import de.vik.testrail2java.types.Type;
 import de.vik.testrail2java.types.Priority.PriorityId;
 import de.vik.testrail2java.types.Project.ProjectId;
+import de.vik.testrail2java.types.Run.RunId;
 import de.vik.testrail2java.types.Section.SectionId;
+import de.vik.testrail2java.types.Status.StatusId;
+import de.vik.testrail2java.types.Suite;
+import de.vik.testrail2java.types.Type;
 import de.vik.testrail2java.types.User.UserId;
 
 public class Primitives {
@@ -51,7 +52,11 @@ public class Primitives {
         return new TimeSpan(value);
     }
 
-    public static Status.StatusId statusId(int value) {
-        return new Status.StatusId(value);
+    public static StatusId statusId(int value) {
+        return new StatusId(value);
+    }
+
+    public static RunId runId(int value) {
+        return new RunId(value);
     }
 }

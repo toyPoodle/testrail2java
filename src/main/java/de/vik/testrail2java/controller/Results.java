@@ -9,7 +9,7 @@ import de.vik.testrail2java.net.Filters;
 import de.vik.testrail2java.net.MethodUri;
 import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Case.CaseId;
-import de.vik.testrail2java.types.Plan.TestRunId;
+import de.vik.testrail2java.types.Run.RunId;
 import de.vik.testrail2java.types.Result;
 import de.vik.testrail2java.types.Status.StatusId;
 import de.vik.testrail2java.types.Test.TestId;
@@ -46,7 +46,7 @@ public class Results {
 	 * @param runId The ID of the test run
 	 * @param caseId The ID of the test case
 	 */
-	public List<Result> getResultsForCase(TestRunId runId, CaseId caseId, Filters<Result> filters) {
+	public List<Result> getResultsForCase(RunId runId, CaseId caseId, Filters<Result> filters) {
 		final MethodUri uri = new MethodUri("get_results_for_case/:run_id/:case_id", filters).withParameters(runId, caseId);
 		return client.getList(Result.class, uri);
 	}
@@ -55,14 +55,14 @@ public class Results {
 	 * Returns a list of test results for a test run.
 	 * @param runId The ID of the test run
 	 */
-	public List<Result> getResultsForRun(TestRunId runId, Filters<Result> filters) {
+	public List<Result> getResultsForRun(RunId runId, Filters<Result> filters) {
 		final MethodUri uri = new MethodUri("get_results_for_run/:run_id", filters).withParameters(runId);
 		return client.getList(Result.class, uri);
 	}
 
 	/**
 	 * Adds a new test result, comment or assigns a test.
-	 * It's recommended to use {@link #addResults(TestRunId, List)} instead if you plan to add results for multiple tests.
+	 * It's recommended to use {@link #addResults(RunId, List)} instead if you plan to add results for multiple tests.
 	 * @param id The ID of the test the result should be added to
 	 * @param result Result to add
 	 */
@@ -75,7 +75,7 @@ public class Results {
 
 	/**
 	 * Adds a new test result, comment or assigns a test (for a test run and case combination).
-	 * It's recommended to use {@link #addResultsForCases(TestRunId, List)} instead if you plan to add results
+	 * It's recommended to use {@link #addResultsForCases(RunId, List)} instead if you plan to add results
 	 * for multiple test cases.
 	 * The difference to {@link #addResult(TestId, Result)} is that this method expects
 	 * a test run + test case instead of a test. In TestRail, tests are part of a test run and
@@ -88,7 +88,7 @@ public class Results {
 	 * @param result result to add
 	 * @return If successful, this method returns the new test result
 	 */
-	public Result addResultForCase(TestRunId runId, CaseId caseId, Result result) {
+	public Result addResultForCase(RunId runId, CaseId caseId, Result result) {
 		final MethodUri uri = new MethodUri("add_result_for_case/:run_id/:case_id").withParameters(runId, caseId);
 		final AllowedFields allowedFields = new AllowedFields(Result.class,
 				"statusId", "comment", "version", "elapsed", "defects", "assignedtoId", "customStepResults");
@@ -105,7 +105,7 @@ public class Results {
 	 * @param results Results to add
 	 * @return If successful, this method returns the new test results
 	 */
-	public List<Result> addResults(TestRunId id, List<Result> results) {
+	public List<Result> addResults(RunId id, List<Result> results) {
 		final MethodUri uri = new MethodUri("add_results/:run_id").withParameters(id);
 		@SuppressWarnings("SpellCheckingInspection")
 		final AllowedFields allowedFields = new AllowedFields(Result.class,
@@ -123,7 +123,7 @@ public class Results {
 	 * @param id The ID of the test run the results should be added to
 	 * @return If successful, this method returns the new test results
 	 */
-	public List<Result> addResultsForCases(TestRunId id, List<Result> results) {
+	public List<Result> addResultsForCases(RunId id, List<Result> results) {
 		final MethodUri uri = new MethodUri("add_results_for_cases/:run_id").withParameters(id);
 		@SuppressWarnings("SpellCheckingInspection")
 		final AllowedFields allowedFields = new AllowedFields(Result.class,

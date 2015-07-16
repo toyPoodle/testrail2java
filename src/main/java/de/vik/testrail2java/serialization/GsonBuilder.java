@@ -13,7 +13,7 @@ import de.vik.testrail2java.types.CustomFieldDefinition.CustomFieldDefinitionId;
 import de.vik.testrail2java.types.Milestone.MilestoneId;
 import de.vik.testrail2java.types.Plan.PlanEntryId;
 import de.vik.testrail2java.types.Plan.PlanId;
-import de.vik.testrail2java.types.Plan.TestRunId;
+import de.vik.testrail2java.types.Run.RunId;
 import de.vik.testrail2java.types.Priority.PriorityId;
 import de.vik.testrail2java.types.Project.ProjectId;
 import de.vik.testrail2java.types.Result.ResultId;
@@ -60,7 +60,7 @@ public class GsonBuilder {
         gsonBuilder.registerTypeAdapter(SuiteId.class, new NumericIdAdapter());
         gsonBuilder.registerTypeAdapter(SuiteMode.class, new NumericIdAdapter());
         gsonBuilder.registerTypeAdapter(TestId.class, new NumericIdAdapter());
-        gsonBuilder.registerTypeAdapter(TestRunId.class, new NumericIdAdapter());
+        gsonBuilder.registerTypeAdapter(RunId.class, new NumericIdAdapter());
         gsonBuilder.registerTypeAdapter(TypeId.class, new NumericIdAdapter());
         gsonBuilder.registerTypeAdapter(UserId.class, new NumericIdAdapter());
     }

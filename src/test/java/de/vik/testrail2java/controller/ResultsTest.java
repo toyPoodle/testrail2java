@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import de.vik.testrail2java.controller.Results.ResultsContainer;
 import de.vik.testrail2java.serialization.AllowedFields;
-import de.vik.testrail2java.types.Plan.TestRunId;
+import de.vik.testrail2java.types.Run.RunId;
 import de.vik.testrail2java.types.Result;
 import de.vik.testrail2java.types.Test.TestId;
 import de.vik.testrail2java.types.custom.StepResult;
@@ -28,13 +28,13 @@ public class ResultsTest {
     @Test
     public void testGetResultsForCase() throws Exception {
         testGetList(Result.class, "get_results_for_case/1/2&created_after=1234",
-                client -> new Results(client).getResultsForCase(new TestRunId(1), caseId(2), filterBy(createdAfter(timestamp(1234)))));
+                client -> new Results(client).getResultsForCase(new RunId(1), caseId(2), filterBy(createdAfter(timestamp(1234)))));
     }
 
     @Test
     public void testGetResultsForRun() throws Exception {
         testGetList(Result.class, "get_results_for_run/1&created_after=1234",
-                client -> new Results(client).getResultsForRun(new TestRunId(1), filterBy(createdAfter(timestamp(1234)))));
+                client -> new Results(client).getResultsForRun(new RunId(1), filterBy(createdAfter(timestamp(1234)))));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ResultsTest {
                 "assignedtoId", "comment", "customStepResults", "defects", "elapsed", "statusId", "version");
         testSubmissionWithData("add_result_for_case/1/2", Result.class, allowedFields,
                 result -> {},
-                (client, result) -> new Results(client).addResultForCase(new TestRunId(1), caseId(2), result));
+                (client, result) -> new Results(client).addResultForCase(new RunId(1), caseId(2), result));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ResultsTest {
                 .and(StepResult.class, "expected", "content", "actual", "statusId");
         testSubmissionWithDataList("add_results/1", Result.class, allowedFields,
                 ResultsContainer::new,
-                (client, results) -> new Results(client).addResults(new TestRunId(1), results));
+                (client, results) -> new Results(client).addResults(new RunId(1), results));
     }
 
     @Test
@@ -78,6 +78,6 @@ public class ResultsTest {
                 .and(StepResult.class, "expected", "content", "actual", "statusId");
         testSubmissionWithDataList("add_results_for_cases/1", Result.class, allowedFields,
                 ResultsContainer::new,
-                (client, results) -> new Results(client).addResultsForCases(new TestRunId(1), results));
+                (client, results) -> new Results(client).addResultsForCases(new RunId(1), results));
     }
 }
