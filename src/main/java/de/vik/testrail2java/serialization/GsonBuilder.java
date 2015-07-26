@@ -33,6 +33,7 @@ public class GsonBuilder {
         com.google.gson.GsonBuilder gsonBuilder = new com.google.gson.GsonBuilder();
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
         gsonBuilder.setPrettyPrinting();
+        gsonBuilder.disableHtmlEscaping();
 
         registerIdAdapter(gsonBuilder);
 

@@ -137,7 +137,7 @@ public class CaseTest {
                 "    }\n" +
                 "  ],\n" +
                 "  \"custom_preconds\": \"there is something to test\",\n" +
-                "  \"custom_testdata\": \"a\\u003db, c\\u003dd\"\n" +
+                "  \"custom_testdata\": \"a=b, c=d\"\n" +
                 "}";
         assertThat(json, equalTo(expected));
     }
