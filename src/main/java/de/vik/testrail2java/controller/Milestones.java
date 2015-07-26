@@ -3,13 +3,13 @@ package de.vik.testrail2java.controller;
 import java.util.List;
 
 import de.vik.testrail2java.net.APIClient;
+import de.vik.testrail2java.net.Filter;
 import de.vik.testrail2java.net.Filters;
 import de.vik.testrail2java.net.MethodUri;
-import de.vik.testrail2java.net.Filter;
 import de.vik.testrail2java.serialization.AllowedFields;
-import de.vik.testrail2java.types.Project;
 import de.vik.testrail2java.types.Milestone;
 import de.vik.testrail2java.types.Milestone.MilestoneId;
+import de.vik.testrail2java.types.Project.ProjectId;
 
 /**
  * http://docs.gurock.com/testrail-api2/reference-milestones
@@ -36,7 +36,7 @@ public class Milestones {
      * @param filters filters to be applied
      * @return Returns the list of milestones for a project.
      */
-    public List<Milestone> getMilestones(Project.ProjectId id, Filters<Milestone> filters) {
+    public List<Milestone> getMilestones(ProjectId id, Filters<Milestone> filters) {
         final MethodUri uri = new MethodUri("get_milestones/:project_id", filters).withParameters(id);
         return apiClient.getList(Milestone.class, uri);
     }
@@ -44,11 +44,10 @@ public class Milestones {
     /**
      * Creates a new milestone.
      * @param milestone Milestone to be added
-     * @param projectId The ID of the project the milestone should be added to
      * @return Created milestone, if successful
      */
-    public Milestone addMilestone(Project.ProjectId projectId, Milestone milestone) {
-        final MethodUri uri = new MethodUri("add_milestone/:project_id").withParameters(projectId);
+    public Milestone addMilestone(Milestone milestone) {
+        final MethodUri uri = new MethodUri("add_milestone/:project_id").withParameters(milestone.getProjectId());
         final AllowedFields allowedFields = new AllowedFields(Milestone.class, "name", "description", "dueOn");
         return apiClient.post(uri, milestone, allowedFields, Milestone.class);
     }
