@@ -3,6 +3,7 @@ package de.vik.testrail2java.types;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.vik.testrail2java.types.Type.TypeId;
 import de.vik.testrail2java.types.primitive.NumericId;
 
 public class CaseField {
@@ -13,9 +14,12 @@ public class CaseField {
     private String label;
     private String name;
     private String systemName;
-    private Type.TypeId typeId;
+    private TypeId typeId;
 
-    public CaseField(List<Config> configs, String description, int displayOrder, CaseFieldId id, String label, String name, String systemName, Type.TypeId typeId) {
+    /**
+     * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
+     */
+    CaseField(List<Config> configs, String description, int displayOrder, CaseFieldId id, String label, String name, String systemName, TypeId typeId) {
         this.configs = configs;
         this.description = description;
         this.displayOrder = displayOrder;
@@ -27,7 +31,7 @@ public class CaseField {
     }
 
     public List<Config> getConfigs() {
-        return new ArrayList<Config>(configs);
+        return new ArrayList<>(configs);
     }
 
     public String getDescription() {
@@ -54,8 +58,22 @@ public class CaseField {
         return systemName;
     }
 
-    public Type.TypeId getTypeId() {
+    public TypeId getTypeId() {
         return typeId;
+    }
+
+    @Override
+    public String toString() {
+        return "CaseField{" +
+                "configs=" + configs +
+                ", description='" + description + '\'' +
+                ", displayOrder=" + displayOrder +
+                ", id=" + id +
+                ", label='" + label + '\'' +
+                ", name='" + name + '\'' +
+                ", systemName='" + systemName + '\'' +
+                ", typeId=" + typeId +
+                '}';
     }
 
     public static class Config {
@@ -63,7 +81,10 @@ public class CaseField {
         private ConfigId id;
         private Options options;
 
-        public Config(Context context, ConfigId id, Options options) {
+        /**
+         * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
+         */
+        Config(Context context, ConfigId id, Options options) {
             this.context = context;
             this.id = id;
             this.options = options;
@@ -91,13 +112,16 @@ public class CaseField {
         }
     }
 
-    private static class Options {
+    public static class Options {
         private String defaultValue;
         private String format;
         private boolean isRequired;
         private String rows;
 
-        public Options(String defaultValue, String format, boolean isRequired, String rows) {
+        /**
+         * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
+         */
+        Options(String defaultValue, String format, boolean isRequired, String rows) {
             this.defaultValue = defaultValue;
             this.format = format;
             this.isRequired = isRequired;
@@ -133,19 +157,22 @@ public class CaseField {
 
     public static class Context {
         private boolean isGlobal;
-        private int projectIds;
+        private List<Integer> projectIds;
 
-        public Context(boolean isGlobal, int projectIds) {
+        /**
+         * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
+         */
+        Context(boolean isGlobal, List<Integer> projectIds) {
             this.isGlobal = isGlobal;
-            this.projectIds = projectIds;
+            this.projectIds = new ArrayList<>(projectIds);
         }
 
         public boolean isGlobal() {
             return isGlobal;
         }
 
-        public int getProjectIds() {
-            return projectIds;
+        public List<Integer> getProjectIds() {
+            return new ArrayList<>(projectIds);
         }
 
         @Override
@@ -167,19 +194,5 @@ public class CaseField {
         public ConfigId(int id) {
             super(id);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "CaseField{" +
-                "configs=" + configs +
-                ", description='" + description + '\'' +
-                ", displayOrder=" + displayOrder +
-                ", id=" + id +
-                ", label='" + label + '\'' +
-                ", name='" + name + '\'' +
-                ", systemName='" + systemName + '\'' +
-                ", typeId=" + typeId +
-                '}';
     }
 }
