@@ -13,7 +13,7 @@ import de.vik.testrail2java.types.Milestone.MilestoneId;
 import de.vik.testrail2java.types.Priority.PriorityId;
 import de.vik.testrail2java.types.Project.ProjectId;
 import de.vik.testrail2java.types.Section.SectionId;
-import de.vik.testrail2java.types.Suite;
+import de.vik.testrail2java.types.Suite.SuiteId;
 import de.vik.testrail2java.types.Type.TypeId;
 import de.vik.testrail2java.types.User.UserId;
 import de.vik.testrail2java.types.primitive.Id;
@@ -53,10 +53,11 @@ public class Cases {
 
     /**
      * Creates a new test case.
+     * @param c case to be added
      * @return If successful, this method returns the created test case
      */
-    public Case addCase(SectionId sectionId, Case c) {
-        final MethodUri uri = new MethodUri("add_case/:section_id").withParameters(sectionId);
+    public Case addCase(Case c) {
+        final MethodUri uri = new MethodUri("add_case/:section_id").withParameters(c.getSectionId());
         @SuppressWarnings("SpellCheckingInspection")
         final AllowedFields allowedFields = new AllowedFields(Case.class, "title", "typeId", "priorityId", "estimate", "milestoneId", "refs",
                 "customStepsSeparated", "customPreconds", "customTestdata");
@@ -65,6 +66,7 @@ public class Cases {
 
     /**
      * Updates an existing test case (partial updates are supported, i.e. you can submit and update specific fields only).
+     * @param c case to be updated
      * @return If successful, this method returns the updated test case
      */
     public Case updateCase(Case c) {
@@ -100,7 +102,7 @@ public class Cases {
         /**
          * The ID of the test suite
          */
-        public static CaseFilter suiteId(Suite.SuiteId id) {
+        public static CaseFilter suiteId(SuiteId id) {
             return new CaseFilter("suite_id", id);
         }
 

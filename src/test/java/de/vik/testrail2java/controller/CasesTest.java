@@ -4,8 +4,6 @@ import org.junit.Test;
 
 import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Case;
-import de.vik.testrail2java.types.Project.ProjectId;
-import de.vik.testrail2java.types.Section.SectionId;
 import de.vik.testrail2java.types.Suite.SuiteId;
 
 import static de.vik.testrail2java.controller.Cases.CaseFilter.suiteId;
@@ -15,6 +13,8 @@ import static de.vik.testrail2java.testhelpers.Mockups.testGetList;
 import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithData;
 import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithoutResultAndData;
 import static de.vik.testrail2java.types.primitive.Primitives.caseId;
+import static de.vik.testrail2java.types.primitive.Primitives.projectId;
+import static de.vik.testrail2java.types.primitive.Primitives.sectionId;
 import static org.mockito.Mockito.when;
 
 public class CasesTest {
@@ -29,7 +29,7 @@ public class CasesTest {
     public void getCases() throws Exception {
         testGetList(Case.class, "get_cases/1&suite_id=2", (client) -> {
             Cases target = new Cases(client);
-            return target.getCases(new ProjectId(1), filterBy(suiteId(new SuiteId(2))));
+            return target.getCases(projectId(1), filterBy(suiteId(new SuiteId(2))));
         });
     }
 
@@ -39,8 +39,8 @@ public class CasesTest {
         final AllowedFields allowedFields = new AllowedFields(Case.class, "title", "typeId", "priorityId", "estimate", "milestoneId", "refs",
                 "customStepsSeparated", "customPreconds", "customTestdata");
         testSubmissionWithData("add_case/1", Case.class, allowedFields,
-                (data) -> {},
-                (apiClient, data) -> new Cases(apiClient).addCase(new SectionId(1), data));
+                (theCase) -> when(theCase.getSectionId()).thenReturn(sectionId(1)),
+                (apiClient, theCase) -> new Cases(apiClient).addCase(theCase));
     }
 
     @Test
