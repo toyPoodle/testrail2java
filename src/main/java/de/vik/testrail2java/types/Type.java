@@ -7,7 +7,10 @@ public class Type {
     private boolean isDefault;
     private String name;
 
-    public Type(TypeId id, boolean isDefault, String name) {
+    /**
+     * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
+     */
+    Type(TypeId id, boolean isDefault, String name) {
         this.id = id;
         this.isDefault = isDefault;
         this.name = name;
