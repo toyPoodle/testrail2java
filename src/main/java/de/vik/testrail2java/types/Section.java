@@ -13,7 +13,10 @@ public class Section {
     private String name;
     private SuiteId suiteId;
 
-    public Section(int depth, String description, int displayOrder, SectionId id, SectionId parentId, String name, SuiteId suiteId) {
+    /**
+     * For tests
+     */
+    Section(int depth, String description, int displayOrder, SectionId id, SectionId parentId, String name, SuiteId suiteId) {
         this.depth = depth;
         this.description = description;
         this.displayOrder = displayOrder;
@@ -21,6 +24,13 @@ public class Section {
         this.parentId = parentId;
         this.name = name;
         this.suiteId = suiteId;
+    }
+
+    public Section(String description, SuiteId suiteId, SectionId parentId, String name) {
+        this.description = description;
+        this.suiteId = suiteId;
+        this.parentId = parentId;
+        this.name = name;
     }
 
     /**
