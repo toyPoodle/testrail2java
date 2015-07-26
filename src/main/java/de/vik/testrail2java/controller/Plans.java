@@ -48,8 +48,8 @@ public class Plans {
      * @param plan Plan to add
      * @return If successful, this method returns the new test plan
      */
-    public Plan addPlan(Plan plan, ProjectId projectId) {
-        final MethodUri uri = new MethodUri("add_plan/:project_id").withParameters(projectId);
+    public Plan addPlan(Plan plan) {
+        final MethodUri uri = new MethodUri("add_plan/:project_id").withParameters(plan.getProjectId());
         @SuppressWarnings("SpellCheckingInspection")
         final AllowedFields allowedFields = new AllowedFields(Plan.class, "name", "description", "milestoneId", "entries")
                 .and(PlanEntry.class, "suiteId", "name", "assignedtoId", "includeAll", "caseIds", "configIds", "runs")
