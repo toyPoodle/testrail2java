@@ -63,11 +63,11 @@ public class Results {
 	/**
 	 * Adds a new test result, comment or assigns a test.
 	 * It's recommended to use {@link #addResults(RunId, List)} instead if you plan to add results for multiple tests.
-	 * @param id The ID of the test the result should be added to
 	 * @param result Result to add
 	 */
-	public Result addResult(TestId id, Result result) {
-		final MethodUri uri = new MethodUri("add_result/:test_id").withParameters(id);
+	public Result addResult(Result result) {
+		final MethodUri uri = new MethodUri("add_result/:test_id").withParameters(result.getTestId());
+		@SuppressWarnings("SpellCheckingInspection")
 		final AllowedFields allowedFields = new AllowedFields(Result.class,
 				"statusId", "comment", "version", "elapsed", "defects", "assignedtoId", "customStepResults");
 		return client.post(uri, result, allowedFields, Result.class);
@@ -77,7 +77,7 @@ public class Results {
 	 * Adds a new test result, comment or assigns a test (for a test run and case combination).
 	 * It's recommended to use {@link #addResultsForCases(RunId, List)} instead if you plan to add results
 	 * for multiple test cases.
-	 * The difference to {@link #addResult(TestId, Result)} is that this method expects
+	 * The difference to {@link #addResult(Result)} is that this method expects
 	 * a test run + test case instead of a test. In TestRail, tests are part of a test run and
 	 * the test cases are part of the related test suite. So, when you create a new test run,
 	 * TestRail creates a test for each test case found in the test suite of the run. You can
@@ -90,7 +90,8 @@ public class Results {
 	 */
 	public Result addResultForCase(RunId runId, CaseId caseId, Result result) {
 		final MethodUri uri = new MethodUri("add_result_for_case/:run_id/:case_id").withParameters(runId, caseId);
-		final AllowedFields allowedFields = new AllowedFields(Result.class,
+		@SuppressWarnings("SpellCheckingInspection")
+        final AllowedFields allowedFields = new AllowedFields(Result.class,
 				"statusId", "comment", "version", "elapsed", "defects", "assignedtoId", "customStepResults");
 		return client.post(uri, result, allowedFields, Result.class);
 	}
@@ -109,7 +110,7 @@ public class Results {
 		final MethodUri uri = new MethodUri("add_results/:run_id").withParameters(id);
 		@SuppressWarnings("SpellCheckingInspection")
 		final AllowedFields allowedFields = new AllowedFields(Result.class,
-				"statusId", "comment", "version", "elapsed", "defects", "assignedtoId", "customStepResults")
+				"statusId", "comment", "version", "elapsed", "defects", "assignedtoId", "customStepResults", "testId")
                 .and(ResultsContainer.class, "results")
                 .and(StepResult.class, "content", "expected", "actual", "statusId");
 		return client.postList(uri, new ResultsContainer(results), allowedFields, Result.class);
@@ -127,7 +128,7 @@ public class Results {
 		final MethodUri uri = new MethodUri("add_results_for_cases/:run_id").withParameters(id);
 		@SuppressWarnings("SpellCheckingInspection")
 		final AllowedFields allowedFields = new AllowedFields(Result.class,
-				"statusId", "comment", "version", "elapsed", "defects", "assignedtoId", "customStepResults")
+				"statusId", "comment", "version", "elapsed", "defects", "assignedtoId", "customStepResults", "testId")
 				.and(ResultsContainer.class, "results")
                 .and(StepResult.class, "content", "expected", "actual", "statusId");
 		return client.postList(uri, new ResultsContainer(results), allowedFields, Result.class);
