@@ -9,7 +9,10 @@ public class Priority {
     private int priority;
     private String shortName;
 
-    public Priority(PriorityId id, boolean isDefault, String name, int priority, String shortName) {
+    /**
+     * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
+     */
+    Priority(PriorityId id, boolean isDefault, String name, int priority, String shortName) {
         this.id = id;
         this.isDefault = isDefault;
         this.name = name;
