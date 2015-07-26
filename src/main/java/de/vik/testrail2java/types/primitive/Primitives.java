@@ -2,12 +2,14 @@ package de.vik.testrail2java.types.primitive;
 
 import de.vik.testrail2java.types.Case;
 import de.vik.testrail2java.types.Milestone;
+import de.vik.testrail2java.types.Plan.PlanId;
 import de.vik.testrail2java.types.Priority.PriorityId;
 import de.vik.testrail2java.types.Project.ProjectId;
 import de.vik.testrail2java.types.Run.RunId;
 import de.vik.testrail2java.types.Section.SectionId;
 import de.vik.testrail2java.types.Status.StatusId;
 import de.vik.testrail2java.types.Suite;
+import de.vik.testrail2java.types.Test.TestId;
 import de.vik.testrail2java.types.Type;
 import de.vik.testrail2java.types.User.UserId;
 
@@ -58,5 +60,13 @@ public class Primitives {
 
     public static RunId runId(int value) {
         return new RunId(value);
+    }
+
+    public static PlanId planId(int value) {
+        return new PlanId(value);
+    }
+
+    public static TestId testId(int value) {
+        return new TestId(value);
     }
 }
