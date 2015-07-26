@@ -13,7 +13,10 @@ public class Project {
     private SuiteMode suiteMode;
     private String url;
 
-    public Project(String announcement, Timestamp completedOn, ProjectId id, boolean isCompleted, String name, boolean showAnnouncement, SuiteMode suiteMode, String url) {
+    /**
+     * For tests
+     */
+    Project(String announcement, Timestamp completedOn, ProjectId id, boolean isCompleted, String name, boolean showAnnouncement, SuiteMode suiteMode, String url) {
         this.announcement = announcement;
         this.completedOn = completedOn;
         this.id = id;
@@ -22,6 +25,14 @@ public class Project {
         this.showAnnouncement = showAnnouncement;
         this.suiteMode = suiteMode;
         this.url = url;
+    }
+
+    @SuppressWarnings("BooleanParameter")
+    public Project(String announcement, String name, boolean showAnnouncement, SuiteMode suiteMode) {
+        this.announcement = announcement;
+        this.name = name;
+        this.showAnnouncement = showAnnouncement;
+        this.suiteMode = suiteMode;
     }
 
     /**

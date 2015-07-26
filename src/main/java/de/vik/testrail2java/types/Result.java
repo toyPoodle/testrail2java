@@ -15,7 +15,8 @@ import de.vik.testrail2java.types.primitive.Timestamp;
  * http://docs.gurock.com/testrail-api2/reference-results
  */
 public class Result {
-	private UserId assignedtoId;
+	@SuppressWarnings("SpellCheckingInspection")
+    private UserId assignedtoId;
 	private String comment;
 	private UserId createdBy;
 	private Timestamp createdOn;
@@ -27,19 +28,34 @@ public class Result {
 	private TestId testId;
 	private String version;
 
-	public Result(UserId assignedToId, String comment, UserId createdBy, Timestamp createdOn, List<StepResult> stepResults, String defects,
+    /**
+     * For tests
+     */
+	Result(UserId assignedToId, String comment, UserId createdBy, Timestamp createdOn, List<StepResult> stepResults, String defects,
 				  TimeSpan elapsed, ResultId id, StatusId statusId, TestId testId, String version) {
 		this.assignedtoId = assignedToId;
 		this.comment = comment;
 		this.createdBy = createdBy;
 		this.createdOn = createdOn;
-		this.customStepResults = stepResults;
+		this.customStepResults = new ArrayList<>(stepResults);
 		this.defects = defects;
 		this.elapsed = elapsed;
 		this.id = id;
 		this.statusId = statusId;
 		this.testId = testId;
 		this.version = version;
+	}
+
+	public Result(StatusId statusId, String comment, String version, TimeSpan elapsed, String defects, UserId assignedToId,
+				  List<StepResult> stepResults, TestId testId) {
+		this.statusId = statusId;
+		this.comment = comment;
+		this.version = version;
+		this.elapsed = elapsed;
+		this.defects = defects;
+		this.assignedtoId = assignedToId;
+		this.customStepResults = new ArrayList<>(stepResults);
+		this.testId = testId;
 	}
 
 	/**
