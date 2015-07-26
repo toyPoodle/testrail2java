@@ -1,9 +1,20 @@
 package de.vik.testrail2java.types;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
+import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.serialization.GsonBuilder;
+import de.vik.testrail2java.types.ConfigurationGroup.ConfigurationId;
+import de.vik.testrail2java.types.Plan.PlanEntryId;
 
+import static de.vik.testrail2java.types.primitive.Primitives.caseId;
+import static de.vik.testrail2java.types.primitive.Primitives.milestoneId;
+import static de.vik.testrail2java.types.primitive.Primitives.planId;
+import static de.vik.testrail2java.types.primitive.Primitives.projectId;
+import static de.vik.testrail2java.types.primitive.Primitives.runId;
+import static de.vik.testrail2java.types.primitive.Primitives.suiteId;
 import static de.vik.testrail2java.types.primitive.Primitives.timestamp;
 import static de.vik.testrail2java.types.primitive.Primitives.userId;
 import static org.hamcrest.Matchers.equalTo;
@@ -88,5 +99,30 @@ public class RunTest {
         assertThat(run.getCaseIds().get(0).getValue(), equalTo("21"));
         assertThat(run.getCaseIds().get(1).getValue(), equalTo("22"));
         assertThat(run.getUrl(), equalTo("http://<server>/testrail/index.php?/runs/view/81"));
+    }
+
+    @Test
+    public void serialization() throws Exception {
+        @SuppressWarnings("SpellCheckingInspection")
+        AllowedFields allowedFields = new AllowedFields(Run.class, "suiteId", "name", "description",
+                "milestoneId", "assignedtoId", "includeAll", "caseIds");
+        String actual = new GsonBuilder().createFor(allowedFields).toJson(new Run(userId(1), 2, timestamp(1393900000L), "Firefox, Ubuntu 12",
+                Arrays.asList(new ConfigurationId(3), new ConfigurationId(4)), userId(5), timestamp(1393845644L), 6, 7, 8, 9, 10, 11, 12,
+                "a description", 13, runId(14), true, true, milestoneId(15), planId(16), "This is a new test run", 17, projectId(18), 19,
+                suiteId(20), 21, "url", 22, new PlanEntryId("23"), Arrays.asList(caseId(24), caseId(25))));
+        @SuppressWarnings("SpellCheckingInspection")
+        final String expected = "{\n" +
+                "  \"assignedto_id\": 1,\n" +
+                "  \"description\": \"a description\",\n" +
+                "  \"include_all\": true,\n" +
+                "  \"milestone_id\": 15,\n" +
+                "  \"name\": \"This is a new test run\",\n" +
+                "  \"suite_id\": 20,\n" +
+                "  \"case_ids\": [\n" +
+                "    24,\n" +
+                "    25\n" +
+                "  ]\n" +
+                "}";
+        assertThat(actual, equalTo(expected));
     }
 }

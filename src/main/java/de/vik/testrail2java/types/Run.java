@@ -48,8 +48,11 @@ public class Run {
     private PlanEntryId entryId;
     private List<CaseId> caseIds;
 
+    /**
+     * For tests
+     */
     @SuppressWarnings({"BooleanParameter", "SpellCheckingInspection"})
-    public Run(UserId assignedtoId, int blockedCount, Timestamp completedOn, String config, List<ConfigurationId> configIds,
+    Run(UserId assignedtoId, int blockedCount, Timestamp completedOn, String config, List<ConfigurationId> configIds,
                UserId createdBy, Timestamp createdOn, int customStatus1Count, int customStatus2Count, int customStatus3Count,
                int customStatus4Count, int customStatus5Count, int customStatus6Count, int customStatus7Count, String description,
                int failedCount, RunId id, boolean includeAll, boolean isCompleted, MilestoneId milestoneId, PlanId planId,
@@ -85,6 +88,19 @@ public class Run {
         this.url = url;
         this.entryIndex = entryIndex;
         this.entryId = entryId;
+        this.caseIds = new ArrayList<>(caseIds);
+    }
+
+    @SuppressWarnings("BooleanParameter")
+    public Run(ProjectId projectId, SuiteId suiteId, String name, String description, MilestoneId milestoneId, UserId assignedToId,
+               boolean includeAll, List<CaseId> caseIds) {
+        this.projectId = projectId;
+        this.suiteId = suiteId;
+        this.name = name;
+        this.description = description;
+        this.milestoneId = milestoneId;
+        this.assignedtoId = assignedToId;
+        this.includeAll = includeAll;
         this.caseIds = new ArrayList<>(caseIds);
     }
 
