@@ -14,9 +14,7 @@ public class Status {
     private String name;
 
     /**
-     * Not intended to be used until there is a possibility to create it in TestRail.
-     * All fields are set via reflection during deserialization.
-     * Only here to make IDE happy and to remove "private field X is never assigned" warnings.
+     * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
      */
     Status(int colorBright, int colorDark, int colorMedium, StatusId id, boolean isFinal, boolean isSystem, boolean isUntested, String label, String name) {
         this.colorBright = colorBright;
