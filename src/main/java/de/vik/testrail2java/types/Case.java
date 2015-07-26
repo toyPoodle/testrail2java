@@ -35,7 +35,10 @@ public class Case {
     @SuppressWarnings("SpellCheckingInspection")
     private String customTestdata;
 
-    public Case(UserId createdBy, Timestamp createdOn, TimeSpan estimate, TimeSpan estimateForecast, CaseId id, MilestoneId milestoneId,
+    /**
+     * For Tests
+     */
+    Case(UserId createdBy, Timestamp createdOn, TimeSpan estimate, TimeSpan estimateForecast, CaseId id, MilestoneId milestoneId,
                 PriorityId priorityId, String refs, SectionId sectionId, SuiteId suiteId, String title, TypeId typeId, UserId updatedBy,
                 Timestamp updatedOn, List<Step> steps, String precondition, String testData) {
         this.createdBy = createdBy;
@@ -52,6 +55,20 @@ public class Case {
         this.typeId = typeId;
         this.updatedBy = updatedBy;
         this.updatedOn = updatedOn;
+        this.customStepsSeparated = new ArrayList<>(steps);
+        this.customPreconds = precondition;
+        this.customTestdata = testData;
+    }
+
+    public Case(SectionId sectionId, String title, TypeId typeId, PriorityId priorityId, TimeSpan estimate, MilestoneId milestoneId,
+                String refs, List<Step> steps, String precondition, String testData) {
+        this.sectionId = sectionId;
+        this.title = title;
+        this.typeId = typeId;
+        this.priorityId = priorityId;
+        this.estimate = estimate;
+        this.milestoneId = milestoneId;
+        this.refs = refs;
         this.customStepsSeparated = new ArrayList<>(steps);
         this.customPreconds = precondition;
         this.customTestdata = testData;
