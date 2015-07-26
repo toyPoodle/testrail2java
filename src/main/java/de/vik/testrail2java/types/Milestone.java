@@ -1,5 +1,6 @@
 package de.vik.testrail2java.types;
 
+import de.vik.testrail2java.types.Project.ProjectId;
 import de.vik.testrail2java.types.primitive.NumericId;
 import de.vik.testrail2java.types.primitive.Timestamp;
 
@@ -10,10 +11,14 @@ public class Milestone {
     private MilestoneId id;
     private boolean isCompleted;
     private String name;
-    private Project.ProjectId projectId;
+    private ProjectId projectId;
     private String url;
 
-    public Milestone(Timestamp completedOn, String description, Timestamp dueOn, MilestoneId id, boolean isCompleted, String name, Project.ProjectId projectId, String url) {
+    /**
+     * For tests
+     */
+    Milestone(Timestamp completedOn, String description, Timestamp dueOn, MilestoneId id, boolean isCompleted, String name,
+              ProjectId projectId, String url) {
         this.completedOn = completedOn;
         this.description = description;
         this.dueOn = dueOn;
@@ -22,6 +27,13 @@ public class Milestone {
         this.name = name;
         this.projectId = projectId;
         this.url = url;
+    }
+
+    public Milestone(String description, String name, ProjectId projectId, Timestamp dueOn) {
+        this.description = description;
+        this.name = name;
+        this.projectId = projectId;
+        this.dueOn = dueOn;
     }
 
     /**
@@ -69,7 +81,7 @@ public class Milestone {
     /**
      *The ID of the project the milestone belongs to
      */
-    public Project.ProjectId getProjectId() {
+    public ProjectId getProjectId() {
         return projectId;
     }
 
