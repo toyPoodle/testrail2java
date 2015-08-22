@@ -46,7 +46,7 @@ public class MethodUriTest {
 
     @Test
     public void FilterParameterIsReplacedWithItsValue() throws Exception {
-        assertThat(target(Filters.filterBy(new Filter("anotherParam", "10")), "method_name/:param", 9).insertParameters(), equalTo("method_name/9&anotherParam=10"));
+        assertThat(target(Filters.filter(new Filter("anotherParam", "10")), "method_name/:param", 9).insertParameters(), equalTo("method_name/9&anotherParam=10"));
     }
 
     private Id id(int value) {

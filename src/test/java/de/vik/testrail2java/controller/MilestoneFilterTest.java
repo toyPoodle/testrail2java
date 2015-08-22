@@ -11,7 +11,7 @@ public class MilestoneFilterTest {
 
     @Test
     public void filterKeys() throws Exception {
-        assertThat(MilestoneFilter.isCompleted(), asStringIs("is_completed=1"));
-        assertThat(MilestoneFilter.isNotCompleted(), asStringIs("is_completed=0"));
+        assertThat(MilestoneFilter.byIsCompleted(), asStringIs("is_completed=1"));
+        assertThat(MilestoneFilter.byIsNotCompleted(), asStringIs("is_completed=0"));
     }
 }

@@ -5,8 +5,8 @@ import org.junit.Test;
 import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Project;
 
-import static de.vik.testrail2java.controller.Projects.ProjectFilter.isCompleted;
-import static de.vik.testrail2java.net.Filters.filterBy;
+import static de.vik.testrail2java.controller.Projects.ProjectFilter.byIsCompleted;
+import static de.vik.testrail2java.net.Filters.filter;
 import static de.vik.testrail2java.testhelpers.Mockups.testGetItem;
 import static de.vik.testrail2java.testhelpers.Mockups.testGetList;
 import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithData;
@@ -25,7 +25,7 @@ public class ProjectsTest {
     @Test
     public void testGetProjects() throws Exception {
         testGetList(Project.class, "get_projects&is_completed=1",
-                client -> new Projects(client).getProjects(filterBy(isCompleted())));
+                client -> new Projects(client).getProjects(filter(byIsCompleted())));
     }
 
     @Test

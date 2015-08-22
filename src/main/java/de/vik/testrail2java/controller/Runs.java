@@ -109,63 +109,63 @@ public class Runs {
         /**
          * The ID of the test suite
          */
-        public static RunFilter suiteId(SuiteId id) {
+        public static RunFilter bySuiteId(SuiteId id) {
             return new RunFilter("suite_id", id);
         }
 
         /**
          * Only return test runs created after this date (as UNIX timestamp).
          */
-        public static RunFilter createdAfter(Timestamp timestamp) {
+        public static RunFilter byCreatedAfter(Timestamp timestamp) {
             return new RunFilter("created_after", timestamp);
         }
 
         /**
          * Only return test runs created before this date (as UNIX timestamp).
          */
-        public static RunFilter createdBefore(Timestamp timestamp) {
+        public static RunFilter byCreatedBefore(Timestamp timestamp) {
             return new RunFilter("created_before", timestamp);
         }
 
         /**
          * A comma-separated list of creators (user IDs) to filter by.
          */
-        public static RunFilter createdBy(UserId id, UserId... furtherIds) {
+        public static RunFilter byCreatedBy(UserId id, UserId... furtherIds) {
             return new RunFilter("created_by", id, furtherIds);
         }
 
         /**
          * A comma-separated list of milestone IDs to filter by.
          */
-        public static RunFilter milestoneId(MilestoneId id, MilestoneId... furtherIds) {
+        public static RunFilter byMilestoneId(MilestoneId id, MilestoneId... furtherIds) {
             return new RunFilter("milestone_id", id, furtherIds);
         }
 
         /**
          * completed test runs only
          */
-        public static RunFilter isCompleted() {
+        public static RunFilter byIsCompleted() {
             return new RunFilter("is_completed", "1");
         }
 
         /**
          * active test runs only
          */
-        public static RunFilter isActive() {
+        public static RunFilter byIsActive() {
             return new RunFilter("is_completed", "0");
         }
 
         /**
          *Limit the result to :limit test plans.
          */
-        public static RunFilter limit(int limit) {
+        public static RunFilter byLimit(int limit) {
             return new RunFilter("limit", limit);
         }
 
         /**
          *Use :offset to skip records.
          */
-        public static RunFilter offset(int offset) {
+        public static RunFilter byOffset(int offset) {
             return new RunFilter("offset", offset);
         }
 

@@ -5,8 +5,8 @@ import org.junit.Test;
 import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Run;
 
-import static de.vik.testrail2java.controller.Runs.RunFilter.createdBy;
-import static de.vik.testrail2java.net.Filters.filterBy;
+import static de.vik.testrail2java.controller.Runs.RunFilter.byCreatedBy;
+import static de.vik.testrail2java.net.Filters.filter;
 import static de.vik.testrail2java.testhelpers.Mockups.testGetItem;
 import static de.vik.testrail2java.testhelpers.Mockups.testGetList;
 import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithData;
@@ -27,7 +27,7 @@ public class RunsTest {
     @Test
     public void testGetRuns() throws Exception {
         testGetList(Run.class, "get_runs/2&created_by=3",
-                apiClient -> new Runs(apiClient).getRuns(projectId(2), filterBy(createdBy(userId(3)))));
+                apiClient -> new Runs(apiClient).getRuns(projectId(2), filter(byCreatedBy(userId(3)))));
     }
 
     @Test

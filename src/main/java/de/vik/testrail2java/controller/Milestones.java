@@ -80,14 +80,14 @@ public class Milestones {
         /**
          * To return completed milestones only.
          */
-        public static MilestoneFilter isCompleted() {
+        public static MilestoneFilter byIsCompleted() {
             return new MilestoneFilter("is_completed", "1");
         }
 
         /**
          * To return active milestones only.
          */
-        public static MilestoneFilter isNotCompleted() {
+        public static MilestoneFilter byIsNotCompleted() {
             return new MilestoneFilter("is_completed", "0");
         }
     }

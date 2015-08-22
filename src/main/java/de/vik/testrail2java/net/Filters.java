@@ -12,17 +12,14 @@ public class Filters <T> implements AsString {
         filters = new ArrayList<>();
     }
 
-    protected Filters(Filter<T> filter) {
-        filters = new ArrayList<>();
-        filters.add(filter);
-    }
-
     public static <T> Filters<T> none() {
         return new Filters<>();
     }
 
-    public static <T> Filters<T> filterBy(Filter<T> filter) {
-        return new Filters<>(filter);
+    public static <T> Filters<T> filter(Filter<T> filter) {
+        final Filters<T> result = new Filters<>();
+        result.filters.add(filter);
+        return result;
     }
 
     public Filters<T> and(Filter<T> filter) {

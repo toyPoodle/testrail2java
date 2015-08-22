@@ -171,42 +171,42 @@ public class Results {
 		/**
 		 * Limit the result to :limit test plans.
 		 */
-		public static Filter<Result> limit(int limit) {
+		public static Filter<Result> byLimit(int limit) {
 			return new ResultFilter("limit", limit);
 		}
 
 		/**
 		 * Use :offset to skip records.
 		 */
-		public static Filter<Result> offset(int offset) {
+		public static Filter<Result> byOffset(int offset) {
 			return new ResultFilter("offset", offset);
 		}
 
 		/**
 		 * A comma-separated list of status IDs to filter by.
 		 */
-		public static Filter<Result> statusId(StatusId id, StatusId... furtherIds) {
+		public static Filter<Result> byStatusId(StatusId id, StatusId... furtherIds) {
 			return new ResultFilter("status_id", asString(id, furtherIds));
 		}
 
 		/**
 		 * Only return test results created after this date (as UNIX timestamp).
 		 */
-		public static Filter<Result> createdAfter(Timestamp timestamp) {
+		public static Filter<Result> byCreatedAfter(Timestamp timestamp) {
 			return new ResultFilter("created_after", asString(timestamp));
 		}
 
 		/**
 		 * Only return test results created before this date (as UNIX timestamp).
 		 */
-		public static Filter<Result> createdBefore(Timestamp timestamp) {
+		public static Filter<Result> byCreatedBefore(Timestamp timestamp) {
 			return new ResultFilter("created_before", asString(timestamp));
 		}
 
 		/**
 		 * A comma-separated list of creators (user IDs) to filter by.
 		 */
-		public static Filter<Result> createdBy(UserId id, UserId... furtherIds) {
+		public static Filter<Result> byCreatedBy(UserId id, UserId... furtherIds) {
 			return new ResultFilter("created_by", asString(id, furtherIds));
 		}
 

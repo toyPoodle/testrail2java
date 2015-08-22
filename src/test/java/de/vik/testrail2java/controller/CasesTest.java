@@ -6,8 +6,8 @@ import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Case;
 import de.vik.testrail2java.types.Suite.SuiteId;
 
-import static de.vik.testrail2java.controller.Cases.CaseFilter.suiteId;
-import static de.vik.testrail2java.net.Filters.filterBy;
+import static de.vik.testrail2java.controller.Cases.CaseFilter.bySuiteId;
+import static de.vik.testrail2java.net.Filters.filter;
 import static de.vik.testrail2java.testhelpers.Mockups.testGetItem;
 import static de.vik.testrail2java.testhelpers.Mockups.testGetList;
 import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithData;
@@ -29,7 +29,7 @@ public class CasesTest {
     public void getCases() throws Exception {
         testGetList(Case.class, "get_cases/1&suite_id=2", (client) -> {
             Cases target = new Cases(client);
-            return target.getCases(projectId(1), filterBy(suiteId(new SuiteId(2))));
+            return target.getCases(projectId(1), filter(bySuiteId(new SuiteId(2))));
         });
     }
 

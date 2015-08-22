@@ -8,8 +8,8 @@ import de.vik.testrail2java.types.Plan.PlanEntry;
 import de.vik.testrail2java.types.Plan.PlanEntryId;
 import de.vik.testrail2java.types.Run;
 
-import static de.vik.testrail2java.controller.Plans.PlanFilter.isCompleted;
-import static de.vik.testrail2java.net.Filters.filterBy;
+import static de.vik.testrail2java.controller.Plans.PlanFilter.byIsCompleted;
+import static de.vik.testrail2java.net.Filters.filter;
 import static de.vik.testrail2java.testhelpers.Mockups.testGetItem;
 import static de.vik.testrail2java.testhelpers.Mockups.testGetList;
 import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithData;
@@ -30,7 +30,7 @@ public class PlansTest {
 	@Test
 	public void testGetPlans() throws Exception {
 		testGetList(Plan.class, "get_plans/2&is_completed=1",
-				client -> new Plans(client).getPlans(projectId(2), filterBy(isCompleted())));
+				client -> new Plans(client).getPlans(projectId(2), filter(byIsCompleted())));
 	}
 
 	@Test

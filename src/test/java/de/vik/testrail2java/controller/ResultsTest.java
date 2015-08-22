@@ -7,8 +7,8 @@ import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Result;
 import de.vik.testrail2java.types.custom.StepResult;
 
-import static de.vik.testrail2java.controller.Results.ResultFilter.createdAfter;
-import static de.vik.testrail2java.net.Filters.filterBy;
+import static de.vik.testrail2java.controller.Results.ResultFilter.byCreatedAfter;
+import static de.vik.testrail2java.net.Filters.filter;
 import static de.vik.testrail2java.testhelpers.Mockups.testGetList;
 import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithData;
 import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithDataList;
@@ -23,19 +23,19 @@ public class ResultsTest {
     @Test
     public void testGetResults() throws Exception {
         testGetList(Result.class, "get_results/1&created_after=1234",
-                client -> new Results(client).getResults(testId(1), filterBy(createdAfter(timestamp(1234)))));
+                client -> new Results(client).getResults(testId(1), filter(byCreatedAfter(timestamp(1234)))));
     }
 
     @Test
     public void testGetResultsForCase() throws Exception {
         testGetList(Result.class, "get_results_for_case/1/2&created_after=1234",
-                client -> new Results(client).getResultsForCase(runId(1), caseId(2), filterBy(createdAfter(timestamp(1234)))));
+                client -> new Results(client).getResultsForCase(runId(1), caseId(2), filter(byCreatedAfter(timestamp(1234)))));
     }
 
     @Test
     public void testGetResultsForRun() throws Exception {
         testGetList(Result.class, "get_results_for_run/1&created_after=1234",
-                client -> new Results(client).getResultsForRun(runId(1), filterBy(createdAfter(timestamp(1234)))));
+                client -> new Results(client).getResultsForRun(runId(1), filter(byCreatedAfter(timestamp(1234)))));
     }
 
     @Test

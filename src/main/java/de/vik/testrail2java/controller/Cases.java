@@ -102,77 +102,77 @@ public class Cases {
         /**
          * The ID of the test suite
          */
-        public static CaseFilter suiteId(SuiteId id) {
+        public static CaseFilter bySuiteId(SuiteId id) {
             return new CaseFilter("suite_id", id);
         }
 
         /**
          * The ID of the section
          */
-        public static CaseFilter sectionId(SectionId id) {
+        public static CaseFilter bySectionId(SectionId id) {
             return new CaseFilter("section_id", id);
         }
 
         /**
          * Only return test cases created after this date (as UNIX timestamp).
          */
-        public static CaseFilter createdAfter(Timestamp timestamp) {
+        public static CaseFilter byCreatedAfter(Timestamp timestamp) {
             return new CaseFilter("created_after", timestamp);
         }
 
         /**
          * Only return test cases created before this date (as UNIX timestamp).
          */
-        public static CaseFilter createdBefore(Timestamp timestamp) {
+        public static CaseFilter byCreatedBefore(Timestamp timestamp) {
             return new CaseFilter("created_before", timestamp);
         }
 
         /**
          * A comma-separated list of creators (user IDs) to filter by.
          */
-        public static CaseFilter createdBy(UserId id, UserId... furtherIds) {
+        public static CaseFilter byCreatedBy(UserId id, UserId... furtherIds) {
             return new CaseFilter("created_by", id, furtherIds);
         }
 
         /**
          * A comma-separated list of milestone IDs to filter by.
          */
-        public static CaseFilter milestoneId(MilestoneId id, MilestoneId... furtherIds) {
+        public static CaseFilter byMilestoneId(MilestoneId id, MilestoneId... furtherIds) {
             return new CaseFilter("milestone_id", id, furtherIds);
         }
 
         /**
          * A comma-separated list of priority IDs to filter by.
          */
-        public static CaseFilter priorityId(PriorityId id, PriorityId... furtherIds) {
+        public static CaseFilter byPriorityId(PriorityId id, PriorityId... furtherIds) {
             return new CaseFilter("priority_id", id, furtherIds);
         }
 
         /**
          * A comma-separated list of case type IDs to filter by.
          */
-        public static CaseFilter typeId(TypeId id, TypeId... furtherIds) {
+        public static CaseFilter byTypeId(TypeId id, TypeId... furtherIds) {
             return new CaseFilter("type_id", id, furtherIds);
         }
 
         /**
          * Only return test cases updated after this date (as UNIX timestamp).
          */
-        public static CaseFilter updatedAfter(Timestamp timestamp) {
+        public static CaseFilter byUpdatedAfter(Timestamp timestamp) {
             return new CaseFilter("updated_after", timestamp);
         }
 
         /**
          * Only return test cases updated before this date (as UNIX timestamp).
          */
-        public static CaseFilter updatedBefore(Timestamp timestamp) {
+        public static CaseFilter byUpdatedBefore(Timestamp timestamp) {
             return new CaseFilter("updated_before", timestamp);
         }
 
         /**
          * A comma-separated list of users who updated test cases to filter by.
          */
-        public static CaseFilter updatedBy(UserId id, UserId... furtherIds) {
+        public static CaseFilter byUpdatedBy(UserId id, UserId... furtherIds) {
             return new CaseFilter("updated_by", id, furtherIds);
         }
     }

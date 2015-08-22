@@ -74,14 +74,14 @@ public class Projects {
         /**
          * completed projects only
          */
-        public static Filter<Project> isCompleted() {
+        public static Filter<Project> byIsCompleted() {
             return new ProjectFilter("is_completed", "1");
         }
 
         /**
          * active projects only
          */
-        public static Filter<Project> isActive() {
+        public static Filter<Project> byIsActive() {
             return new ProjectFilter("is_completed", "0");
         }
     }

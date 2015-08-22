@@ -11,7 +11,7 @@ public class ProjectFilterTest {
 
     @Test
     public void filterKeys() throws Exception {
-        assertThat(ProjectFilter.isActive(), asStringIs("is_completed=0"));
-        assertThat(ProjectFilter.isCompleted(), asStringIs("is_completed=1"));
+        assertThat(ProjectFilter.byIsActive(), asStringIs("is_completed=0"));
+        assertThat(ProjectFilter.byIsCompleted(), asStringIs("is_completed=1"));
     }
 }

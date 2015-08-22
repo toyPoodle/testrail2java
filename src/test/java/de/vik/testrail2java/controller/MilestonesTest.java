@@ -6,8 +6,8 @@ import de.vik.testrail2java.serialization.AllowedFields;
 import de.vik.testrail2java.types.Milestone;
 import de.vik.testrail2java.types.Milestone.MilestoneId;
 
-import static de.vik.testrail2java.controller.Milestones.MilestoneFilter.isCompleted;
-import static de.vik.testrail2java.net.Filters.filterBy;
+import static de.vik.testrail2java.controller.Milestones.MilestoneFilter.byIsCompleted;
+import static de.vik.testrail2java.net.Filters.filter;
 import static de.vik.testrail2java.testhelpers.Mockups.testGetItem;
 import static de.vik.testrail2java.testhelpers.Mockups.testGetList;
 import static de.vik.testrail2java.testhelpers.Mockups.testSubmissionWithData;
@@ -28,7 +28,7 @@ public class MilestonesTest {
     public void testGetMilestones() throws Exception {
         testGetList(Milestone.class, "get_milestones/1&is_completed=1", (client) -> {
             final Milestones target = new Milestones(client);
-            return target.getMilestones(projectId(1), filterBy(isCompleted()));
+            return target.getMilestones(projectId(1), filter(byIsCompleted()));
         });
     }
 

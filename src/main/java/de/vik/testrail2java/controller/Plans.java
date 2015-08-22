@@ -133,56 +133,56 @@ public class Plans {
         /**
          * Only return test plans created after this date (as UNIX timestamp).
          */
-        public static Filter<Plan> createdAfter(Timestamp timestamp) {
+        public static Filter<Plan> byCreatedAfter(Timestamp timestamp) {
             return new PlanFilter("created_after", timestamp);
         }
 
         /**
          * Only return test plans created before this date (as UNIX timestamp).
          */
-        public static Filter<Plan> createdBefore(Timestamp timestamp) {
+        public static Filter<Plan> byCreatedBefore(Timestamp timestamp) {
             return new PlanFilter("created_before", timestamp);
         }
 
         /**
          * A comma-separated list of creators (user IDs) to filter by.
          */
-        public static Filter<Plan> createdBy(UserId id, UserId... furtherIds) {
+        public static Filter<Plan> byCreatedBy(UserId id, UserId... furtherIds) {
             return new PlanFilter("created_by", asString(id, furtherIds));
         }
 
         /**
          * completed test plans only
          */
-        public static Filter<Plan> isCompleted() {
+        public static Filter<Plan> byIsCompleted() {
             return new PlanFilter("is_completed", "1");
         }
 
         /**
          * active test plans only
          */
-        public static Filter<Plan> isActive() {
+        public static Filter<Plan> byIsActive() {
             return new PlanFilter("is_completed", "0");
         }
 
         /**
          *Limit the result to :limit test plans.
          */
-        public static Filter<Plan> limit(int limit) {
+        public static Filter<Plan> byLimit(int limit) {
             return new PlanFilter("limit", limit);
         }
 
         /**
          *Use :offset to skip records.
          */
-        public static Filter<Plan> offset(int offset) {
+        public static Filter<Plan> byOffset(int offset) {
             return new PlanFilter("offset", offset);
         }
 
         /**
          *A comma-separated list of milestone IDs to filter by.
          */
-        public static Filter<Plan> milestoneId(MilestoneId id, MilestoneId... furtherIds) {
+        public static Filter<Plan> byMilestoneId(MilestoneId id, MilestoneId... furtherIds) {
             return new PlanFilter("milestone_id", asString(id, furtherIds));
         }
     }
