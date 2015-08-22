@@ -4,14 +4,14 @@ import de.vik.testrail2java.types.primitive.NumericId;
 import de.vik.testrail2java.types.primitive.Timestamp;
 
 public class Project {
-    private String announcement;
-    private Timestamp completedOn;
-    private ProjectId id;
-    private boolean isCompleted;
-    private String name;
-    private boolean showAnnouncement;
-    private SuiteMode suiteMode;
-    private String url;
+    private final String announcement;
+    private final Timestamp completedOn;
+    private final ProjectId id;
+    private final boolean isCompleted;
+    private final String name;
+    private final boolean showAnnouncement;
+    private final SuiteMode suiteMode;
+    private final String url;
 
     /**
      * For tests
@@ -29,10 +29,7 @@ public class Project {
 
     @SuppressWarnings("BooleanParameter")
     public Project(String announcement, String name, boolean showAnnouncement, SuiteMode suiteMode) {
-        this.announcement = announcement;
-        this.name = name;
-        this.showAnnouncement = showAnnouncement;
-        this.suiteMode = suiteMode;
+        this(announcement, null, null, false, name, showAnnouncement, suiteMode, null);
     }
 
     /**

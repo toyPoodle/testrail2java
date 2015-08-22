@@ -2,13 +2,11 @@ package de.vik.testrail2java.controller;
 
 import org.junit.Test;
 
-import de.vik.testrail2java.testhelpers.Mockups;
 import de.vik.testrail2java.types.User;
 
 import static de.vik.testrail2java.testhelpers.Mockups.testGetItem;
 import static de.vik.testrail2java.testhelpers.Mockups.testGetList;
 import static de.vik.testrail2java.types.primitive.Primitives.userId;
-import static org.junit.Assert.*;
 
 public class UsersTest {
 

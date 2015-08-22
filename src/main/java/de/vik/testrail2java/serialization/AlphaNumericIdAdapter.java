@@ -4,17 +4,15 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 
-import de.vik.testrail2java.TestRailException;
-import de.vik.testrail2java.types.Plan;
-import de.vik.testrail2java.types.primitive.Id;
-import de.vik.testrail2java.types.primitive.NumericId;
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+
+import de.vik.testrail2java.TestRailException;
+import de.vik.testrail2java.types.primitive.Id;
 
 
 public class AlphaNumericIdAdapter implements JsonDeserializer<Id>, JsonSerializer<Id> {

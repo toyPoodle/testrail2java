@@ -14,7 +14,7 @@ import de.vik.testrail2java.types.Suite.SuiteId;
  * http://docs.gurock.com/testrail-api2/reference-sections
  */
 public class Sections {
-    private APIClient client;
+    private final APIClient client;
 
     public Sections(APIClient client) {
         this.client = client;

@@ -5,13 +5,13 @@ import de.vik.testrail2java.types.Suite.SuiteId;
 import de.vik.testrail2java.types.primitive.NumericId;
 
 public class Section {
-    private int depth;
-    private String description;
-    private int displayOrder;
-    private SectionId id;
-    private SectionId parentId;
-    private String name;
-    private SuiteId suiteId;
+    private final int depth;
+    private final String description;
+    private final int displayOrder;
+    private final SectionId id;
+    private final SectionId parentId;
+    private final String name;
+    private final SuiteId suiteId;
 
     /**
      * For tests
@@ -27,10 +27,7 @@ public class Section {
     }
 
     public Section(String description, SuiteId suiteId, SectionId parentId, String name) {
-        this.description = description;
-        this.suiteId = suiteId;
-        this.parentId = parentId;
-        this.name = name;
+        this(0, description, 0, null, parentId, name, suiteId);
     }
 
     /**

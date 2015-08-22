@@ -15,7 +15,7 @@ import de.vik.testrail2java.types.Project.ProjectId;
  */
 public class Projects {
 
-    private APIClient client;
+    private final APIClient client;
 
     public Projects(APIClient client) {
         this.client = client;

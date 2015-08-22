@@ -16,37 +16,37 @@ import de.vik.testrail2java.types.primitive.Timestamp;
 
 public class Run {
     @SuppressWarnings("SpellCheckingInspection")
-    private UserId assignedtoId;
-    private int blockedCount;
-    private Timestamp completedOn;
-    private String config;
-    private List<ConfigurationId> configIds;
-    private UserId createdBy;
-    private Timestamp createdOn;
-    private int customStatus1Count;
-    private int customStatus2Count;
-    private int customStatus3Count;
-    private int customStatus4Count;
-    private int customStatus5Count;
-    private int customStatus6Count;
-    private int customStatus7Count;
-    private String description;
-    private int failedCount;
-    private RunId id;
-    private boolean includeAll;
-    private boolean isCompleted;
-    private MilestoneId milestoneId;
-    private PlanId planId;
-    private String name;
-    private int passedCount;
-    private ProjectId projectId;
-    private int retestCount;
-    private SuiteId suiteId;
-    private int untestedCount;
-    private String url;
-    private int entryIndex;
-    private PlanEntryId entryId;
-    private List<CaseId> caseIds;
+    private final UserId assignedtoId;
+    private final int blockedCount;
+    private final Timestamp completedOn;
+    private final String config;
+    private final List<ConfigurationId> configIds;
+    private final UserId createdBy;
+    private final Timestamp createdOn;
+    private final int customStatus1Count;
+    private final int customStatus2Count;
+    private final int customStatus3Count;
+    private final int customStatus4Count;
+    private final int customStatus5Count;
+    private final int customStatus6Count;
+    private final int customStatus7Count;
+    private final String description;
+    private final int failedCount;
+    private final RunId id;
+    private final boolean includeAll;
+    private final boolean isCompleted;
+    private final MilestoneId milestoneId;
+    private final PlanId planId;
+    private final String name;
+    private final int passedCount;
+    private final ProjectId projectId;
+    private final int retestCount;
+    private final SuiteId suiteId;
+    private final int untestedCount;
+    private final String url;
+    private final int entryIndex;
+    private final PlanEntryId entryId;
+    private final List<CaseId> caseIds;
 
     /**
      * For tests
@@ -94,14 +94,8 @@ public class Run {
     @SuppressWarnings("BooleanParameter")
     public Run(ProjectId projectId, SuiteId suiteId, String name, String description, MilestoneId milestoneId, UserId assignedToId,
                boolean includeAll, List<CaseId> caseIds) {
-        this.projectId = projectId;
-        this.suiteId = suiteId;
-        this.name = name;
-        this.description = description;
-        this.milestoneId = milestoneId;
-        this.assignedtoId = assignedToId;
-        this.includeAll = includeAll;
-        this.caseIds = new ArrayList<>(caseIds);
+        this(assignedToId, 0, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 0, description, 0, null, includeAll, false, milestoneId, null, name, 0,
+                projectId, 0, suiteId, 0, null, 0, null, caseIds);
     }
 
     /**

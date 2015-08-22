@@ -15,24 +15,24 @@ import de.vik.testrail2java.types.primitive.Timestamp;
 public class Plan {
 
     @SuppressWarnings("SpellCheckingInspection")
-    private UserId assignedtoId;
-    private int blockedCount;
-    private Timestamp completedOn;
-    private UserId createdBy;
-    private Timestamp createdOn;
-    private int customStatus1Count;
-    private String description;
-    private List<PlanEntry> entries;
-    private int failedCount;
-    private PlanId id;
-    private boolean isCompleted;
-    private MilestoneId milestoneId;
-    private String name;
-    private int passedCount;
-    private ProjectId projectId;
-    private int retestCount;
-    private int untestedCount;
-    private String url;
+    private final UserId assignedtoId;
+    private final int blockedCount;
+    private final Timestamp completedOn;
+    private final UserId createdBy;
+    private final Timestamp createdOn;
+    private final int customStatus1Count;
+    private final String description;
+    private final List<PlanEntry> entries;
+    private final int failedCount;
+    private final PlanId id;
+    private final boolean isCompleted;
+    private final MilestoneId milestoneId;
+    private final String name;
+    private final int passedCount;
+    private final ProjectId projectId;
+    private final int retestCount;
+    private final int untestedCount;
+    private final String url;
 
     @SuppressWarnings("BooleanParameter")
     public Plan(UserId assignedToId, int blockedCount, Timestamp completedOn, UserId createdBy, Timestamp createdOn,
@@ -163,14 +163,14 @@ public class Plan {
     }
 
     public static class PlanEntry {
-        private PlanEntryId id;
-        private String name;
-        private SuiteId suiteId;
-        private List<Run> runs;
-        private List<ConfigurationId> configIds;
-        private boolean includeAll;
+        private final PlanEntryId id;
+        private final String name;
+        private final SuiteId suiteId;
+        private final List<Run> runs;
+        private final List<ConfigurationId> configIds;
+        private final boolean includeAll;
         @SuppressWarnings("SpellCheckingInspection")
-        private UserId assignedtoId;
+        private final UserId assignedtoId;
 
         @SuppressWarnings("BooleanParameter")
         public PlanEntry(PlanEntryId id, String name, SuiteId suiteId, List<Run> runs, List<ConfigurationId>

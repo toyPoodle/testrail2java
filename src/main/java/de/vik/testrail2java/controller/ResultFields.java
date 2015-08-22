@@ -12,7 +12,7 @@ import de.vik.testrail2java.types.CustomFieldDefinition;
  */
 public class ResultFields {
 
-    private APIClient client;
+    private final APIClient client;
 
     public ResultFields(APIClient client) {
         this.client = client;

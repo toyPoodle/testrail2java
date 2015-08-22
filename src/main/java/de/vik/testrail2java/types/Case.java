@@ -15,25 +15,25 @@ import de.vik.testrail2java.types.primitive.TimeSpan;
 import de.vik.testrail2java.types.primitive.Timestamp;
 
 public class Case {
-    private UserId createdBy;
-    private Timestamp createdOn;
-    private TimeSpan estimate;
-    private TimeSpan estimateForecast;
-    private CaseId id;
-    private MilestoneId milestoneId;
-    private PriorityId priorityId;
-    private String refs;
-    private SectionId sectionId;
-    private SuiteId suiteId;
-    private String title;
-    private TypeId typeId;
-    private UserId updatedBy;
-    private Timestamp updatedOn;
-    private List<Step> customStepsSeparated;
+    private final UserId createdBy;
+    private final Timestamp createdOn;
+    private final TimeSpan estimate;
+    private final TimeSpan estimateForecast;
+    private final CaseId id;
+    private final MilestoneId milestoneId;
+    private final PriorityId priorityId;
+    private final String refs;
+    private final SectionId sectionId;
+    private final SuiteId suiteId;
+    private final String title;
+    private final TypeId typeId;
+    private final UserId updatedBy;
+    private final Timestamp updatedOn;
+    private final List<Step> customStepsSeparated;
     @SuppressWarnings("SpellCheckingInspection")
-    private String customPreconds;
+    private final String customPreconds;
     @SuppressWarnings("SpellCheckingInspection")
-    private String customTestdata;
+    private final String customTestdata;
 
     /**
      * For Tests
@@ -62,16 +62,7 @@ public class Case {
 
     public Case(SectionId sectionId, String title, TypeId typeId, PriorityId priorityId, TimeSpan estimate, MilestoneId milestoneId,
                 String refs, List<Step> steps, String precondition, String testData) {
-        this.sectionId = sectionId;
-        this.title = title;
-        this.typeId = typeId;
-        this.priorityId = priorityId;
-        this.estimate = estimate;
-        this.milestoneId = milestoneId;
-        this.refs = refs;
-        this.customStepsSeparated = new ArrayList<>(steps);
-        this.customPreconds = precondition;
-        this.customTestdata = testData;
+        this(null, null, estimate, null, null, milestoneId, priorityId, refs, sectionId, null, title, typeId, null, null, steps, precondition, testData);
     }
 
     /**

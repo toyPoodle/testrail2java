@@ -21,7 +21,7 @@ import de.vik.testrail2java.types.primitive.Timestamp;
  */
 public class Results {
 
-	private APIClient client;
+	private final APIClient client;
 
 	public Results(APIClient client) {
 		this.client = client;
@@ -136,7 +136,7 @@ public class Results {
 
 
 	protected static class ResultsContainer {
-		private List<Result> results;
+		private final List<Result> results;
 
 		public ResultsContainer(List<Result> results) {
 			this.results = results;

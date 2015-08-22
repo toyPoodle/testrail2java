@@ -10,7 +10,7 @@ import java.util.List;
  * http://docs.gurock.com/testrail-api2/reference-priorities
  */
 public class Priorities {
-    private APIClient client;
+    private final APIClient client;
 
     public Priorities(APIClient client) {
         this.client = client;

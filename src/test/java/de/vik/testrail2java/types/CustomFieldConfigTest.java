@@ -1,6 +1,5 @@
 package de.vik.testrail2java.types;
 
-import org.junit.*;
 import org.junit.Test;
 
 import de.vik.testrail2java.serialization.GsonBuilder;
@@ -8,7 +7,7 @@ import de.vik.testrail2java.types.CustomFieldDefinition.CustomFieldConfig;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class CustomFieldConfigTest {
 

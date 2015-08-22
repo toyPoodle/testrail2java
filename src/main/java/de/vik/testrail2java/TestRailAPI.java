@@ -7,9 +7,9 @@ import de.vik.testrail2java.controller.Cases;
 
 
 public class TestRailAPI {
-    private String baseUrl;
-    private String testRailUser;
-    private String testRailPassword;
+    private final String baseUrl;
+    private final String testRailUser;
+    private final String testRailPassword;
 
     public TestRailAPI(String baseUrl, String testRailUser, String testRailPassword) {
         this.baseUrl = baseUrl;

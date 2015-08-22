@@ -7,13 +7,13 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class AllowedFields {
-	private Map<Class<?>, Set<String>> fieldMapping = new HashMap<>();
+	private final Map<Class<?>, Set<String>> fieldMapping = new HashMap<>();
 
 	public AllowedFields(Class<?> clazz, String... fields) {
 		fieldMapping.put(clazz, asSet(fields));
 	}
 
-	protected AllowedFields(Class<?> clazz, String[] fields, AllowedFields otherFields) {
+	private AllowedFields(Class<?> clazz, String[] fields, AllowedFields otherFields) {
 		this(clazz, fields);
 		fieldMapping.putAll(otherFields.fieldMapping);
 	}

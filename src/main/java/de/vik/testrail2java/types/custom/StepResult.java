@@ -3,10 +3,10 @@ package de.vik.testrail2java.types.custom;
 import de.vik.testrail2java.types.Status.StatusId;
 
 public class StepResult {
-    private String content;
-    private String expected;
-    private String actual;
-    private StatusId statusId;
+    private final String content;
+    private final String expected;
+    private final String actual;
+    private final StatusId statusId;
 
     public StepResult(String content, String expected, String actual, StatusId statusId) {
         this.content = content;

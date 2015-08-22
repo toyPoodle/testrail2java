@@ -1,14 +1,8 @@
 package de.vik.testrail2java.types;
 
-import java.util.List;
-
 import org.hamcrest.Matchers;
-import org.junit.*;
 import org.junit.Test;
 
-import de.vik.testrail2java.controller.ResultFields;
-import de.vik.testrail2java.net.APIClient;
-import de.vik.testrail2java.net.RestClient;
 import de.vik.testrail2java.serialization.GsonBuilder;
 import de.vik.testrail2java.types.CustomFieldDefinition.CustomFieldContext;
 

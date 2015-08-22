@@ -22,7 +22,7 @@ import de.vik.testrail2java.types.primitive.Timestamp;
  * http://docs.gurock.com/testrail-api2/reference-runs
  */
 public class Runs {
-    private APIClient client;
+    private final APIClient client;
 
     public Runs(APIClient client) {
         this.client = client;

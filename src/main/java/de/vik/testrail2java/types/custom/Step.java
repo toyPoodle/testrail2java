@@ -1,8 +1,8 @@
 package de.vik.testrail2java.types.custom;
 
 public class Step {
-    private String expected;
-    private String content;
+    private final String expected;
+    private final String content;
 
     public Step(String expected, String content) {
         this.expected = expected;

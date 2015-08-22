@@ -61,7 +61,7 @@ public class RestClient
 {
 	private String user;
 	private String password;
-	private String baseUrl;
+	private final String baseUrl;
 
 	public RestClient(String baseUrl)
 	{

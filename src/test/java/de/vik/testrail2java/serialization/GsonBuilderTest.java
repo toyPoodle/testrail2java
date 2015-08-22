@@ -20,7 +20,8 @@ public class GsonBuilderTest {
     }
 
     private static final class TestClass {
-        String field;
+        @SuppressWarnings("unused")
+        private final String field;
 
         public TestClass(String field) {
             this.field = field;

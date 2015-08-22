@@ -17,24 +17,27 @@ import de.vik.testrail2java.types.primitive.TimeSpan;
 
 public class Test {
 	@SuppressWarnings("SpellCheckingInspection")
-	private UserId assignedtoId;
-	private CaseId caseId;
-	private String customExpected;
+	private final UserId assignedtoId;
+	private final CaseId caseId;
+	private final String customExpected;
 	@SuppressWarnings("SpellCheckingInspection")
-	private String customPreconds;
-	private List<Step> customStepsSeparated;
-	private TimeSpan estimate;
-	private TimeSpan estimateForecast;
-	private TestId id;
-	private MilestoneId milestoneId;
-    private String refs;
-	private PriorityId priorityId;
-	private RunId runId;
-	private StatusId statusId;
-	private String title;
-	private TypeId typeId;
+	private final String customPreconds;
+	private final List<Step> customStepsSeparated;
+	private final TimeSpan estimate;
+	private final TimeSpan estimateForecast;
+	private final TestId id;
+	private final MilestoneId milestoneId;
+    private final String refs;
+	private final PriorityId priorityId;
+	private final RunId runId;
+	private final StatusId statusId;
+	private final String title;
+	private final TypeId typeId;
 
-	private Test(UserId assignedToId, CaseId caseId, String expected, String preconditions, List<Step> steps, TimeSpan estimate,
+    /**
+     * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
+     */
+	Test(UserId assignedToId, CaseId caseId, String expected, String preconditions, List<Step> steps, TimeSpan estimate,
                  TimeSpan estimateForecast, TestId id, MilestoneId milestoneId, String refs, PriorityId priorityId, RunId runId, StatusId statusId, String title, TypeId typeId) {
 		this.assignedtoId = assignedToId;
 		this.caseId = caseId;

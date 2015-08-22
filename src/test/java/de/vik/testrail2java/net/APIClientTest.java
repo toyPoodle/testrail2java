@@ -1,6 +1,5 @@
 package de.vik.testrail2java.net;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
@@ -129,7 +128,7 @@ public class APIClientTest {
         verify(client, times(1)).sendPost(someUri(), expectedJson);
     }
 
-    private APIClient targetForGet(MethodUri uri, String json) throws IOException {
+    private APIClient targetForGet(MethodUri uri, String json) {
         RestClient restClient = mock(RestClient.class);
         when(restClient.sendGet(uri)).thenReturn(response(json));
         return new APIClient(restClient, new GsonBuilder());
@@ -154,11 +153,11 @@ public class APIClientTest {
     private static class WrapperClass {
         //used via reflection
         @SuppressWarnings("unused")
-        private String outerField;
+        private final String outerField;
 
         //used via reflection
         @SuppressWarnings("unused")
-        private TestClass wrapped;
+        private final TestClass wrapped;
 
         private WrapperClass(String outerField, String wrappedField) {
             this.outerField = outerField;
@@ -167,7 +166,7 @@ public class APIClientTest {
     }
 
     private static class TestClass {
-        private String field;
+        private final String field;
 
         private TestClass(String field) {
             this.field = field;

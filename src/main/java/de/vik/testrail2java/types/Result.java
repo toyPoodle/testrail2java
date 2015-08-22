@@ -16,17 +16,17 @@ import de.vik.testrail2java.types.primitive.Timestamp;
  */
 public class Result {
 	@SuppressWarnings("SpellCheckingInspection")
-    private UserId assignedtoId;
-	private String comment;
-	private UserId createdBy;
-	private Timestamp createdOn;
-	private List<StepResult> customStepResults;
-	private String defects;
-	private TimeSpan elapsed;
-	private ResultId id;
-	private StatusId statusId;
-	private TestId testId;
-	private String version;
+    private final UserId assignedtoId;
+	private final String comment;
+	private final UserId createdBy;
+	private final Timestamp createdOn;
+	private final List<StepResult> customStepResults;
+	private final String defects;
+	private final TimeSpan elapsed;
+	private final ResultId id;
+	private final StatusId statusId;
+	private final TestId testId;
+	private final String version;
 
     /**
      * For tests
@@ -48,14 +48,7 @@ public class Result {
 
 	public Result(StatusId statusId, String comment, String version, TimeSpan elapsed, String defects, UserId assignedToId,
 				  List<StepResult> stepResults, TestId testId) {
-		this.statusId = statusId;
-		this.comment = comment;
-		this.version = version;
-		this.elapsed = elapsed;
-		this.defects = defects;
-		this.assignedtoId = assignedToId;
-		this.customStepResults = new ArrayList<>(stepResults);
-		this.testId = testId;
+		this(assignedToId, comment, null, null, stepResults, defects, elapsed, null, statusId, testId, version);
 	}
 
 	/**

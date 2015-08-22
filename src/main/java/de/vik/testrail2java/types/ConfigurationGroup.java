@@ -7,10 +7,10 @@ import de.vik.testrail2java.types.Project.ProjectId;
 import de.vik.testrail2java.types.primitive.NumericId;
 
 public class ConfigurationGroup {
-    private ConfigurationGroupId id;
-    private String name;
-    private ProjectId projectId;
-    private List<Configuration> configs;
+    private final ConfigurationGroupId id;
+    private final String name;
+    private final ProjectId projectId;
+    private final List<Configuration> configs;
 
     /**
      * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
@@ -49,9 +49,9 @@ public class ConfigurationGroup {
     }
 
     public static class Configuration {
-        private ConfigurationId id;
-        private ConfigurationGroupId groupId;
-        private String name;
+        private final ConfigurationId id;
+        private final ConfigurationGroupId groupId;
+        private final String name;
 
         /**
          * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.

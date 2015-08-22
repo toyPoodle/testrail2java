@@ -7,14 +7,14 @@ import de.vik.testrail2java.types.Type.TypeId;
 import de.vik.testrail2java.types.primitive.NumericId;
 
 public class CaseField {
-    private List<Config> configs;
-    private String description;
-    private int displayOrder;
-    private CaseFieldId id;
-    private String label;
-    private String name;
-    private String systemName;
-    private TypeId typeId;
+    private final List<Config> configs;
+    private final String description;
+    private final int displayOrder;
+    private final CaseFieldId id;
+    private final String label;
+    private final String name;
+    private final String systemName;
+    private final TypeId typeId;
 
     /**
      * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
@@ -77,9 +77,9 @@ public class CaseField {
     }
 
     public static class Config {
-        private Context context;
-        private ConfigId id;
-        private Options options;
+        private final Context context;
+        private final ConfigId id;
+        private final Options options;
 
         /**
          * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
@@ -113,10 +113,10 @@ public class CaseField {
     }
 
     public static class Options {
-        private String defaultValue;
-        private String format;
-        private boolean isRequired;
-        private String rows;
+        private final String defaultValue;
+        private final String format;
+        private final boolean isRequired;
+        private final String rows;
 
         /**
          * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
@@ -156,8 +156,8 @@ public class CaseField {
     }
 
     public static class Context {
-        private boolean isGlobal;
-        private List<Integer> projectIds;
+        private final boolean isGlobal;
+        private final List<Integer> projectIds;
 
         /**
          * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.

@@ -10,14 +10,14 @@ import de.vik.testrail2java.types.primitive.NumericId;
 
 public class CustomFieldDefinition {
 
-    private List<CustomFieldConfig> configs;
-    private String description;
-    private int displayOrder;
-    private CustomFieldDefinitionId id;
-    private String label;
-    private String name;
-    private String systemName;
-    private TypeId typeId;
+    private final List<CustomFieldConfig> configs;
+    private final String description;
+    private final int displayOrder;
+    private final CustomFieldDefinitionId id;
+    private final String label;
+    private final String name;
+    private final String systemName;
+    private final TypeId typeId;
 
     /**
      * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
@@ -80,9 +80,9 @@ public class CustomFieldDefinition {
     }
 
     public static class CustomFieldConfig {
-        private CustomFieldContext context;
-        private CustomFieldConfigId id;
-        private CustomFieldOptions options;
+        private final CustomFieldContext context;
+        private final CustomFieldConfigId id;
+        private final CustomFieldOptions options;
 
         /**
          * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
@@ -116,10 +116,10 @@ public class CustomFieldDefinition {
     }
 
     public static class CustomFieldOptions {
-        private String format;
-        private Boolean hasActual;
-        private Boolean hasExpected;
-        private Boolean isRequired;
+        private final String format;
+        private final Boolean hasActual;
+        private final Boolean hasExpected;
+        private final Boolean isRequired;
 
         /**
          * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
@@ -159,8 +159,8 @@ public class CustomFieldDefinition {
     }
 
     public static class CustomFieldContext {
-        private Boolean isGlobal;
-        private List<ProjectId> projectIds;
+        private final Boolean isGlobal;
+        private final List<ProjectId> projectIds;
 
         /**
          * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.

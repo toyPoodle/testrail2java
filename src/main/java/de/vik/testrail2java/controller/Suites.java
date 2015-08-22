@@ -13,7 +13,7 @@ import de.vik.testrail2java.types.Suite.SuiteId;
  * http://docs.gurock.com/testrail-api2/reference-suites
  */
 public class Suites {
-    private APIClient client;
+    private final APIClient client;
 
     public Suites(APIClient client) {
         this.client = client;

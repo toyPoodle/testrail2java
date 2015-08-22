@@ -10,7 +10,7 @@ import de.vik.testrail2java.types.Status;
  * http://docs.gurock.com/testrail-api2/reference-statuses
  */
 public class Statuses {
-    private APIClient client;
+    private final APIClient client;
 
     public Statuses(APIClient client) {
         this.client = client;

@@ -5,14 +5,14 @@ import de.vik.testrail2java.types.primitive.NumericId;
 import de.vik.testrail2java.types.primitive.Timestamp;
 
 public class Milestone {
-    private Timestamp completedOn;
-    private String description;
-    private Timestamp dueOn;
-    private MilestoneId id;
-    private boolean isCompleted;
-    private String name;
-    private ProjectId projectId;
-    private String url;
+    private final Timestamp completedOn;
+    private final String description;
+    private final Timestamp dueOn;
+    private final MilestoneId id;
+    private final boolean isCompleted;
+    private final String name;
+    private final ProjectId projectId;
+    private final String url;
 
     /**
      * For tests
@@ -30,10 +30,7 @@ public class Milestone {
     }
 
     public Milestone(String description, String name, ProjectId projectId, Timestamp dueOn) {
-        this.description = description;
-        this.name = name;
-        this.projectId = projectId;
-        this.dueOn = dueOn;
+        this(null, description, dueOn, null, false, name, projectId, null);
     }
 
     /**

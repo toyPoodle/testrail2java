@@ -3,11 +3,11 @@ package de.vik.testrail2java.types;
 import de.vik.testrail2java.types.primitive.NumericId;
 
 public class Priority {
-    private PriorityId id;
-    private boolean isDefault;
-    private String name;
-    private int priority;
-    private String shortName;
+    private final PriorityId id;
+    private final boolean isDefault;
+    private final String name;
+    private final int priority;
+    private final String shortName;
 
     /**
      * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.

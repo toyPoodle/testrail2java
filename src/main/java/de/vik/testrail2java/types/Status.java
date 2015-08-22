@@ -3,15 +3,15 @@ package de.vik.testrail2java.types;
 import de.vik.testrail2java.types.primitive.NumericId;
 
 public class Status {
-    private int colorBright;
-    private int colorDark;
-    private int colorMedium;
-    private StatusId id;
-    private boolean isFinal;
-    private boolean isSystem;
-    private boolean isUntested;
-    private String label;
-    private String name;
+    private final int colorBright;
+    private final int colorDark;
+    private final int colorMedium;
+    private final StatusId id;
+    private final boolean isFinal;
+    private final boolean isSystem;
+    private final boolean isUntested;
+    private final String label;
+    private final String name;
 
     /**
      * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.

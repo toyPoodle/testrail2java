@@ -3,9 +3,9 @@ package de.vik.testrail2java.types;
 import de.vik.testrail2java.types.primitive.NumericId;
 
 public class Type {
-    private TypeId id;
-    private boolean isDefault;
-    private String name;
+    private final TypeId id;
+    private final boolean isDefault;
+    private final String name;
 
     /**
      * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.

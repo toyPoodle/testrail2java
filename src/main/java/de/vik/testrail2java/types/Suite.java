@@ -5,15 +5,15 @@ import de.vik.testrail2java.types.primitive.NumericId;
 import de.vik.testrail2java.types.primitive.Timestamp;
 
 public class Suite {
-    private Timestamp completedOn;
-    private String description;
-    private SuiteId id;
-    private boolean isBaseline;
-    private boolean isCompleted;
-    private boolean isMaster;
-    private String name;
-    private ProjectId projectId;
-    private String url;
+    private final Timestamp completedOn;
+    private final String description;
+    private final SuiteId id;
+    private final boolean isBaseline;
+    private final boolean isCompleted;
+    private final boolean isMaster;
+    private final String name;
+    private final ProjectId projectId;
+    private final String url;
 
     /**
      * For tests
@@ -32,9 +32,7 @@ public class Suite {
     }
 
     public Suite(String description, String name, ProjectId projectId) {
-        this.description = description;
-        this.name = name;
-        this.projectId = projectId;
+        this(null, description, null, false, false, false, name, projectId, null);
     }
 
     public Timestamp getCompletedOn() {

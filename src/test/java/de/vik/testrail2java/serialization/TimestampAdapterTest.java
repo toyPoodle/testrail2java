@@ -15,7 +15,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static de.vik.testrail2java.testhelpers.JsonTestHelpers.jsonPrimitive;
 
 public class TimestampAdapterTest {
     @Test

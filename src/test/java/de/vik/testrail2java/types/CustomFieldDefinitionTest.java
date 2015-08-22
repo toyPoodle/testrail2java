@@ -1,6 +1,5 @@
 package de.vik.testrail2java.types;
 
-import org.junit.*;
 import org.junit.Test;
 
 import de.vik.testrail2java.serialization.GsonBuilder;
