@@ -28,6 +28,8 @@ public class TestTest {
                 "  \"estimate\": \"1m 5s\"," +
                 "  \"estimate_forecast\": \"1h 5m\"," +
                 "  \"id\": 100," +
+                "  \"milestone_id\": 101," +
+                "  \"refs\": \"ISSUE-1\"," +
                 "  \"priority_id\": 3," +
                 "  \"run_id\": 4," +
                 "  \"status_id\": 5," +
@@ -43,6 +45,8 @@ public class TestTest {
         assertThat(actual.getEstimate(), equalTo(timeSpan("1m 5s")));
         assertThat(actual.getEstimateForecast(), equalTo(timeSpan("1h 5m")));
         assertThat(actual.getId().asInt(), equalTo(100));
+        assertThat(actual.getMilestoneId().asInt(), equalTo(101));
+        assertThat(actual.getRefs(), equalTo("ISSUE-1"));
         assertThat(actual.getPriorityId().asInt(), equalTo(3));
         assertThat(actual.getRunId().asInt(), equalTo(4));
         assertThat(actual.getStatusId().asInt(), equalTo(5));

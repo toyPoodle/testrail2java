@@ -3,7 +3,9 @@ package de.vik.testrail2java.types;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.vik.testrail2java.controller.Statuses;
 import de.vik.testrail2java.types.Case.CaseId;
+import de.vik.testrail2java.types.Milestone.MilestoneId;
 import de.vik.testrail2java.types.Run.RunId;
 import de.vik.testrail2java.types.Priority.PriorityId;
 import de.vik.testrail2java.types.Status.StatusId;
@@ -24,6 +26,8 @@ public class Test {
 	private TimeSpan estimate;
 	private TimeSpan estimateForecast;
 	private TestId id;
+	private MilestoneId milestoneId;
+    private String refs;
 	private PriorityId priorityId;
 	private RunId runId;
 	private StatusId statusId;
@@ -31,15 +35,17 @@ public class Test {
 	private TypeId typeId;
 
 	private Test(UserId assignedToId, CaseId caseId, String expected, String preconditions, List<Step> steps, TimeSpan estimate,
-				 TimeSpan estimateForecast, TestId id, PriorityId priorityId, RunId runId, StatusId statusId, String title, TypeId typeId) {
+                 TimeSpan estimateForecast, TestId id, MilestoneId milestoneId, String refs, PriorityId priorityId, RunId runId, StatusId statusId, String title, TypeId typeId) {
 		this.assignedtoId = assignedToId;
 		this.caseId = caseId;
 		this.customExpected = expected;
 		this.customPreconds = preconditions;
-		this.customStepsSeparated = new ArrayList<>(steps);
+        this.customStepsSeparated = new ArrayList<>(steps);
 		this.estimate = estimate;
 		this.estimateForecast = estimateForecast;
 		this.id = id;
+        this.milestoneId = milestoneId;
+        this.refs = refs;
 		this.priorityId = priorityId;
 		this.runId = runId;
 		this.statusId = statusId;
@@ -47,79 +53,134 @@ public class Test {
 		this.typeId = typeId;
 	}
 
+	/**
+	 * The ID of the user the test is assigned to
+	 */
 	public UserId getAssignedToId() {
 		return assignedtoId;
 	}
 
+	/**
+	 * The ID of the user the test is assigned to
+	 */
 	public CaseId getCaseId() {
 		return caseId;
 	}
 
+    /**
+     * Custom expected field of the related test case
+     */
 	public String getExpected() {
 		return customExpected;
 	}
 
+    /**
+     * Custom preconditions field of the related test case
+     */
 	public String getPreconditions() {
 		return customPreconds;
 	}
 
+    /**
+     * Custom test steps from the related test case
+     */
 	public List<Step> getSteps() {
 		return new ArrayList<>(customStepsSeparated);
 	}
 
+	/**
+	 * The estimate of the related test case, e.g. "30s" or "1m 45s"
+	 */
 	public TimeSpan getEstimate() {
 		return estimate;
 	}
 
+	/**
+	 * The estimate forecast of the related test case, e.g. "30s" or "1m 45s"
+	 */
 	public TimeSpan getEstimateForecast() {
 		return estimateForecast;
 	}
 
+	/**
+	 * The unique ID of the test
+	 */
 	public TestId getId() {
 		return id;
 	}
 
-	public PriorityId getPriorityId() {
+    /**
+     * The ID of the milestone that is linked to the test case
+     */
+    public MilestoneId getMilestoneId() {
+        return milestoneId;
+    }
+
+    /**
+     * A comma-separated list of references/requirements that are linked to the test case
+     */
+    public String getRefs() {
+        return refs;
+    }
+
+    /**
+     * The ID of the priority that is linked to the test case
+     */
+    public PriorityId getPriorityId() {
 		return priorityId;
 	}
 
+    /**
+     * The ID of the test run the test belongs to
+     */
 	public RunId getRunId() {
 		return runId;
 	}
 
+    /**
+     * The ID of the current status of the test, also see {@link Statuses#getStatuses()}
+     */
 	public StatusId getStatusId() {
 		return statusId;
 	}
 
+    /**
+     * The title of the related test case
+     */
 	public String getTitle() {
 		return title;
 	}
 
+    /**
+     * The ID of the test case type that is linked to the test case
+     */
 	public TypeId getTypeId() {
 		return typeId;
 	}
 
-	@Override
-	@SuppressWarnings("SpellCheckingInspection")
-	public String toString() {
-		return "Test{" +
-				"assignedtoId=" + assignedtoId +
-				", caseId=" + caseId +
-				", customExpected='" + customExpected + '\'' +
-				", customPreconds='" + customPreconds + '\'' +
-				", customStepsSeparated=" + customStepsSeparated +
-				", estimate=" + estimate +
-				", estimateForecast=" + estimateForecast +
-				", id=" + id +
-				", priorityId=" + priorityId +
-				", runId=" + runId +
-				", statusId=" + statusId +
-				", title='" + title + '\'' +
-				", typeId=" + typeId +
-				'}';
-	}
+    @Override
+    @SuppressWarnings("SpellCheckingInspection")
+    public String toString() {
+        return "Test{" +
+                "assignedtoId=" + assignedtoId +
+                ", caseId=" + caseId +
+                ", customExpected='" + customExpected + '\'' +
+                ", customPreconds='" + customPreconds + '\'' +
+                ", customStepsSeparated=" + customStepsSeparated +
+                ", estimate=" + estimate +
+                ", estimateForecast=" + estimateForecast +
+                ", id=" + id +
+                ", milestoneId=" + milestoneId +
+                ", refs='" + refs + '\'' +
+                ", priorityId=" + priorityId +
+                ", runId=" + runId +
+                ", statusId=" + statusId +
+                ", title='" + title + '\'' +
+                ", typeId=" + typeId +
+                '}';
+    }
 
-	public static class TestId extends NumericId {
+    public static class TestId extends NumericId {
 		public TestId(int id) {
 			super(id);
 		}
