@@ -13,6 +13,6 @@ public class TestFilterTest {
     @Test
     public void filterKeys() throws Exception {
         assertThat(TestFilter.byStatusId(statusId(1)), asStringIs("status_id=1"));
-        assertThat(TestFilter.byStatusId(statusId(1), statusId(2)), asStringIs("status_id=1,2"));
+        assertThat(TestFilter.byStatusId(statusId(1), statusId(2)), asStringIs("status_id=1%2C2"));
     }
 }

@@ -18,6 +18,6 @@ public class ResultFilterTest {
         assertThat(Results.ResultFilter.byLimit(2), asStringIs("limit=2"));
         assertThat(Results.ResultFilter.byOffset(3), asStringIs("offset=3"));
         assertThat(Results.ResultFilter.byStatusId(statusId(4)), asStringIs("status_id=4"));
-        assertThat(Results.ResultFilter.byStatusId(statusId(5), statusId(6)), asStringIs("status_id=5,6"));
+        assertThat(Results.ResultFilter.byStatusId(statusId(5), statusId(6)), asStringIs("status_id=5%2C6"));
     }
 }

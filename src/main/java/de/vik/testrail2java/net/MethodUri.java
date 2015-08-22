@@ -3,6 +3,9 @@ package de.vik.testrail2java.net;
 import de.vik.testrail2java.TestRailException;
 import de.vik.testrail2java.types.primitive.AsString;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,15 +53,24 @@ public class MethodUri {
         if (filters.any()) {
             result += filters.asString();
         }
-
         return result;
     }
 
     private String parameterValue(Object parameter) {
+        final String parameterAsString;
         if (parameter instanceof AsString) {
-            return ((AsString)parameter).asString();
+            parameterAsString = ((AsString) parameter).asString();
+            return parameterAsString;
         }
-        return String.valueOf(parameter);
+        parameterAsString = String.valueOf(parameter);
+        try {
+            return URLEncoder.encode(parameterAsString, StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            // by definition UTF-8 should be supported by every Java VM
+            // http://docs.oracle.com/javase/8/docs/api/java/nio/charset/Charset.html
+            // so just repackage the exception to make compiler happy
+            throw new RuntimeException(e);
+        }
     }
 
     public MethodUri withParameters(Object... parameters) {

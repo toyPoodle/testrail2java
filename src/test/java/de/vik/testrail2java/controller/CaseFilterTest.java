@@ -27,17 +27,17 @@ public class CaseFilterTest {
         assertThat(CaseFilter.byCreatedAfter(timestamp(1)), asStringIs("created_after=1"));
         assertThat(CaseFilter.byCreatedBefore(timestamp(1)), asStringIs("created_before=1"));
         assertThat(CaseFilter.byCreatedBy(userId(1)), asStringIs("created_by=1"));
-        assertThat(CaseFilter.byCreatedBy(userId(1), userIds(2)), asStringIs("created_by=1,2"));
+        assertThat(CaseFilter.byCreatedBy(userId(1), userIds(2)), asStringIs("created_by=1%2C2"));
         assertThat(CaseFilter.byMilestoneId(milestoneId(1)), asStringIs("milestone_id=1"));
-        assertThat(CaseFilter.byMilestoneId(milestoneId(1), milestoneIds(2)), asStringIs("milestone_id=1,2"));
+        assertThat(CaseFilter.byMilestoneId(milestoneId(1), milestoneIds(2)), asStringIs("milestone_id=1%2C2"));
         assertThat(CaseFilter.byPriorityId(priorityId(1)), asStringIs("priority_id=1"));
-        assertThat(CaseFilter.byPriorityId(priorityId(1), priorityIds(2)), asStringIs("priority_id=1,2"));
+        assertThat(CaseFilter.byPriorityId(priorityId(1), priorityIds(2)), asStringIs("priority_id=1%2C2"));
         assertThat(CaseFilter.byTypeId(typeId(1)), asStringIs("type_id=1"));
-        assertThat(CaseFilter.byTypeId(typeId(1), typeIds(2)), asStringIs("type_id=1,2"));
+        assertThat(CaseFilter.byTypeId(typeId(1), typeIds(2)), asStringIs("type_id=1%2C2"));
         assertThat(CaseFilter.byUpdatedAfter(timestamp(1)), asStringIs("updated_after=1"));
         assertThat(CaseFilter.byUpdatedBefore(timestamp(1)), asStringIs("updated_before=1"));
         assertThat(CaseFilter.byUpdatedBy(userId(1)), asStringIs("updated_by=1"));
-        assertThat(CaseFilter.byUpdatedBy(userId(1), userIds(2)), asStringIs("updated_by=1,2"));
+        assertThat(CaseFilter.byUpdatedBy(userId(1), userIds(2)), asStringIs("updated_by=1%2C2"));
     }
 
     private Type.TypeId[] typeIds(int value) {

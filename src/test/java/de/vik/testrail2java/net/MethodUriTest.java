@@ -49,6 +49,17 @@ public class MethodUriTest {
         assertThat(target(Filters.filter(new Filter("anotherParam", "10")), "method_name/:param", 9).insertParameters(), equalTo("method_name/9&anotherParam=10"));
     }
 
+    @Test
+    public void escapingOfSpecialCharactersInParameters() throws Exception {
+        assertThat(target("get_something/:param", "foo@bar.com").insertParameters(), equalTo("get_something/foo%40bar.com"));
+    }
+
+    @Test
+    public void escapingOfSpecialCharactersInFilters() throws Exception {
+        assertThat(target(Filters.filter(new Filter("filter", "10,11")), "method_name/:param", 9).insertParameters(), equalTo("method_name/9&filter=10%2C11"));
+        assertThat(target(Filters.filter(new Filter("filter", "@&/%")), "method_name/:param", 9).insertParameters(), equalTo("method_name/9&filter=%40%26%2F%25"));
+    }
+
     private Id id(int value) {
         return new Id(value) {};
     }
