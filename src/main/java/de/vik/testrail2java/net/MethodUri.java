@@ -69,7 +69,7 @@ public class MethodUri {
             // by definition UTF-8 should be supported by every Java VM
             // http://docs.oracle.com/javase/8/docs/api/java/nio/charset/Charset.html
             // so just repackage the exception to make compiler happy
-            throw new RuntimeException(e);
+            throw new TestRailException(e);
         }
     }
 
