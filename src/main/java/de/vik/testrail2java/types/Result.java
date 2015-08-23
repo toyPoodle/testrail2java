@@ -1,6 +1,5 @@
 package de.vik.testrail2java.types;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.vik.testrail2java.types.Status.StatusId;
@@ -10,6 +9,8 @@ import de.vik.testrail2java.types.custom.StepResult;
 import de.vik.testrail2java.types.primitive.NumericId;
 import de.vik.testrail2java.types.primitive.TimeSpan;
 import de.vik.testrail2java.types.primitive.Timestamp;
+
+import static de.vik.testrail2java.utilities.ListUtils.copy;
 
 /**
  * http://docs.gurock.com/testrail-api2/reference-results
@@ -37,7 +38,7 @@ public class Result {
 		this.comment = comment;
 		this.createdBy = createdBy;
 		this.createdOn = createdOn;
-		this.customStepResults = new ArrayList<>(stepResults);
+		this.customStepResults = copy(stepResults);
 		this.defects = defects;
 		this.elapsed = elapsed;
 		this.id = id;
@@ -80,7 +81,7 @@ public class Result {
 	}
 
 	public List<StepResult> getStepResults() {
-		return new ArrayList<>(customStepResults);
+		return copy(customStepResults);
 	}
 
 	/**

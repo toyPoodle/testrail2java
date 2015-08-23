@@ -1,12 +1,13 @@
 package de.vik.testrail2java.types;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.vik.testrail2java.types.Project.ProjectId;
 import de.vik.testrail2java.types.Type.TypeId;
 import de.vik.testrail2java.types.primitive.Id;
 import de.vik.testrail2java.types.primitive.NumericId;
+
+import static de.vik.testrail2java.utilities.ListUtils.copy;
 
 public class CustomFieldDefinition {
 
@@ -23,7 +24,7 @@ public class CustomFieldDefinition {
      * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
      */
     CustomFieldDefinition(List<CustomFieldConfig> configs, String description, int displayOrder, CustomFieldDefinitionId id, String label, String name, String systemName, TypeId typeId) {
-        this.configs = configs;
+        this.configs = copy(configs);
         this.description = description;
         this.displayOrder = displayOrder;
         this.id = id;
@@ -34,7 +35,7 @@ public class CustomFieldDefinition {
     }
 
     public List<CustomFieldConfig> getConfigs() {
-        return new ArrayList<>(configs);
+        return copy(configs);
     }
 
     public String getDescription() {

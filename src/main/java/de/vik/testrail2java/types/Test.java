@@ -1,6 +1,5 @@
 package de.vik.testrail2java.types;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.vik.testrail2java.controller.Statuses;
@@ -14,6 +13,8 @@ import de.vik.testrail2java.types.User.UserId;
 import de.vik.testrail2java.types.custom.Step;
 import de.vik.testrail2java.types.primitive.NumericId;
 import de.vik.testrail2java.types.primitive.TimeSpan;
+
+import static de.vik.testrail2java.utilities.ListUtils.copy;
 
 public class Test {
 	@SuppressWarnings("SpellCheckingInspection")
@@ -43,7 +44,7 @@ public class Test {
 		this.caseId = caseId;
 		this.customExpected = expected;
 		this.customPreconds = preconditions;
-        this.customStepsSeparated = new ArrayList<>(steps);
+        this.customStepsSeparated = copy(steps);
 		this.estimate = estimate;
 		this.estimateForecast = estimateForecast;
 		this.id = id;
@@ -88,7 +89,7 @@ public class Test {
      * Custom test steps from the related test case
      */
 	public List<Step> getSteps() {
-		return new ArrayList<>(customStepsSeparated);
+		return copy(customStepsSeparated);
 	}
 
 	/**

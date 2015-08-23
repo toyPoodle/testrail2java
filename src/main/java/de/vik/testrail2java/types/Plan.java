@@ -1,6 +1,5 @@
 package de.vik.testrail2java.types;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.vik.testrail2java.types.ConfigurationGroup.ConfigurationId;
@@ -11,6 +10,8 @@ import de.vik.testrail2java.types.User.UserId;
 import de.vik.testrail2java.types.primitive.Id;
 import de.vik.testrail2java.types.primitive.NumericId;
 import de.vik.testrail2java.types.primitive.Timestamp;
+
+import static de.vik.testrail2java.utilities.ListUtils.copy;
 
 public class Plan {
 
@@ -46,7 +47,7 @@ public class Plan {
         this.createdOn = createdOn;
         this.customStatus1Count = customStatus1Count;
         this.description = description;
-        this.entries = new ArrayList<>(entries);
+        this.entries = copy(entries);
         this.failedCount = failedCount;
         this.id = id;
         this.isCompleted = isCompleted;
@@ -88,7 +89,7 @@ public class Plan {
     }
 
     public List<PlanEntry> getEntries() {
-        return new ArrayList<>(entries);
+        return copy(entries);
     }
 
     public int getFailedCount() {
@@ -178,8 +179,8 @@ public class Plan {
             this.id = id;
             this.name = name;
             this.suiteId = suiteId;
-            this.runs = new ArrayList<>(runs);
-            this.configIds = new ArrayList<>(configIds);
+            this.runs = copy(runs);
+            this.configIds = copy(configIds);
             this.includeAll = includeAll;
             this.assignedtoId = assignedToId;
         }
@@ -197,11 +198,11 @@ public class Plan {
         }
 
         public List<Run> getRuns() {
-            return runs;
+            return copy(runs);
         }
 
         public List<ConfigurationId> getConfigIds() {
-            return configIds;
+            return copy(configIds);
         }
 
         public boolean isIncludeAll() {

@@ -1,6 +1,5 @@
 package de.vik.testrail2java.types;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.vik.testrail2java.types.Milestone.MilestoneId;
@@ -13,6 +12,8 @@ import de.vik.testrail2java.types.custom.Step;
 import de.vik.testrail2java.types.primitive.NumericId;
 import de.vik.testrail2java.types.primitive.TimeSpan;
 import de.vik.testrail2java.types.primitive.Timestamp;
+
+import static de.vik.testrail2java.utilities.ListUtils.copy;
 
 public class Case {
     private final UserId createdBy;
@@ -55,7 +56,7 @@ public class Case {
         this.typeId = typeId;
         this.updatedBy = updatedBy;
         this.updatedOn = updatedOn;
-        this.customStepsSeparated = new ArrayList<>(steps);
+        this.customStepsSeparated = copy(steps);
         this.customPreconds = precondition;
         this.customTestdata = testData;
     }
@@ -183,7 +184,7 @@ public class Case {
     }
 
     public List<Step> getSteps() {
-        return customStepsSeparated;
+        return copy(customStepsSeparated);
     }
 
     @Override

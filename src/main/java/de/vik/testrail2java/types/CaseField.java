@@ -1,10 +1,11 @@
 package de.vik.testrail2java.types;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.vik.testrail2java.types.Type.TypeId;
 import de.vik.testrail2java.types.primitive.NumericId;
+
+import static de.vik.testrail2java.utilities.ListUtils.copy;
 
 public class CaseField {
     private final List<Config> configs;
@@ -20,7 +21,7 @@ public class CaseField {
      * Is not intended to be instantiated by API user, since this entity cannot be created via TestRail API.
      */
     CaseField(List<Config> configs, String description, int displayOrder, CaseFieldId id, String label, String name, String systemName, TypeId typeId) {
-        this.configs = configs;
+        this.configs = copy(configs);
         this.description = description;
         this.displayOrder = displayOrder;
         this.id = id;
@@ -31,7 +32,7 @@ public class CaseField {
     }
 
     public List<Config> getConfigs() {
-        return new ArrayList<>(configs);
+        return copy(configs);
     }
 
     public String getDescription() {
@@ -164,7 +165,7 @@ public class CaseField {
          */
         Context(boolean isGlobal, List<Integer> projectIds) {
             this.isGlobal = isGlobal;
-            this.projectIds = new ArrayList<>(projectIds);
+            this.projectIds = copy(projectIds);
         }
 
         public boolean isGlobal() {
@@ -172,7 +173,7 @@ public class CaseField {
         }
 
         public List<Integer> getProjectIds() {
-            return new ArrayList<>(projectIds);
+            return copy(projectIds);
         }
 
         @Override

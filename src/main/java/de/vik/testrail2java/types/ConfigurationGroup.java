@@ -1,10 +1,11 @@
 package de.vik.testrail2java.types;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.vik.testrail2java.types.Project.ProjectId;
 import de.vik.testrail2java.types.primitive.NumericId;
+
+import static de.vik.testrail2java.utilities.ListUtils.copy;
 
 public class ConfigurationGroup {
     private final ConfigurationGroupId id;
@@ -19,7 +20,7 @@ public class ConfigurationGroup {
         this.id = id;
         this.name = name;
         this.projectId = projectId;
-        this.configs = new ArrayList<>(configs);
+        this.configs = copy(configs);
     }
 
     public ConfigurationGroupId getId() {
@@ -35,7 +36,7 @@ public class ConfigurationGroup {
     }
 
     public List<Configuration> getConfigs() {
-        return new ArrayList<>(configs);
+        return copy(configs);
     }
 
     @Override

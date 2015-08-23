@@ -14,6 +14,8 @@ import de.vik.testrail2java.types.User.UserId;
 import de.vik.testrail2java.types.primitive.NumericId;
 import de.vik.testrail2java.types.primitive.Timestamp;
 
+import static de.vik.testrail2java.utilities.ListUtils.copy;
+
 public class Run {
     @SuppressWarnings("SpellCheckingInspection")
     private final UserId assignedtoId;
@@ -62,7 +64,7 @@ public class Run {
         this.blockedCount = blockedCount;
         this.completedOn = completedOn;
         this.config = config;
-        this.configIds = new ArrayList<>(configIds);
+        this.configIds = copy(configIds);
         this.createdBy = createdBy;
         this.createdOn = createdOn;
         this.customStatus1Count = customStatus1Count;
@@ -88,7 +90,7 @@ public class Run {
         this.url = url;
         this.entryIndex = entryIndex;
         this.entryId = entryId;
-        this.caseIds = new ArrayList<>(caseIds);
+        this.caseIds = copy(caseIds);
     }
 
     @SuppressWarnings("BooleanParameter")
@@ -312,7 +314,7 @@ public class Run {
      * An array of case IDs for the custom case selection
      */
     public List<CaseId> getCaseIds() {
-        return caseIds;
+        return copy(caseIds);
     }
 
     @Override
