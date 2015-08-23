@@ -153,6 +153,7 @@ public class RestClient
 		try {
 			HttpURLConnection conn = setupConnection(url);
 			if ("POST".equals(method)) {
+				conn.setRequestMethod("POST");
                 writeData(data, conn);
             }
 			String responseBody = readResponseBody(conn);
